@@ -1,0 +1,80 @@
+Category;Attribute;Sub-Attribute;Type/Format;Required/Optional;Description
+User Details;First Name;;Text;Mandatory;User's first name for account creation
+User Details;Last Name;;Text;Mandatory;User's last name for account creation
+User Details;Email;;Email;Mandatory;Primary email address for user account and notifications
+User Details;Role;;Text (User/Admin);Mandatory;User role in the system
+User Details;Package;;Text (M/P/B);Mandatory;Service package type (Metered/Pro/Basic)
+User Details;Mobile Number;;Phone (10 digits);Optional;User's mobile phone number
+User Details;Local Extension;;Number (3-5 digits);Mandatory;User's local extension number
+User Details;Job Title;;Text;Optional;User's job title/position
+User Details;Department;;Text;Optional;User's department in organization
+User Details;PID;;Number;Auto-generated;Person ID in system
+User Details;Username;;Text;Auto-generated;Login username for the user
+User Details;Password;;Text;Auto-generated;Login password for the user
+Location/Address;Location Name;;Text;Mandatory;Name of the location/property
+Location/Address;Street Address;;Text;Mandatory;Physical street address
+Location/Address;City;;Text;Mandatory;City name
+Location/Address;State;;Text (2 chars);Mandatory;State abbreviation
+Location/Address;ZIP Code;;Number (5 digits);Mandatory;ZIP code
+Location/Address;Shipping Address;Street;Text;Mandatory;Street address for equipment shipping
+Location/Address;Shipping Address;City;Text;Mandatory;City for equipment shipping
+Location/Address;Shipping Address;State;Text (2 chars);Mandatory;State for equipment shipping
+Location/Address;Shipping Address;ZIP;Number (5 digits);Mandatory;ZIP code for equipment shipping
+Location/Address;E911 Address;Street;Text;Mandatory;Emergency services street address
+Location/Address;E911 Address;City;Text;Mandatory;Emergency services city
+Location/Address;E911 Address;State;Text (2 chars);Mandatory;Emergency services state
+Location/Address;E911 Address;ZIP;Number (5 digits);Mandatory;Emergency services ZIP code
+Location/Address;E911 Business Name;;Text;Mandatory;Business name shown for E911 calls
+Location/Address;Timezone;;Text;Mandatory;Override timezone (e.g. Pacific Time US & Canada)
+Phone Numbers;Main Number;;Phone (10 digits);Mandatory;Main phone number for location
+Phone Numbers;Area Code Preference;;Number (3 digits);Optional;Preferred area code for new numbers
+Phone Numbers;Number to Port;;Phone (10 digits);Optional;Existing number to port over
+Phone Numbers;Inbound Number;;Phone (10 digits);Optional;Inbound telephone number (DID)
+Phone Numbers;Outbound Number;;Phone (10 digits);Optional;Caller ID number for outbound calls
+Phone Numbers;Fax Number;;Phone (10 digits);Optional;Dedicated fax line number
+Device Configuration;Device Brand;;Text;Mandatory;Phone hardware manufacturer (Polycom/Cisco/Yealink/Obihai)
+Device Configuration;Device Model;;Text;Mandatory;Specific model number (e.g. VVX-411/T46U/OBI302)
+Device Configuration;Phone Make/Model;;Text;Mandatory;Combined make and model from workbook
+Device Configuration;Number of Devices;;Number;Mandatory;Quantity of devices needed
+Device Configuration;Rental/Purchase;;Text;Mandatory;Whether device is rented or purchased
+Device Configuration;MAC Address;;Text (12 chars);Optional;Device MAC address if known
+Device Configuration;Activation URL;;URL;Auto-generated;Provisioning URL for device
+Device Configuration;Hardware Profile;;Text;Optional;Custom hardware configuration profile
+Phone Buttons;Lines Configuration;Number of Lines;Number;Mandatory;Number of line buttons to configure (1-12)
+Phone Buttons;Lines Configuration;Line Names;Text (comma-separated);Optional;Custom names for each line
+Phone Buttons;Custom Configuration;Per Employee;Yes/No;Mandatory;Whether custom configs needed per employee
+Phone Buttons;Call Parking;Enabled;Yes/No;Mandatory;Whether call parking is needed
+Phone Buttons;Call Parking;Number of Keys;Number;Conditional;Number of call park keys needed (if enabled)
+Phone Buttons;Call Parking;Name;Text;Conditional;Name for call parking group
+Phone Buttons;Call Parking;Extension;Number (3-4 digits);Conditional;Local extension for call parking
+Phone Buttons;Call Parking;Music on Hold;Yes/No;Optional;Enable music for parked calls
+Phone Buttons;Call Parking;Number of Spots;Number;Conditional;Maximum concurrent parked calls
+Phone Buttons;Call Parking;Send Reminders;Yes/No;Optional;Send notifications for parked calls
+Phone Buttons;Speed Dial;;Yes/No;Optional;Configure speed dial buttons
+Phone Buttons;Presence;;Yes/No;Optional;Configure presence monitoring buttons
+Fax Configuration;Fax Service;Enabled;Yes/No;Mandatory;Whether fax service is needed
+Fax Configuration;Fax Service;Type;Text (Personal/Shared);Conditional;Type of fax service if enabled
+Fax Configuration;Fax Inbox;Name;Text;Conditional;Name for fax inbox
+Fax Configuration;Fax Inbox;Email;Email;Conditional;Email address for fax delivery
+Fax Configuration;Fax Machine;;Text;Optional;Physical fax machine configuration
+Fax Configuration;Outgoing Fax Header;;Text;Optional;Header text for outgoing faxes
+Fax Configuration;T.38 Settings;;Yes/No;Optional;Enable T.38 fax protocol
+Network Settings;Configure Network;;Text (DHCP/Manual);Mandatory;Network configuration method
+Network Settings;Custom Config;;XML/Text;Optional;Custom network configuration snippet
+Call Features;Call Forwarding;;Yes/No;Optional;Enable call forwarding features
+Call Features;Voicemail;;Yes/No;Mandatory;Enable voicemail service
+Call Features;Auto Attendant;;Yes/No;Optional;Enable auto attendant menu
+Call Features;Ring Groups;;Yes/No;Optional;Configure ring groups
+Call Features;Call Recording;;Yes/No;Optional;Enable call recording
+Call Features;Conference Bridge;;Yes/No;Optional;Setup conference bridge
+Business Information;Company Name;;Text;Mandatory;Company/property management name
+Business Information;Account Number;;Text;Auto-generated;BroadVoice account number
+Business Information;Location Type;;Text;Optional;Type of location (office/residential/etc)
+Business Information;Implementation Date;;Date;Mandatory;Target go-live date
+Notifications;Welcome Email;;Email;Mandatory;Email for welcome message and credentials
+Notifications;Admin Email;;Email;Mandatory;Email for admin access and reports
+Notifications;Logistics Email;;Email;Optional;Email for shipping notifications
+Notifications;Activation Codes Export;;Yes/No;Mandatory;Export activation codes for logistics
+SharePoint/Integration;Input Workbook Path;;File Path;Mandatory;Location of input requirements workbook
+SharePoint/Integration;Output Folder;;File Path;Mandatory;Destination for activation codes export
+SharePoint/Integration;Email Report;;Yes/No;Mandatory;Send completion report via email

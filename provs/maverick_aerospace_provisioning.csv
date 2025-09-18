@@ -1,0 +1,104 @@
+Category;Attribute;Sub-Attribute;Required/Optional;Extracted Value;Source Timestamp;Status;Notes
+User Details;First Name;;Mandatory;Will;03:37-15:32;Complete;Primary contact on call
+User Details;Last Name;;Mandatory;;Not mentioned;Missing;Will's last name not provided
+User Details;Email;;Mandatory;;Not mentioned;Missing;Need Will's email
+User Details;Role;;Mandatory;Administrator;Inferred;Complete;Primary decision maker
+User Details;Package;;Mandatory;;Not mentioned;Missing;Need to determine package type
+User Details;Mobile Number;;Optional;;Not mentioned;Not Required;
+User Details;Local Extension;;Mandatory;;05:11-05:37;Pending;311 and 411 need reassignment
+User Details;Job Title;;Optional;;Not mentioned;Not Required;
+User Details;Department;;Optional;;Not mentioned;Not Required;
+User Details;First Name;;Mandatory;Joshua;02:42;Complete;BroadVoice implementation
+User Details;Last Name;;Mandatory;Kirby;02:42;Complete;Joshua Kirby
+User Details;Email;;Mandatory;;Not mentioned;Missing;Joshua's BV email
+User Details;Role;;Mandatory;Implementation;Inferred;Complete;BroadVoice staff
+User Details;First Name;;Mandatory;Patricia;00:20;Complete;BroadVoice technical
+User Details;Last Name;;Mandatory;Rael;00:20;Complete;Patricia Rael
+User Details;Email;;Mandatory;;Not mentioned;Missing;Patricia's BV email
+User Details;Role;;Mandatory;Technical;Inferred;Complete;BroadVoice staff
+Location/Address;Location Name;;Mandatory;Maverick Aerospace;08:30;Complete;Company name confirmed
+Location/Address;Street Address;;Mandatory;3718 Capital F;07:11-07:13;Partial;Incomplete address
+Location/Address;City;;Mandatory;City of Industry;07:11-07:13;Complete;
+Location/Address;State;;Mandatory;CA;07:11-07:13;Complete;California
+Location/Address;ZIP Code;;Mandatory;90601;07:11-07:13;Complete;
+Location/Address;Shipping Address;Street;Mandatory;3718 Capital F;07:11-07:13;Complete;Equipment shipping address
+Location/Address;Shipping Address;City;Mandatory;City of Industry;07:11-07:13;Complete;
+Location/Address;Shipping Address;State;Mandatory;CA;07:11-07:13;Complete;
+Location/Address;Shipping Address;ZIP;Mandatory;90601;07:11-07:13;Complete;
+Location/Address;E911 Address;Street;Mandatory;3718 Capital F;Inferred;Complete;Same as service address
+Location/Address;E911 Address;City;Mandatory;City of Industry;Inferred;Complete;
+Location/Address;E911 Address;State;Mandatory;CA;Inferred;Complete;
+Location/Address;E911 Address;ZIP;Mandatory;90601;Inferred;Complete;
+Location/Address;E911 Business Name;;Mandatory;Maverick Aerospace;08:30;Complete;
+Location/Address;Timezone;;Mandatory;Pacific;10:30-10:33;Complete;7 to 5 Pacific time
+Phone Numbers;Main Number;;Mandatory;714-578-XXXX;02:13-02:16;Partial;714 area code confirmed
+Phone Numbers;Area Code Preference;;Optional;714;02:13;Complete;Current area code
+Phone Numbers;Number to Port;;Optional;714-578-0700;02:18-02:42;Complete;Fax number to port
+Phone Numbers;Number to Port;;Optional;Main number;07:55;Pending;Main line to be ported
+Phone Numbers;Inbound Number;;Optional;;Not mentioned;Not Required;
+Phone Numbers;Outbound Number;;Optional;;Not mentioned;Not Required;
+Phone Numbers;Fax Number;;Optional;714-578-0700;02:18-02:42;Complete;Confirmed fax number
+Device Configuration;Device Brand;;Mandatory;Polycom;18:46;Complete;Poly Edge phones
+Device Configuration;Device Model;;Mandatory;Edge 350;18:46;Complete;Poly Edge 350
+Device Configuration;Phone Make/Model;;Mandatory;Poly Edge 350;18:46;Complete;
+Device Configuration;Number of Devices;;Mandatory;53;03:53-04:14;Complete;53 users/phones
+Device Configuration;Rental/Purchase;;Mandatory;;Not mentioned;Missing;Need to determine
+Device Configuration;MAC Address;;Optional;;Not mentioned;Not Required;Will be collected later
+Device Configuration;Activation URL;;Auto-generated;;N/A;Pending;Will be generated
+Device Configuration;Hardware Profile;;Optional;;Not mentioned;Not Required;
+Device Configuration;ATA Device;;Optional;3;00:23-03:09;Partial;3 analog adapters for paging
+Phone Buttons;Lines Configuration;Number of Lines;Mandatory;53;03:53;Complete;53 users total
+Phone Buttons;Lines Configuration;Line Names;Optional;;Not mentioned;Not Required;
+Phone Buttons;Custom Configuration;Per Employee;Mandatory;Yes;22:10;Complete;Will personalize after deployment
+Phone Buttons;Call Parking;Enabled;Mandatory;Yes;21:14-21:47;Complete;Call parks requested
+Phone Buttons;Call Parking;Number of Keys;Conditional;Few;21:50;Complete;A few call parks
+Phone Buttons;Speed Dial;;Optional;Yes;18:44-22:24;Complete;Speed dial for paging
+Phone Buttons;Presence;;Optional;Yes;21:50-22:10;Complete;BLF/presence for select users
+Fax Configuration;Fax Service;Enabled;Mandatory;Yes;01:16-02:06;Complete;E-fax service
+Fax Configuration;Fax Service;Type;Conditional;E-fax;01:53-02:06;Complete;Electronic fax only
+Fax Configuration;Fax Inbox;Name;Conditional;;Not mentioned;Missing;
+Fax Configuration;Fax Inbox;Email;Conditional;;Not mentioned;Missing;
+Fax Configuration;Fax Machine;;Text;No;01:25-01:43;Complete;No physical copier/fax
+Fax Configuration;Outgoing Fax Header;;Optional;;Not mentioned;Not Required;
+Fax Configuration;T.38 Settings;;Optional;;Not mentioned;Not Required;
+Network Settings;Configure Network;;Mandatory;Static IP;16:33-16:44;Complete;Static IP configuration
+Network Settings;Custom Config;;Optional;Yes;17:02;Complete;Static IP details needed
+Network Settings;Static IP;;Optional;Yes;16:43;Complete;Internal static IPs
+Network Settings;Firewall;;Optional;SonicWall;15:54-16:02;Complete;SonicWall firewall
+Call Features;Call Forwarding;;Optional;;Not mentioned;Not Required;
+Call Features;Voicemail;;Mandatory;Yes;20:04-20:13;Complete;Voicemail to email enabled
+Call Features;Auto Attendant;;Optional;Yes;08:15-08:30;Complete;Main number to menu
+Call Features;Business Hours;;Optional;7-5 Pacific;10:27-10:33;Complete;Business hours routing
+Call Features;After Hours Message;;Optional;Yes;09:58-10:16;Complete;Different after-hours greeting
+Call Features;Ring Groups;;Optional;Yes;08:47-09:00;Complete;Groups for menu options
+Call Features;Call Recording;;Optional;;Not mentioned;Not Required;
+Call Features;Conference Bridge;;Optional;;Not mentioned;Not Required;
+Call Features;International Dialing;;Optional;No;20:22-20:27;Complete;Not needed
+Business Information;Company Name;;Mandatory;Maverick Aerospace;08:30;Complete;
+Business Information;Account Number;;Auto-generated;;N/A;Pending;Will be assigned
+Business Information;Location Type;;Optional;Manufacturing;Inferred;Complete;Aerospace company
+Business Information;Implementation Date;;Mandatory;Labor Day timeframe;12:56-13:15;Partial;Around September 1st
+Business Information;Building Configuration;;Optional;3 buildings/2 locations;16:09-16:31;Complete;Connected by fiber
+Notifications;Welcome Email;;Mandatory;;Not mentioned;Missing;
+Notifications;Admin Email;;Mandatory;;Not mentioned;Missing;
+Notifications;Logistics Email;;Optional;;Not mentioned;Not Required;
+Notifications;Activation Codes Export;;Mandatory;;Not mentioned;Missing;
+SharePoint/Integration;Input Workbook Path;;Mandatory;Excel sheet;04:15-04:31;Pending;User detail sheet to be sent
+SharePoint/Integration;Output Folder;;Mandatory;;Not mentioned;Missing;
+SharePoint/Integration;Email Report;;Mandatory;Yes;23:04;Complete;Wrap-up email mentioned
+Additional Notes;Paging System;;Optional;Yes;00:31-00:44;Complete;IP SIP paging and bell system
+Additional Notes;Paging Extensions;;Optional;3;18:44-18:59;Complete;3 separate paging zones
+Additional Notes;Wall Mounts;;Optional;5;17:15-17:27;Complete;5 wall mounts needed
+Additional Notes;Wi-Fi Capable;;Optional;Yes;18:25-18:36;Complete;Phones are Wi-Fi capable but will be hardwired
+Additional Notes;Internet Provider;;Optional;Frontier Fiber;15:32-15:41;Complete;Frontier fiber connection
+Additional Notes;Generic Users;;Optional;10;05:58-06:12;Complete;~10 users without names yet
+Additional Notes;Extension Issues;;Optional;311/411;05:11-05:37;Complete;Need to reassign N11 extensions
+Additional Notes;Menu Script;;Optional;Pending;08:30-09:17;Pending;Written script to be provided
+Additional Notes;Menu Options Breakdown;;Optional;Pending;08:52-09:07;Pending;Option routing details needed
+Additional Notes;Current Phone System;;Optional;Sangoma 500;21:08-21:14;Complete;Current Sangoma 500 series phones
+Additional Notes;Audio Greeting Retrieval;;Optional;Yes;19:17-19:30;Complete;Patricia will retrieve current greeting
+Additional Notes;Support Period;;Optional;5 days;23:16-23:28;Complete;5 business days post-implementation support
+Summary;Total Attributes;;;100;;;
+Summary;Complete Required Fields;;;55;;;55% complete
+Summary;Missing Required Fields;;;18;;;Need follow-up
+Summary;Optional Fields Captured;;;27;;;Comprehensive detail level

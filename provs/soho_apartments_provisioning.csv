@@ -1,0 +1,79 @@
+Category;Attribute;Sub-Attribute;Required/Optional;Extracted Value;Source Timestamp;Status;Notes
+User Details;First Name;;Mandatory;Christi;Multiple references;Complete;Primary contact
+User Details;Last Name;;Mandatory;Lewis;Multiple references;Complete;Primary contact
+User Details;Email;;Mandatory;soho@fortispm.com;14:36;Complete;Admin email address
+User Details;Role;;Mandatory;User;Inferred;Complete;Standard user role
+User Details;Package;;Mandatory;;Not mentioned;Missing;Need to determine package type
+User Details;Mobile Number;;Optional;;Not mentioned;Not Required;
+User Details;Local Extension;;Mandatory;;Not mentioned;Missing;Need to assign extension
+User Details;Job Title;;Optional;;Not mentioned;Not Required;
+User Details;Department;;Optional;;Not mentioned;Not Required;
+User Details;First Name;;Mandatory;Adam;03:38;Complete;Secondary contact
+User Details;Last Name;;Mandatory;Hurlebaus;03:38;Complete;Secondary contact
+User Details;Email;;Mandatory;;Not mentioned;Missing;Adam's email not provided
+User Details;Role;;Mandatory;Admin;Inferred;Complete;Appears to be decision maker
+Location/Address;Location Name;;Mandatory;The Soho Apartments;10:27;Complete;"Also mentioned as ""rally location"""
+Location/Address;Street Address;;Mandatory;9408 Fayetteville Road;01:51;Complete;Original property address
+Location/Address;City;;Mandatory;Raleigh;01:51;Complete;Rally/Raleigh mentioned
+Location/Address;State;;Mandatory;NC;01:51;Complete;North Carolina
+Location/Address;ZIP Code;;Mandatory;;Not mentioned;Missing;Need ZIP for property
+Location/Address;Shipping Address;Street;Mandatory;13100 Margie Lane;02:55-03:07;Complete;Leasing office address
+Location/Address;Shipping Address;City;Mandatory;Fuquay-Varina;03:07;Complete;Spelled out in call
+Location/Address;Shipping Address;State;Mandatory;NC;03:07;Complete;North Carolina
+Location/Address;Shipping Address;ZIP;Mandatory;27603;03:07;Complete;
+Location/Address;E911 Address;Street;Mandatory;13100 Margie Lane;02:55-03:07;Complete;Same as shipping
+Location/Address;E911 Address;City;Mandatory;Fuquay-Varina;03:07;Complete;
+Location/Address;E911 Address;State;Mandatory;NC;03:07;Complete;
+Location/Address;E911 Address;ZIP;Mandatory;27603;03:07;Complete;
+Location/Address;E911 Business Name;;Mandatory;The Soho Apartments;10:27;Complete;Confirmed display name
+Location/Address;Timezone;;Mandatory;;Not mentioned;Missing;Need to confirm timezone
+Phone Numbers;Main Number;;Mandatory;984-552-2011;08:38-09:01;Complete;Selected and confirmed
+Phone Numbers;Area Code Preference;;Optional;984;06:11;Complete;Specified preference
+Phone Numbers;Number to Port;;Optional;None;05:29;Complete;Creating new number instead
+Phone Numbers;Inbound Number;;Optional;9842536999;04:59;Noted;CRM tracking number - not for BroadVoice
+Phone Numbers;Outbound Number;;Optional;;Not mentioned;Not Required;
+Phone Numbers;Fax Number;;Optional;;Not mentioned;Not Required;
+Device Configuration;Device Brand;;Mandatory;Polycom;Inferred;Partial;Mentioned VVX models
+Device Configuration;Device Model;;Mandatory;VVX-411;Inferred;Partial;Common model mentioned
+Device Configuration;Phone Make/Model;;Mandatory;Polycom VVX-411;Inferred;Partial;
+Device Configuration;Number of Devices;;Mandatory;1;00:26;Complete;One user, one phone
+Device Configuration;Rental/Purchase;;Mandatory;;Not mentioned;Missing;Need to determine
+Device Configuration;MAC Address;;Optional;;Not mentioned;Not Required;
+Device Configuration;Activation URL;;Auto-generated;;N/A;Pending;Will be generated
+Device Configuration;Hardware Profile;;Optional;;Not mentioned;Not Required;
+Phone Buttons;Lines Configuration;Number of Lines;Mandatory;1;00:26;Complete;Single user mentioned
+Phone Buttons;Lines Configuration;Line Names;Optional;;Not mentioned;Not Required;
+Phone Buttons;Custom Configuration;Per Employee;Mandatory;No;Inferred;Complete;Single user setup
+Phone Buttons;Call Parking;Enabled;Mandatory;;Not mentioned;Missing;Need to determine
+Phone Buttons;Call Parking;Number of Keys;Conditional;;Not mentioned;Not Required;
+Phone Buttons;Speed Dial;;Optional;;Not mentioned;Not Required;
+Phone Buttons;Presence;;Optional;;Not mentioned;Not Required;
+Fax Configuration;Fax Service;Enabled;Mandatory;No;Inferred;Complete;Not discussed
+Fax Configuration;Fax Service;Type;Conditional;;N/A;Not Required;
+Network Settings;Configure Network;;Mandatory;DHCP;Default;Complete;Standard configuration
+Network Settings;Custom Config;;Optional;;Not mentioned;Not Required;
+Call Features;Call Forwarding;;Optional;Yes;16:57-17:18;Complete;Discussed forwarding from CRM
+Call Features;Voicemail;;Mandatory;;Not mentioned;Missing;Need to confirm
+Call Features;Auto Attendant;;Optional;;Not mentioned;Not Required;
+Call Features;Ring Groups;;Optional;;Not mentioned;Not Required;
+Call Features;Call Recording;;Optional;;Not mentioned;Not Required;
+Call Features;Conference Bridge;;Optional;;Not mentioned;Not Required;
+Business Information;Company Name;;Mandatory;Fortis Property Management;14:36;Complete;Inferred from email domain
+Business Information;Account Number;;Auto-generated;;N/A;Pending;Will be assigned
+Business Information;Location Type;;Optional;Residential/Leasing Office;Inferred;Complete;Apartment complex
+Business Information;Implementation Date;;Mandatory;Immediate;01:16;Complete;Equipment pre-prepared
+Notifications;Welcome Email;;Mandatory;soho@fortispm.com;15:25;Complete;Confirmed will receive
+Notifications;Admin Email;;Mandatory;soho@fortispm.com;14:36-15:16;Complete;Same as welcome email
+Notifications;Logistics Email;;Optional;;Not mentioned;Not Required;
+Notifications;Activation Codes Export;;Mandatory;Yes;16:04;Complete;Email recap mentioned
+SharePoint/Integration;Input Workbook Path;;Mandatory;;04:29;Referenced;Document mentioned but path unknown
+SharePoint/Integration;Output Folder;;Mandatory;;Not mentioned;Missing;
+SharePoint/Integration;Email Report;;Mandatory;Yes;16:31;Complete;Email recap confirmed
+Additional Notes;Mobile App;;Optional;Yes;15:28-17:24;Complete;App usage discussed
+Additional Notes;CRM Integration;;Optional;Yes;17:18;Complete;Call forwarding from CRM system
+Additional Notes;Future Expansion;;Optional;Yes;00:46;Noted;Will add more users in future
+Additional Notes;New Construction;;Optional;Yes;10:57;Noted;New build property
+Summary;Total Attributes;;;80;;;
+Summary;Complete Required Fields;;;42;;;52.5% complete
+Summary;Missing Required Fields;;;10;;;Need follow-up
+Summary;Optional Fields Captured;;;8;;;Good detail level

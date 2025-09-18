@@ -1,0 +1,941 @@
+00:02
+Now 53 standard users, 3-metered users, 1 shared fax, 1 auto attendant, 3 analog adapters, and then 53 polycom edge E350 phones.
+Move the player to 20.01 seconds in the call
+Patricia Rael
+00:20
+Question
+Is that correct?
+Move the player to 21.91 seconds in the call
+Patricia Rael
+00:21
+Okay, perfect.
+Move the player to 23.81 seconds in the call
+Patricia Rael
+00:23
+Question
+The 3-metered users as well as the 3 analog adapters, is that for paging?
+Move the player to 31.96 seconds in the call
+Speaker 3
+00:31
+Perfect. Yeah, we have an IP SIP device that does paging as well as it's a bell system so like lunch and stuff.
+Move the player to 44.62 seconds in the call
+Patricia Rael
+00:44
+Okay, if you could perhaps send me like model information or even send pictures of the current setup. I just want to make sure that the adapters were sending out will work.
+Move the player to 56.13 seconds in the call
+Patricia Rael
+00:56
+If it's already set based it might just be us entering or giving you new CIP information to enter in the hardware or the software that you have.
+Move the player to 66.64 seconds in the call
+Patricia Rael
+01:06
+But yeah, the more information we have on that the better, but if not, I mean, it'll still be tied to three metered users. It's just a matter of whether we send you analog adapters or not.
+Move the player to 76.81 seconds in the call
+Patricia Rael
+01:16
+And then the facts. The facts right now, it looks like it's just effects or will you be doing physical faxing as well.
+Move the player to 85.93 seconds in the call
+Speaker 3
+01:25
+We, that's a good question. We used to have a copy of it. module in it that actually took physical faxes. We no longer have that copy or so.
+Move the player to 102.9 seconds in the call
+Patricia Rael
+01:42
+Okay.
+Move the player to 103.51 seconds in the call
+Speaker 3
+01:43
+There'd be deal with faxes but I mean I guess it seems to be. Take a bit.
+Move the player to 112.12 seconds in the call
+Patricia Rael
+01:52
+Sorry you cut off a little bit
+Move the player to 113.46 seconds in the call
+Speaker 3
+01:53
+There at the end. Okay it does happen occasionally that like some of our customers have the fax like a drawing or something like that. So I guess the E facts would be fine.
+Move the player to 126.74 seconds in the call
+Patricia Rael
+02:06
+Okay, perfect.
+Move the player to 128.3 seconds in the call
+Patricia Rael
+02:08
+Question
+And very quickly, what is your main number?
+Move the player to 133.22 seconds in the call
+Speaker 3
+02:13
+The main number is 714 Okay,
+Move the player to 141.82 seconds in the call
+Patricia Rael
+02:21
+Question
+And what is the facts number that you have?
+Move the player to 146.92 seconds in the call
+Speaker 3
+02:26
+Challenges
+I'm going to have to double check on that, but I believe it's 0700. There is 700.
+Move the player to 155.85 seconds in the call
+Patricia Rael
+02:35
+Yep, that looks like it.
+Move the player to 158.25 seconds in the call
+Speaker 3
+02:38
+Let me confirm with you just in case.
+Move the player to 162.08 seconds in the call
+Patricia Rael
+02:42
+Okay, I do see that number listed in the LOA. So it is 714-578-0700. So I think we're good there. There's Joshua. Joshua just joined us. Hey, Josh. Hey guys, apologies about that. No worries, I was speaking with Will.
+Move the player to 177.6 seconds in the call
+Patricia Rael
+02:57
+I did get, you know, confirm the quote. And then I was just going through the numbers very quickly. The three meter users are for paging. They might need the analog adapters.
+Move the player to 189.84 seconds in the call
+Patricia Rael
+03:09
+I'm going to have them send me some pictures or more information on what they're currently used because it sounds like it might already be sit based and we wouldn't need to send out the analog adapters.
+Move the player to 200.58 seconds in the call
+Patricia Rael
+03:20
+The facts will be effects. And that's all I got to you so far. So if you want to go ahead and. do the rest of your portion, then I'll go through mine.
+Move the player to 209.71 seconds in the call
+Joshua Kirby
+03:29
+Yeah, so the faxes, the three faxes will be effects or it's just one fax and that'll be effects.
+Move the player to 217.54 seconds in the call
+Joshua Kirby
+03:37
+Question
+And then what about for with the the three meter users?
+Move the player to 224.76 seconds in the call
+Patricia Rael
+03:44
+Yeah, the three meter users are paging and that's why I said the three analog adapters might be needed for them. But once I get more information, I'll let you know for sure.
+Move the player to 233.36 seconds in the call
+Joshua Kirby
+03:53
+Gotcha. OK, perfect. Perfect. OK. All righty, so yeah, so the major thing that I would need from your end is, so for the 53 users, it's more than likely multiple people, first and last name, sort of a setup.
+Move the player to 254.09 seconds in the call
+Speaker 3
+04:14
+Yeah.
+Move the player to 255.31 seconds in the call
+Joshua Kirby
+04:15
+Yeah, so what we would need at that point. So we I'm going to send you an Excel sheet. And on that Excel sheet, we have it'll have like first name, last name.
+Move the player to 271.96 seconds in the call
+Joshua Kirby
+04:31
+If they have extensions, you can go ahead and list that there. Anyone who would need access to either like a portal or if you wanted to give anyone like administrative access, you would add their email.
+Move the player to 282.93 seconds in the call
+Joshua Kirby
+04:42
+Those are the most important things we would need on there. So then that way we can import that into the system, get the phones added and set the equipment to get shipped out and everything.
+Move the player to 294.8 seconds in the call
+Joshua Kirby
+04:54
+So I will send that over to you after our call and then just get that filled out.
+Move the player to 299.82 seconds in the call
+Joshua Kirby
+04:59
+Now obviously... the faster we receive it, the faster we can get them at it and get the phone set to ship out and everything. And obviously the longer it takes for us to do all of that as well.
+Move the player to 311.49 seconds in the call
+Speaker 3
+05:11
+Got you. The only hold up I can imagine on my end is that I have a couple of extensions that probably aren't going to work for you. I have 311 and 411.
+Move the player to 327.84 seconds in the call
+Speaker 3
+05:27
+I just have to figure out what I can move that extension to. But that involved just me asking the user and figuring out business cards and ... like that.
+Move the player to 337.56 seconds in the call
+Speaker 3
+05:37
+So if you could give me a maybe, you maybe a couple hours on that, that would be helpful.
+Move the player to 344.4 seconds in the call
+Patricia Rael
+05:44
+Yep, and you can always leave those ones blank for now because we can add an extension number later or adjust an extension number.
+Move the player to 351.53 seconds in the call
+Patricia Rael
+05:51
+As long as we have the name and email address so that way we can build that user and add the hardware.
+Move the player to 358.77 seconds in the call
+Speaker 3
+05:58
+Got you. Okay. Okay, if you know. And I'll probably have a bunch that. probably have at least 10 that won't have any name information yet.
+Move the player to 372.7 seconds in the call
+Speaker 3
+06:12
+Question
+Is that going to be a problem?
+Move the player to 375.08 seconds in the call
+Speaker 3
+06:15
+If you can just be generic. If you have a generic user
+Move the player to 378.28 seconds in the call
+Patricia Rael
+06:18
+One through 10, and then if you yourself have admin access, you can update that later.
+Move the player to 384.52 seconds in the call
+Speaker 3
+06:24
+Perfect. Okay.
+Move the player to 387.41 seconds in the call
+Joshua Kirby
+06:27
+Yeah. And then even for the one, and I'm not my. by my thing was going to be in and out.
+Move the player to 393.22 seconds in the call
+Joshua Kirby
+06:33
+So you might have already stated this, but for the ones that 311, for the meantime, you can always just add, if you put them on there, just so we can get it set up and get it kind of get the ball rolling.
+Move the player to 406.51 seconds in the call
+Joshua Kirby
+06:46
+What we can do is you can just add an extra one at the end.
+Move the player to 411.68 seconds in the call
+Speaker 3
+06:51
+Oh, okay. All right. Yeah.
+Move the player to 413.26 seconds in the call
+Joshua Kirby
+06:53
+So instead of just doing 4-1-1, you know, you would do 4-1-1-1, you
+Move the player to 417.74 seconds in the call
+Speaker 3
+06:57
+Know, 3-1-1-1. Okay, cool.
+Move the player to 422.98 seconds in the call
+Joshua Kirby
+07:02
+Yeah, that's what I usually do. And then let's see here.
+Move the player to 426.44 seconds in the call
+Joshua Kirby
+07:06
+Question
+And for the equipment, are we shipping that?
+Move the player to 431.1 seconds in the call
+Joshua Kirby
+07:11
+Let me see here. To the 3-7-1-8 capital F, city of Industry California, 90601. Yeah.
+Move the player to 440.01 seconds in the call
+Joshua Kirby
+07:20
+Okay, so yeah, we can definitely do that. Let me see here. I'm just going through making sure I have everything I need.
+Move the player to 452.78 seconds in the call
+Joshua Kirby
+07:32
+Question
+And then we're just only porting the two numbers, correct, the main line and the facts line, correct?
+Move the player to 458.53 seconds in the call
+Speaker 3
+07:38
+I will double check on that when I'm virtually certain. Those are the only two numbers that have been ever associated with Maverick Aerospace, but I will double check.
+Move the player to 466.27 seconds in the call
+Joshua Kirby
+07:46
+Gotcha, no worries. Okay, so here's what we can do.
+Move the player to 468.97 seconds in the call
+Joshua Kirby
+07:48
+So, well, here's how it'll go from, you know, the, you know, Patricia might have some things that she wants to go over a bit more on her in, possibly, but just from my end, what'll happen essentially from here is, you know, we'll go ahead, you know, get the user information from you, get it at it, get the phones at it, you know, set to have that shipped out.
+Move the player to 490.35 seconds in the call
+Joshua Kirby
+08:10
+And then from there, you know, we already have the two numbers, we know which one is the main and which one of the facts. It's pretty simple.
+Move the player to 495.45 seconds in the call
+Joshua Kirby
+08:15
+And from there, it's just, the coplo setup, which I believe on here, it says an attendant. like a written or recorded script that
+Move the player to 510.78 seconds in the call
+Joshua Kirby
+08:30
+Yeah, we would need like a written or a verbal script that, you know, has whatever messaging you want to put on there. Hello, thank you for calling Mavic Arrow, you know, for one press this.
+Move the player to 520.77 seconds in the call
+Joshua Kirby
+08:40
+Now what we would need alongside that unless it's extremely obvious, you know, hey option one goes to John, option two goes to Sally.
+Move the player to 527.09 seconds in the call
+Joshua Kirby
+08:47
+Question
+We need just a simple breakdown of, you know, hey, if option one goes to sales, you know, is that a person?
+Move the player to 532.41 seconds in the call
+Joshua Kirby
+08:52
+Question
+Is that a group of people?
+Move the player to 533.61 seconds in the call
+Joshua Kirby
+08:53
+We just need a simple breakdown explaining, you know, what each option is doing on the attendant.
+Move the player to 540.29 seconds in the call
+Speaker 3
+09:00
+Okay, that's not a problem.
+Move the player to 542.34 seconds in the call
+Speaker 3
+09:02
+Question
+Do you want me to add that on the extension sheet?
+Move the player to 545.11 seconds in the call
+Speaker 3
+09:05
+Question
+Can I add a column for like groups?
+Move the player to 547.47 seconds in the call
+Joshua Kirby
+09:07
+Yeah, if you what you can do is you can like tours at the bottom of the sheet, you know, just go a couple of spaces down and then if you want, you can, you know, if it's just going to be a written script, you can put all the information there.
+Move the player to 557.6 seconds in the call
+Joshua Kirby
+09:17
+But if it's just the breakdown for the attendant and, you know, like, and like just for the options, then, yeah, you can either one, you can do it there, but just do it at the bottom.
+Move the player to 575.57 seconds in the call
+Joshua Kirby
+09:35
+Either one of them you can. So if you want to just provide the whole script there or you know, if you send over recording with the breakdown there, then yeah, that's fine. And they will have that there.
+Move the player to 586.01 seconds in the call
+Joshua Kirby
+09:46
+And then do you have it will like after hours quote unquote, you know, does it do anything different or is this recording or the message going to just play 24 seven.
+Move the player to 598.14 seconds in the call
+Speaker 3
+09:58
+Probably. Yeah, probably after hours, we would have a little bit different. Probably other go to. straight to voicemail or
+Move the player to 608.66 seconds in the call
+Speaker 3
+10:08
+I got to see like what we have right now. I think that's what it does. Basically it's a message saying like you know we're closed offices closed.
+Move the player to 616.1 seconds in the call
+Speaker 3
+10:16
+You can leave a message or call back you know within business hours in the next day.
+Move the player to 621.75 seconds in the call
+Joshua Kirby
+10:21
+Yeah, Jen, do you know what the business hours
+Move the player to 626.33 seconds in the call
+Speaker 3
+10:26
+Are?
+Move the player to 627.07 seconds in the call
+Speaker 3
+10:27
+To 5.
+Move the player to 630.47 seconds in the call
+Joshua Kirby
+10:30
+Question
+And what time zone?
+Move the player to 633.11 seconds in the call
+Joshua Kirby
+10:33
+Pacific.
+Move the player to 633.41 seconds in the call
+Speaker 3
+10:33
+7.
+Move the player to 635.23 seconds in the call
+Joshua Kirby
+10:35
+Question
+Who cares?
+Move the player to 637.17 seconds in the call
+Joshua Kirby
+10:37
+Ok, yeah. And then we so yeah, so just put both. Put the during business hours and then after hours, whatever the message is for that.
+Move the player to 644.1 seconds in the call
+Joshua Kirby
+10:44
+Question
+And you can even just put like goals to voicemail, after hours, and says this, right?
+Move the player to 650.27 seconds in the call
+Joshua Kirby
+10:50
+Or something along those lines.
+Move the player to 655.5 seconds in the call
+Joshua Kirby
+10:55
+Okay, and so that is virtually all the information I need on my end. So yeah, so essentially, you know, I'll just kind of be on hold for the user detail sheet. And then once we get the attendant information.
+Move the player to 672.34 seconds in the call
+Joshua Kirby
+11:12
+So what we do is we typically do wait for the to get the attendant information back. Just because, you know, once submitting the port, we want to make sure that there's no life errors and a hiccup.
+Move the player to 682.63 seconds in the call
+Joshua Kirby
+11:22
+Just because, you know, that can, that is the one space where issues could potentially arrive because technically and legally, when the losing carrier provides us with a date,
+Move the player to 697.38 seconds in the call
+Joshua Kirby
+11:37
+Of the time they honor it. But for whatever reason, we need to change the date for any unforeseen circumstances or anything, or we just need to push the order back.
+Move the player to 706.67 seconds in the call
+Joshua Kirby
+11:46
+Question
+They're not obligated to You know, adjust for us once they've already said, hey, yeah, we'll release the number, right?
+Move the player to 714.24 seconds in the call
+Joshua Kirby
+11:54
+Question
+So we don't ever really run into that issue, but it is an issue that could happen, right?
+Move the player to 719.54 seconds in the call
+Joshua Kirby
+11:59
+Next Steps
+So what we like to do is make sure we just have the attendant information first. And then once we get that, what's you're going to send it over with the user detail sheet, then I'll submit the port.
+Move the player to 727.61 seconds in the call
+Joshua Kirby
+12:07
+Question
+Is there any day that you need to go like live on or by or?
+Move the player to 731.99 seconds in the call
+Speaker 3
+12:11
+Question
+I mean, what typically what?
+Move the player to 739.26 seconds in the call
+Speaker 3
+12:19
+Question
+Typically what is like how long does it take in order to I mean like if you submitted it today, how long does it typically take?
+Move the player to 746.93 seconds in the call
+Joshua Kirby
+12:26
+Um, I mean, it can take anywhere. I mean, let's say, Prince, we submitted today. I could probably get it anywhere between the 27th to 28th.
+Move the player to 758.04 seconds in the call
+Joshua Kirby
+12:38
+So anywhere between like three two five business days from the day we submit it, we can usually get a date or anywhere like three, four, five days.
+Move the player to 767.44 seconds in the call
+Joshua Kirby
+12:47
+It just very, it kind of depends on what time of year, have a holiday is around, you know, that sort of stuff.
+Move the player to 772.7 seconds in the call
+Speaker 3
+12:52
+I got you. I mean, like, I think that.
+Move the player to 776.31 seconds in the call
+Speaker 3
+12:56
+Question
+Trying to work it around the labor day, it's coming up right?
+Move the player to 781.97 seconds in the call
+Joshua Kirby
+13:01
+Yeah, the laborly. Yeah.
+Move the player to 784.61 seconds in the call
+Speaker 3
+13:04
+I think that's what we would try to kind of center it around. I mean, it would be great to do it over that weekend because that would be at all possible. But
+Move the player to 795.17 seconds in the call
+Joshua Kirby
+13:15
+Yeah, so we wouldn't be able to do it necessarily over the weekend.
+Move the player to 798.47 seconds in the call
+Joshua Kirby
+13:18
+We could like set up like give you a temporary number and then you set it up like the Friday, get it connected the Friday before and do like a call forwarding and then the like get all the phones connected, you know, and stuff like that, get everything kind of preset up with the temporary number and then do like a call forwarding on Friday or you know, on that Saturday or whatever with the losing carrier, you know, say, hey, we want to do a call forwarding to this temporary number and then on the following Monday or so we could port.
+Move the player to 829.54 seconds in the call
+Joshua Kirby
+13:49
+Question
+But I think Labor Day is on the first, right?
+Move the player to 833.97 seconds in the call
+Joshua Kirby
+13:53
+Yeah, I think it's the first this year.
+Move the player to 839.01 seconds in the call
+Speaker
+13:59
+It's on the first. Just so you
+Move the player to 840.55 seconds in the call
+Patricia Rael
+14:00
+Know, Josh, I'm not available all of next week. And then the following week, I'm not a free the second, the third I am for a little bit, the fourth is out completely and the Friday the fifth.
+Move the player to 853.82 seconds in the call
+Patricia Rael
+14:13
+So that would be a squeeze.
+Move the player to 857.34 seconds in the call
+Speaker 3
+14:17
+Got to. Okay. Plus the hardware. Okay.
+Move the player to 860.08 seconds in the call
+Patricia Rael
+14:20
+Question
+How long does the hardware take to get there?
+Move the player to 861.46 seconds in the call
+Patricia Rael
+14:21
+Yeah, roughly five two seven days.
+Move the player to 863.77 seconds in the call
+Joshua Kirby
+14:23
+Yeah, yeah, well, usually it can depend anywhere between three two seven, you know, it can kind of greatly vary just depending on how you PS how busy UPS is. That's true. Yeah.
+Move the player to 875.3 seconds in the call
+Speaker 3
+14:35
+Okay. Yeah, so yeah, so as far as things that won't work, I mean, I don't really think there are any. As long as we can get the full setup, I think we're good.
+Move the player to 889.71 seconds in the call
+Joshua Kirby
+14:49
+Yeah, exactly.
+Move the player to 890.63 seconds in the call
+Joshua Kirby
+14:50
+So yeah, so what we'll do is we can retouch that via email when we get a little like once we get the user detail sheet back once we get everything added and shipped out, we can kind of go based on that right and say, okay, you know, let's look at our schedules, let's see what's open and then we can go from there and get everything scheduled and stuff.
+Move the player to 909.12 seconds in the call
+Joshua Kirby
+15:09
+Yeah, so I'll go ahead and pass it over to Tricia. Did you have anything else that you needed to go
+Move the player to 914.91 seconds in the call
+Speaker
+15:14
+Over?
+Move the player to 917.69 seconds in the call
+Speaker 3
+15:17
+Not that I can really think of right now. I think we touched on pretty much everything.
+Move the player to 922.45 seconds in the call
+Joshua Kirby
+15:22
+Question
+And then Patricia, did you have anything that she needed to?
+Move the player to 925.95 seconds in the call
+Patricia Rael
+15:25
+Yeah, just a little bit.
+Move the player to 927.43 seconds in the call
+Patricia Rael
+15:27
+Question
+So network wise, who's your internet service provider?
+Move the player to 932.56 seconds in the call
+Speaker 3
+15:32
+Frontier.
+Move the player to 933.84 seconds in the call
+Patricia Rael
+15:33
+Frontier?
+Move the player to 934.42 seconds in the call
+Patricia Rael
+15:34
+Okay.
+Move the player to 935.72 seconds in the call
+Patricia Rael
+15:35
+Question
+What kind of connection is that?
+Move the player to 937.16 seconds in the call
+Patricia Rael
+15:37
+Question
+Is that a DSL cable fiber with them?
+Move the player to 941.66 seconds in the call
+Speaker 3
+15:41
+It's, um, it's fiber. It's a fiber line. Okay. Yeah.
+Move the player to 949.08 seconds in the call
+Patricia Rael
+15:49
+Question
+And then behind that, do you have a third party firewall in use?
+Move the player to 954.19 seconds in the call
+Speaker 3
+15:54
+We do. Yes.
+Move the player to 956.41 seconds in the call
+Patricia Rael
+15:56
+Question
+Do you know what type of firewall it is?
+Move the player to 958.39 seconds in the call
+Patricia Rael
+15:58
+It's a sonic. Okay. Perfect. Awesome.
+Move the player to 962 seconds in the call
+Patricia Rael
+16:02
+Question
+And do you manage that?
+Move the player to 966.41 seconds in the call
+Patricia Rael
+16:06
+Okay perfect.
+Move the player to 969.48 seconds in the call
+Speaker 3
+16:09
+Yeah, three buildings. Each one, well no, they're actually one and two are connected by the fiber so there's actually two locations really, three buildings and yeah they're both on sonic walls and yeah that's really it.
+Move the player to 991.36 seconds in the call
+Joshua Kirby
+16:31
+Okay.
+Move the player to 993.18 seconds in the call
+Patricia Rael
+16:33
+Got it. And then local network is that static or DHCP because these phones will be plug and play if it's just a DHCP.
+Move the player to 1003.27 seconds in the call
+Speaker 3
+16:43
+It's static.
+Move the player to 1004.77 seconds in the call
+Patricia Rael
+16:44
+Okay. So that's internal network. So we would need to assign the phones a static IP beforehand.
+Move the player to 1014.18 seconds in the call
+Speaker 3
+16:54
+Okay, yeah.
+Move the player to 1022.19 seconds in the call
+Patricia Rael
+17:02
+Next Steps
+I'll send you via email just like a screenshot of the information that we would need for each phone before. Okay. All right.
+Move the player to 1030.77 seconds in the call
+Patricia Rael
+17:10
+Question
+Are any wall mounts needed for any of the phones?
+Move the player to 1035.99 seconds in the call
+Speaker 3
+17:15
+Yeah. I wonder how many though. So it's six shops, two shops, three shops.
+Move the player to 1047.26 seconds in the call
+Speaker 3
+17:27
+I think probably five.
+Move the player to 1056.13 seconds in the call
+Patricia Rael
+17:36
+Question
+I'm just you have cost for that or do you need to get pricing on that?
+Move the player to 1061.41 seconds in the call
+Speaker 3
+17:41
+I'm sorry. You broke
+Move the player to 1062.91 seconds in the call
+Patricia Rael
+17:42
+Up. Hey, sorry about that. Sorry about that. I think I was
+Move the player to 1066.34 seconds in the call
+Joshua Kirby
+17:46
+Pricing
+Meeting up with you said the cost for the wall mounts. Yeah, well, that's there is an extra cost and it's a poly edge. The 350. Let me see here the wall mounts.
+Move the player to 1086.84 seconds in the call
+Joshua Kirby
+18:06
+Next Steps
+Yeah, you know, I'll have to look. I'll get the price over to you in mind because I was in a wrap up email at the after we're done. I will send it over to you.
+Move the player to 1095.09 seconds in the call
+Speaker 3
+18:15
+Yeah. Thank you. Awesome.
+Move the player to 1098.19 seconds in the call
+Patricia Rael
+18:18
+Question
+Okay, so and then there's a ethernet drops at each location of phones going to be installed right?
+Move the player to 1104.9 seconds in the call
+Speaker 3
+18:24
+Yes.
+Move the player to 1105.9 seconds in the call
+Patricia Rael
+18:25
+Okay, these phones technically are Wi-Fi capable. We just don't want a full Wi-Fi layout with this many phones. So if the majority can be hardwired, that would be great.
+Move the player to 1116.76 seconds in the call
+Speaker 3
+18:36
+Absolutely. Yeah, there's I mean, I maybe a couple I would think about putting on Wi-Fi, but they'll all be hardwired.
+Move the player to 1123.16 seconds in the call
+Patricia Rael
+18:43
+Okay, great.
+Move the player to 1124.77 seconds in the call
+Patricia Rael
+18:44
+And then in the user details, if you could just list since there is three separate paging, just let me know if there's an extension tied to them because we can add those, I don't know if your current phones, if they have them as like a speed dial button or anything like that to page.
+Move the player to 1139.5 seconds in the call
+Speaker 3
+18:59
+There is. So yes, I will add those.
+Move the player to 1143.03 seconds in the call
+Patricia Rael
+19:03
+Perfect.
+Move the player to 1144.37 seconds in the call
+Patricia Rael
+19:04
+Question
+And then we did get that your main number when it's dialed right now, it just goes straight to a menu, correct?
+Move the player to 1150.45 seconds in the call
+Patricia Rael
+19:10
+Question
+Or does it ring into like person first?
+Move the player to 1154.62 seconds in the call
+Speaker 3
+19:14
+Okay. Go straight.
+Move the player to 1156.52 seconds in the call
+Patricia Rael
+19:16
+Okay.
+Move the player to 1157.34 seconds in the call
+Patricia Rael
+19:17
+If you do want to keep that same greeting, what I can do is I can call in and retrieve that, or if you have access to the audio file directly, you can always send that to us, but I usually just call in and I can record it.
+Move the player to 1170.92 seconds in the call
+Speaker 3
+19:30
+Yeah, I mean, that would be that would be perfect because I don't think I can get that from our current provider. Okay.
+Move the player to 1179.24 seconds in the call
+Patricia Rael
+19:39
+Yeah, no problem. I'll call in and get it. If I have any questions on that to you, I know you said you'll send the group information. If you want to add that in the sheet, that's perfectly fine.
+Move the player to 1188.62 seconds in the call
+Patricia Rael
+19:48
+Next Steps
+Or if I have any other questions on any other menu options, I'll reach out to you via email on that.
+Move the player to 1195.26 seconds in the call
+Patricia Rael
+19:55
+I'll call after hours to just to see what the greeting is there and see if it's just going to a voicemail or just an announcement.
+Move the player to 1203.21 seconds in the call
+Speaker 3
+20:03
+Okay, great.
+Move the player to 1204.9 seconds in the call
+Patricia Rael
+20:04
+Question
+Do you want voicemail to email enabled for all users?
+Move the player to 1208.28 seconds in the call
+Patricia Rael
+20:08
+So if someone gets a message, they'll get an audio copy. OK, perfect.
+Move the player to 1213.89 seconds in the call
+Speaker 3
+20:13
+Yeah, I would say so. That's the kind of the way I set up now. I don't even know if people actually use it, but that's how it's set up now.
+Move the player to 1221.21 seconds in the call
+Patricia Rael
+20:21
+Ok, great.
+Move the player to 1222.78 seconds in the call
+Patricia Rael
+20:22
+Do you need international dialing enabled?
+Move the player to 1227.31 seconds in the call
+Speaker 3
+20:27
+Um, not really. Yeah, okay.
+Move the player to 1231.34 seconds in the call
+Patricia Rael
+20:31
+It's not common anymore, but.
+Move the player to 1234.7 seconds in the call
+Speaker 3
+20:34
+Okay, yeah, okay, okay.
+Move the player to 1237.24 seconds in the call
+Patricia Rael
+20:37
+It's not common. What I can do though. Yeah, I mean, what's happened stuff, make it kind of null now.
+Move the player to 1244.28 seconds in the call
+Patricia Rael
+20:44
+But in case you did need it, what I could do is like if yourself as an admin wants to enable it for a user, you can.
+Move the player to 1250.77 seconds in the call
+Patricia Rael
+20:50
+So I'll enable it on an account level, but technically no one would still be able to dial unless you enabled it for them.
+Move the player to 1260.25 seconds in the call
+Patricia Rael
+21:00
+Okay.
+Move the player to 1262.15 seconds in the call
+Patricia Rael
+21:02
+Question
+And then do you currently have Loype phones or is that what your current setup is?
+Move the player to 1268.06 seconds in the call
+Speaker 3
+21:08
+Yeah we have Sangoma excuse me we mostly Sangoma 500 series.
+Move the player to 1274.32 seconds in the call
+Patricia Rael
+21:14
+Okay do your phones have any special configurations like call parks so if you place someone on a park everybody can see that call waiting.
+Move the player to 1284.67 seconds in the call
+Speaker
+21:24
+Um
+Move the player to 1286.15 seconds in the call
+Speaker 3
+21:26
+No I will I don't think so.
+Move the player to 1291 seconds in the call
+Patricia Rael
+21:31
+Question
+Okay, is that something you'd like to add to your phones?
+Move the player to 1294.22 seconds in the call
+Patricia Rael
+21:34
+Because it's a feature we can add. It's instead of placing them on hold, because only your phone would see that call waiting if you placed them on hold.
+Move the player to 1301.29 seconds in the call
+Patricia Rael
+21:41
+You placed them on a park and everybody can see that call waiting and can pick it up by pressing the park button.
+Move the player to 1307.96 seconds in the call
+Speaker 3
+21:47
+I wouldn't think that could be useful, yeah.
+Move the player to 1310.32 seconds in the call
+Patricia Rael
+21:50
+Okay, a few call parks. And then you have quite a few users, so we can't really add another feature called a BLF or a presence for everyone.
+Move the player to 1320.26 seconds in the call
+Patricia Rael
+22:00
+But each phone or each user can kind of personalize their phone with certain users that maybe they monitor a lot or that they call a lot.
+Move the player to 1330.44 seconds in the call
+Patricia Rael
+22:10
+So that might be better to just work on afterwards, just because it's probably easier to see and personalize once once the users have the funds in front of them.
+Move the player to 1342.01 seconds in the call
+Speaker 3
+22:22
+Yeah, we have a thing said to be totally agree.
+Move the player to 1344.55 seconds in the call
+Patricia Rael
+22:24
+Ok. And then we'll also just make sure we have the speed dials for paging preset as well. Once I get the user details in the extensions for them, then I'll make sure that's added.
+Move the player to 1357.13 seconds in the call
+Speaker 3
+22:37
+Okay,
+Move the player to 1357.53 seconds in the call
+Patricia Rael
+22:37
+Perfect. Okay, I think I have everything I need.
+Move the player to 1363.35 seconds in the call
+Patricia Rael
+22:43
+Do you have any questions for me?
+Move the player to 1366.74 seconds in the call
+Speaker 3
+22:46
+I don't but at this point, no, I don't. I think everything sounds pretty clear cut.
+Move the player to 1372.62 seconds in the call
+Patricia Rael
+22:52
+Okay, yeah, perfect. If you do have anything come up, you can always reach out to myself or Josh. But I'll get you back to Joshua then to wrap it up. Thank you.
+Move the player to 1382.43 seconds in the call
+Speaker 3
+23:02
+Perfect. Thank you so much.
+Move the player to 1384.62 seconds in the call
+Joshua Kirby
+23:04
+Longest Monologue
+Okay, yeah. And so like I said earlier, you know, I will go ahead and send kind of a wrap up email and just kind of rehashing everything we discussed.
+Move the player to 1391.36 seconds in the call
+Joshua Kirby
+23:11
+Longest Monologue
+If you have anything for us, we're free to reach out. We'll be more than happy to hop in and assist.
+Move the player to 1396.28 seconds in the call
+Joshua Kirby
+23:16
+Longest Monologue
+You know, even post, you know, completion of the order you'll have myself interest for five days, five business days. So if you do need any assistance, it won't be with anyone new. You don't have to re explain anything.
+Move the player to 1408.86 seconds in the call
+Joshua Kirby
+23:28
+Longest Monologue
+And yeah, from there, we'll just kind of be pending a couple of things from you. And then once we do that, you know, I'll get everything.
+Move the player to 1414.93 seconds in the call
+Joshua Kirby
+23:34
+Longest Monologue
+We'll start to get the stuff added and built, get the port submitted, ship our phones. And then from there, we'll work out an activation date.
+Move the player to 1424.51 seconds in the call
+Joshua Kirby
+23:44
+Longest MonologueNext Steps
+Once we get to shipping the phones and submitting the port and stuff, I'll reach out to you on that day. We'll coordinate and figure out a date that's best for us to go live.
+Move the player to 1434.79 seconds in the call
+Joshua Kirby
+23:54
+Longest Monologue
+And then from there, we'll just be kind of pending the phones getting delivered, waiting for that date. And then once we're there, we'll go ahead and now what we always like to recommend to recommend.
+Move the player to 1444.45 seconds in the call
+Joshua Kirby
+24:04
+Longest Monologue
+Depending on your setup is if you can have phone phones plugged in, especially because they come pre-provisioned.
+Move the player to 1451.76 seconds in the call
+Joshua Kirby
+24:11
+Longest Monologue
+If you can get phones plugged in before, if you can have like enough, you know, forced to have like two phones sitting at the desk at the same time, you know, that's great.
+Move the player to 1460.56 seconds in the call
+Joshua Kirby
+24:20
+Longest Monologue
+Cause then on the day of, you don't have to go around, you know, and actually do a one by one or, you know, pass them around and tell everyone, hey, connect them.
+Move the player to 1467.34 seconds in the call
+Joshua Kirby
+24:27
+Longest Monologue
+But if that works better for you, then obviously we can do that as well. So.
+Move the player to 1471.83 seconds in the call
+Speaker
+24:31
+Okay.
+Move the player to 1474.13 seconds in the call
+Speaker 3
+24:34
+Yeah, some offices probably won't probably be possible, but some for sure have like an extra ethernet port, so that wouldn't be a problem. Perfect. Perfect.
+Move the player to 1487.88 seconds in the call
+Joshua Kirby
+24:47
+Yeah, and then, you know, like I say, any questions or anything, just reach out to us. And if you don't have any other questions, we can go ahead and let you go.
+Move the player to 1495.65 seconds in the call
+Speaker 3
+24:55
+Sounds good. I don't have any more questions at this time now. We're good.
+Move the player to 1500.19 seconds in the call
+Joshua Kirby
+25:00
+All righty, well, thank you for hopping on with us and hopefully you enjoy the rest of your day.
+Move the player to 1505.41 seconds in the call
+Speaker 3
+25:05
+Thank you, you too. Thank you so much for your help.
+Move the player to 1508.03 seconds in the call
+Joshua Kirby
+25:08
+You're welcome. Take care.
+Move the player to 1509.23 seconds in the call
+Patricia Rael
+25:09
+Bye-bye. You
+Move the player to 1510.03 seconds in the call
+Speaker 3
+25:10
+Guys have a good one. Bye.
+Move the player to 1511.43 seconds in the call
+Patricia Rael
+25:11
+You too.

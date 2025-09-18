@@ -1,0 +1,504 @@
+Giovanna Naranjo
+00:02
+Yes, we can.
+Move the player to 3.45 seconds in the call
+Billing Contact
+00:03
+All right, I hear Gavin. I hear. Who else we have, Steven.
+Move the player to 9.35 seconds in the call
+Steven Hatch
+00:09
+Steve, Steve with a broad voice.
+Move the player to 12.13 seconds in the call
+Billing Contact
+00:12
+Steve, all right, great. And we've got so Paul, we see is with our company. He won't be on this call. So I think we're good to go.
+Move the player to 21.36 seconds in the call
+Giovanna Naranjo
+00:21
+Okay, perfect. So the way I run the call, I just go through first what's on the quote.
+Move the player to 27.35 seconds in the call
+Giovanna Naranjo
+00:27
+I'll ask you a couple of other questions, and then I'll hand the call over to Stephen for his portion of the call. And then we can discuss the next steps in the implementation process.
+Move the player to 37.73 seconds in the call
+Billing Contact
+00:37
+Okay.
+Move the player to 39.05 seconds in the call
+Giovanna Naranjo
+00:39
+Okay, so just to confirm. If you can confirm the service address for this location.
+Move the player to 47.99 seconds in the call
+Billing Contact
+00:47
+Let's see, we're doing several. We're starting out with the one in spring down Arkansas. That's one seven nine. Phantom L. It's either drive or Boulevard.
+Move the player to 61.34 seconds in the call
+Giovanna Naranjo
+01:01
+It's not the 2960.
+Move the player to 64.36 seconds in the call
+Billing Contact
+01:04
+No, that is the business address. That's that's headquarters. The service address is in Springdale, Arkansas.
+Move the player to 73.77 seconds in the call
+Giovanna Naranjo
+01:13
+Oh,
+Move the player to 81.62 seconds in the call
+Billing Contact
+01:21
+Ok. Yeah, we won't be doing the headquarters until we have. I think we have one two four or five sites total that were bringing over, but the Springfield Missouri office is not one of them.
+Move the player to 95.45 seconds in the call
+Billing Contact
+01:35
+That'll be after we get these other branches up and going.
+Move the player to 101.55 seconds in the call
+Giovanna Naranjo
+01:41
+Okay, sorry, I apologize for interrupt you.
+Move the player to 104.11 seconds in the call
+Giovanna Naranjo
+01:44
+Question
+So what is the address again?
+Move the player to 107.64 seconds in the call
+Billing Contact
+01:47
+One, I'm trying to find my my notes here. One, seven, nine. Let me get to the exact address here. Oh,
+Move the player to 119.48 seconds in the call
+Giovanna Naranjo
+01:59
+Okay. It's on the.
+Move the player to 122.74 seconds in the call
+Gavin Holle
+02:02
+Yeah, we're heading through to the chat.
+Move the player to 128.12 seconds in the call
+Billing Contact
+02:08
+One seven.
+Move the player to 129.26 seconds in the call
+Giovanna Naranjo
+02:09
+Thank you. So yet Gavin's already provided it on the chat here.
+Move the player to 134.98 seconds in the call
+Billing Contact
+02:14
+So, okay, 179 East Fantanelle Drive. Bring Dale, our guitar has 72762.
+Move the player to 145.33 seconds in the call
+Giovanna Naranjo
+02:25
+Ok, perfect.
+Move the player to 150.6 seconds in the call
+Giovanna Naranjo
+02:30
+Question
+Is that this looks like we're going to be providing an ATA for the fax, is there a fax machine we're going to be at that location?
+Move the player to 160.03 seconds in the call
+Giovanna Naranjo
+02:40
+Yes, they do. OK.
+Move the player to 162.14 seconds in the call
+Giovanna Naranjo
+02:42
+Question
+So we're going to ship the hardware to that address as well, correct?
+Move the player to 165.6 seconds in the call
+Giovanna Naranjo
+02:45
+Yes. Shipping address. Okay. Yes. Per the quote, it's showing 15 local numbers to share fax boxes and five elastic trunking with two OB high, four or two fax adapters.
+Move the player to 188.06 seconds in the call
+Giovanna Naranjo
+03:08
+Question
+Is the what's quoted is that to go across all five locations or are we actually have to share fax boxes to fax back to fax machines at this location?
+Move the player to 201.27 seconds in the call
+Billing Contact
+03:21
+It's going over all locations. So the other fax box goes to let's see.
+Move the player to 217.81 seconds in the call
+Gavin Holle
+03:37
+Was that one for St. Joseph.
+Move the player to 223.9 seconds in the call
+Gavin Holle
+03:43
+Collinsville.
+Move the player to 226.26 seconds in the call
+Billing Contact
+03:46
+Collins, it's I'm thinking Collinsville because yeah. Yeah, I think that's Collinsville.
+Move the player to 239.42 seconds in the call
+Giovanna Naranjo
+03:59
+Ok.
+Move the player to 240.52 seconds in the call
+Billing Contact
+04:00
+You can.
+Move the player to 241.24 seconds in the call
+Billing Contact
+04:01
+Question
+Why don't we do the ship it?
+Move the player to 244.05 seconds in the call
+Billing Contact
+04:04
+Ship the ATA to me in Springfield.
+Move the player to 249.78 seconds in the call
+Giovanna Naranjo
+04:09
+Question
+Okay, and what address is that going to be?
+Move the player to 253.96 seconds in the call
+Billing Contact
+04:13
+That's the 2960 East. He's gene gene. Okay. Okay.
+Move the player to 274.87 seconds in the call
+Giovanna Naranjo
+04:34
+Perfect.
+Move the player to 278.29 seconds in the call
+Giovanna Naranjo
+04:38
+As far as the letter of authorization that we, that was provided for this location, it looks like we're going to be porting five phone numbers for this location alone.
+Move the player to 294.67 seconds in the call
+Giovanna Naranjo
+04:54
+The first two that were listed on the LOA start off with the 479 area code, well, they're all 479 area code. And then the prefix is 751. three five seven zero and then the next one was
+Move the player to 311.28 seconds in the call
+Speaker
+05:11
+Seven five one two nine one five
+Move the player to 315.21 seconds in the call
+Giovanna Naranjo
+05:15
+And then we've got four numbers four seven nine three six four five nine eight four six five three and four nine four seven which is the main number for this location
+Move the player to 333.29 seconds in the call
+Billing Contact
+05:33
+Main numbers, the ending in 3570.
+Move the player to 339.5 seconds in the call
+Giovanna Naranjo
+05:39
+And the facts number.
+Move the player to 341.48 seconds in the call
+Billing Contact
+05:41
+Facts number ends in 2915.
+Move the player to 344.96 seconds in the call
+Giovanna Naranjo
+05:44
+Perfect.
+Move the player to 351.22 seconds in the call
+Giovanna Naranjo
+05:51
+And we're going to make you the administrator on the portal.
+Move the player to 355.34 seconds in the call
+Billing Contact
+05:55
+Yes.
+Move the player to 356.56 seconds in the call
+Giovanna Naranjo
+05:56
+Question
+Is there anyone else that would need to be an administrator?
+Move the player to 359.47 seconds in the call
+Billing Contact
+05:59
+Yeah, let's go and make Paul we see last name W I E S E.
+Move the player to 365.21 seconds in the call
+Giovanna Naranjo
+06:05
+Perfect.
+Move the player to 368.98 seconds in the call
+Giovanna Naranjo
+06:08
+I think that was when we port the numbers over actually. We do have another second layer of security that we offer to prevent the number from being ported out in error. It's a pin number.
+Move the player to 385.46 seconds in the call
+Giovanna Naranjo
+06:25
+Question
+So is that something you would like to set up?
+Move the player to 387.57 seconds in the call
+Giovanna Naranjo
+06:27
+We do encourage that gets set up. It's usually a four digit number.
+Move the player to 391.41 seconds in the call
+Giovanna Naranjo
+06:31
+Do you have something in mind?
+Move the player to 393.83 seconds in the call
+Billing Contact
+06:33
+Yeah, let's do that one nine five nine.
+Move the player to 400.81 seconds in the call
+Giovanna Naranjo
+06:40
+Question
+And is that going to be across the board for all numbers for all locations, correct?
+Move the player to 404.93 seconds in the call
+Giovanna Naranjo
+06:44
+Perfect. Okay. So I'll go ahead and hand this over to Steven for his portion.
+Move the player to 415.96 seconds in the call
+Steven Hatch
+06:55
+All right. Yeah, I don't really have much. So this is, you guys have just the Grand Stream UCM 6204. And it's going to be a registered sub-truck.
+Move the player to 426.53 seconds in the call
+Gavin Holle
+07:06
+Yes, sir. That would be great.
+Move the player to 428.68 seconds in the call
+Steven Hatch
+07:08
+Okay. Yeah. So once we get the registered trunk bill, we'll send you the sip info so you can go ahead and get it set up. Um, so. Yeah. All right. Um, yeah.
+Move the player to 442.59 seconds in the call
+Steven Hatch
+07:22
+So we won't be doing anything with the, I, you know, since it's not appearing, yeah, it's not that we won't do anything with the static IP and stuff. But yeah, I think that's.
+Move the player to 453.02 seconds in the call
+Steven Hatch
+07:33
+You kind of filled out the form, which is pretty much all the information we need.
+Move the player to 456.47 seconds in the call
+Steven Hatch
+07:36
+Question
+My only question then is, so obviously we're just doing the one location now, but for each location are they each going to have their own PBX or their own registration?
+Move the player to 469.44 seconds in the call
+Gavin Holle
+07:49
+Yes. Yeah, it each separate service location. Yeah. Yeah, that's what I share the trunks, but
+Move the player to 481.21 seconds in the call
+Gavin Holle
+08:01
+Sorry, I guess they'll share the call paths, but yeah, separate registrations.
+Move the player to 487.8 seconds in the call
+Steven Hatch
+08:07
+Okay. Yeah. So each one, so every time we turn one up, we'll have to give you the SIP information for each one as you go. Okay. Sounds good. I just wanted to double check that.
+Move the player to 498.09 seconds in the call
+Steven Hatch
+08:18
+That's really something about moving forward, but, you know, figured I'd ask for on the call. Um, yeah, that's really all the information.
+Move the player to 507.21 seconds in the call
+Gavin Holle
+08:27
+Cool.
+Move the player to 507.63 seconds in the call
+Gavin Holle
+08:27
+Question
+And then when you do get the Springtail Trunks set up, would you care to throw one test number on it?
+Move the player to 514.17 seconds in the call
+Steven Hatch
+08:34
+Yeah, yeah, we'll put a test number on it for you. Perfect.
+Move the player to 517.86 seconds in the call
+Giovanna Naranjo
+08:37
+Yeah. Okay. Perfect. So the next thing is talking about the actually goal live date.
+Move the player to 533.39 seconds in the call
+Billing Contact
+08:53
+That would be whenever we don't necessarily have a preference on that just whenever you're ready and the porting, you know, the Ozarks go whenever they will let go of the number.
+Move the player to 549.04 seconds in the call
+Giovanna Naranjo
+09:09
+So, let's see, we have to give the carrier a minimum.
+Move the player to 555.73 seconds in the call
+Giovanna Naranjo
+09:15
+Question
+So Gavin, once we provide you the temp number, once the trunks are built and we provide you the test number, are you going to be able to test right away?
+Move the player to 565.13 seconds in the call
+Giovanna Naranjo
+09:25
+Question
+Are you going to need some time?
+Move the player to 567.53 seconds in the call
+Gavin Holle
+09:27
+No, I mean, within the same day, I should be able to do that.
+Move the player to 571.21 seconds in the call
+Giovanna Naranjo
+09:31
+Pricing
+Ok, so with that said, then we can submit the port request. Again, we do have to give the losing carrier a minimum of $10. full business days. So let's see here one.
+Move the player to 594.89 seconds in the call
+Giovanna Naranjo
+09:54
+I am with that would fall into the first week of September after the holiday.
+Move the player to 602.13 seconds in the call
+Billing Contact
+10:02
+Longest Customer Story
+Let's see. We would prefer as far as timing like 3 p.m.
+Move the player to 612.97 seconds in the call
+Billing Contact
+10:12
+Longest Customer Story
+Kind of time that gives us enough time to get it done before five, but also gives us enough time to resolve any issues that may arise before five.
+Move the player to 621.77 seconds in the call
+Billing Contact
+10:21
+Longest Customer StoryQuestion
+Do we get to pick the time?
+Move the player to 623.53 seconds in the call
+Giovanna Naranjo
+10:23
+So we're looking at Wednesday the third.
+Move the player to 629.69 seconds in the call
+Giovanna Naranjo
+10:29
+Question
+Would that work?
+Move the player to 631.69 seconds in the call
+Gavin Holle
+10:31
+It works on my side.
+Move the player to 634.03 seconds in the call
+Billing Contact
+10:34
+Let's avoid Wednesdays if we can.
+Move the player to 638.52 seconds in the call
+Giovanna Naranjo
+10:38
+Okay, Thursday the fourth.
+Move the player to 640.93 seconds in the call
+Billing Contact
+10:40
+Yeah, Thursday 4th be good.
+Move the player to 643.11 seconds in the call
+Giovanna Naranjo
+10:43
+Okay, perfect. Let me just look at the calendar here real quick.
+Move the player to 654.14 seconds in the call
+Giovanna Naranjo
+10:54
+And you said three o'clock.
+Move the player to 657.64 seconds in the call
+Billing Contact
+10:57
+Yeah, three o'clock on the four guys.
+Move the player to 660.5 seconds in the call
+Billing Contact
+11:00
+Question
+Anybody have the week of labor?
+Move the player to 667.04 seconds in the call
+Billing Contact
+11:07
+Let me check one other thing real quick. Make sure Paul's not a vacation.
+Move the player to 677.74 seconds in the call
+Billing Contact
+11:17
+Right. On the force. So that should be good. Yeah, the fourth would be good.
+Move the player to 685.45 seconds in the call
+Giovanna Naranjo
+11:25
+On the fourth. Hold on.
+Move the player to 713.7 seconds in the call
+Giovanna Naranjo
+11:53
+Longest Monologue
+Okay, so I'll go ahead and send out a tentative calendar invite. for Thursday, September 4th for 3 o'clock.
+Move the player to 723.95 seconds in the call
+Giovanna Naranjo
+12:03
+Longest MonologueNext Steps
+It is tentative for now just until we get confirmation on the port, if for some reason we get any type of rejection, depending on what that is, I'll reach out to you, will I reach out to Gavin or John just to overcome, to see, I mean, need your assistance with getting that.
+Move the player to 743.52 seconds in the call
+Giovanna Naranjo
+12:23
+Longest Monologue
+Rejection resolved. And most of the common rejections we get is either there's a pin number that's needed or something doesn't match, maybe the authorized user on the account doesn't coincide with what we have on our paperwork.
+Move the player to 759.15 seconds in the call
+Giovanna Naranjo
+12:39
+Longest Monologue
+So those are kind of the common rejections we get. When I reach out to which one of you, when I work with them.
+Move the player to 766.29 seconds in the call
+Billing Contact
+12:46
+Probably be me, I'd be the one with account information.
+Move the player to 769.91 seconds in the call
+Giovanna Naranjo
+12:49
+Next Steps
+Okay, perfect. So if that's the case, I will reach out to you, John.
+Move the player to 772.89 seconds in the call
+Giovanna Naranjo
+12:52
+If not, as soon as we get confirmation on the date of the fourth, I will send out a revised calendar invite confirming and then also separate email that I think you know that we've gotten confirmation. Okay.
+Move the player to 785.9 seconds in the call
+Billing Contact
+13:05
+Question
+Is there, is there any reason for us to delay it a little bit just to, you know, to allow for any kind of hiccups that might happen?
+Move the player to 795.39 seconds in the call
+Billing Contact
+13:15
+Like maybe the next Thursday, we're fine with the fourth. I don't know. You know, you guys do this all the time. So
+Move the player to 802.53 seconds in the call
+Giovanna Naranjo
+13:22
+No, not. I mean, again, that's up to you. But Gavin, go ahead.
+Move the player to 806.43 seconds in the call
+Gavin Holle
+13:26
+No, we'll be fine. Okay. Well, once we have that test, drunk in place, we'll know pretty quick whether we're going to have it working or not. So I'm not. I agree.
+Move the player to 817.03 seconds in the call
+Giovanna Naranjo
+13:37
+Yeah, at that point, if you've got him feels that, you know, we need to push it out, then, you know, I definitely would need. a minimum of three business days, full business days notice.
+Move the player to 828.54 seconds in the call
+Giovanna Naranjo
+13:48
+Trying to push out a day before or the day of is not always guaranteed that it will be able to push it out and not go down the phone number and then you would have to work with your current provider to get it restored.
+Move the player to 842.95 seconds in the call
+Giovanna Naranjo
+14:02
+So of course, we don't want to leave until the last minute, but again, as you mentioned, we have done these before. So in Gavin is pretty familiar with that as well.
+Move the player to 852.22 seconds in the call
+Billing Contact
+14:12
+Yeah,
+Move the player to 853.78 seconds in the call
+Gavin Holle
+14:13
+This is number 60 something. So they've all gone pretty smooth.
+Move the player to 860.21 seconds in the call
+Billing Contact
+14:20
+Ok, yeah, I'm not more concerned with the account. Is not technical issues. OK, oh, yeah, yeah.
+Move the player to 868.57 seconds in the call
+Gavin Holle
+14:28
+You will know they'll get the call for a mortar confirmation from. I think Ozarks go will probably be one of the better ones to work with personally.
+Move the player to 878.13 seconds in the call
+Billing Contact
+14:38
+Right. I agree.
+Move the player to 878.93 seconds in the call
+Gavin Holle
+14:38
+It's AT&T that's kind of a booger.
+Move the player to 883.25 seconds in the call
+Giovanna Naranjo
+14:43
+Okay. All right. Well, thank you. I think that would be it that we needed to go through today. So as soon as I have the top number, not that I'll go ahead and send that out to you guys.
+Move the player to 894.54 seconds in the call
+Billing Contact
+14:54
+Okay, sounds right.
+Move the player to 895.74 seconds in the call
+Giovanna Naranjo
+14:55
+Perfect. Well, thank you very much for joining. You guys have a great rest of your day and week. All right. See you soon. All right. Bye bye.
+Move the player to 903.05 seconds in the call
+Billing Contact
+15:03
+Bye bye.

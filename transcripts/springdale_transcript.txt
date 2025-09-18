@@ -1,0 +1,120 @@
+00:02 - Giovanna Naranjo: Yes, we can.
+00:03 - Billing Contact: All right, I hear Gavin. I hear. Who else we have, Steven.
+00:09 - Steven Hatch: Steve, Steve with a broad voice.
+00:12 - Billing Contact: Steve, all right, great. And we've got so Paul, we see is with our company. He won't be on this call. So I think we're good to go.
+00:21 - Giovanna Naranjo: Okay, perfect. So the way I run the call, I just go through first what's on the quote.
+00:27 - Giovanna Naranjo: I'll ask you a couple of other questions, and then I'll hand the call over to Stephen for his portion of the call. And then we can discuss the next steps in the implementation process.
+00:37 - Billing Contact: Okay.
+00:39 - Giovanna Naranjo: Okay, so just to confirm. If you can confirm the service address for this location.
+00:47 - Billing Contact: Let's see, we're doing several. We're starting out with the one in spring down Arkansas. That's one seven nine. Phantom L. It's either drive or Boulevard.
+01:01 - Giovanna Naranjo: It's not the 2960.
+01:04 - Billing Contact: No, that is the business address. That's that's headquarters. The service address is in Springdale, Arkansas.
+01:13 - Giovanna Naranjo: Oh,
+01:21 - Billing Contact: Ok. Yeah, we won't be doing the headquarters until we have. I think we have one two four or five sites total that were bringing over, but the Springfield Missouri office is not one of them.
+01:35 - Billing Contact: That'll be after we get these other branches up and going.
+01:41 - Giovanna Naranjo: Okay, sorry, I apologize for interrupt you.
+01:44 - Giovanna Naranjo - [Question]: So what is the address again?
+01:47 - Billing Contact: One, I'm trying to find my my notes here. One, seven, nine. Let me get to the exact address here. Oh,
+01:59 - Giovanna Naranjo: Okay. It's on the.
+02:02 - Gavin Holle: Yeah, we're heading through to the chat.
+02:08 - Billing Contact: One seven.
+02:09 - Giovanna Naranjo: Thank you. So yet Gavin's already provided it on the chat here.
+02:14 - Billing Contact: So, okay, 179 East Fantanelle Drive. Bring Dale, our guitar has 72762.
+02:25 - Giovanna Naranjo: Ok, perfect.
+02:30 - Giovanna Naranjo - [Question]: Is that this looks like we're going to be providing an ATA for the fax, is there a fax machine we're going to be at that location?
+02:40 - Giovanna Naranjo: Yes, they do. OK.
+02:42 - Giovanna Naranjo - [Question]: So we're going to ship the hardware to that address as well, correct?
+02:45 - Giovanna Naranjo: Yes. Shipping address. Okay. Yes. Per the quote, it's showing 15 local numbers to share fax boxes and five elastic trunking with two OB high, four or two fax adapters.
+03:08 - Giovanna Naranjo - [Question]: Is the what's quoted is that to go across all five locations or are we actually have to share fax boxes to fax back to fax machines at this location?
+03:21 - Billing Contact: It's going over all locations. So the other fax box goes to let's see.
+03:37 - Gavin Holle: Was that one for St. Joseph.
+03:43 - Gavin Holle: Collinsville.
+03:46 - Billing Contact: Collins, it's I'm thinking Collinsville because yeah. Yeah, I think that's Collinsville.
+03:59 - Giovanna Naranjo: Ok.
+04:00 - Billing Contact: You can.
+04:01 - Billing Contact - [Question]: Why don't we do the ship it?
+04:04 - Billing Contact: Ship the ATA to me in Springfield.
+04:09 - Giovanna Naranjo - [Question]: Okay, and what address is that going to be?
+04:13 - Billing Contact: That's the 2960 East. He's gene gene. Okay. Okay.
+04:34 - Giovanna Naranjo: Perfect.
+04:38 - Giovanna Naranjo: As far as the letter of authorization that we, that was provided for this location, it looks like we're going to be porting five phone numbers for this location alone.
+04:54 - Giovanna Naranjo: The first two that were listed on the LOA start off with the 479 area code, well, they're all 479 area code. And then the prefix is 751. three five seven zero and then the next one was
+05:11 - Speaker: Seven five one two nine one five
+05:15 - Giovanna Naranjo: And then we've got four numbers four seven nine three six four five nine eight four six five three and four nine four seven which is the main number for this location
+05:33 - Billing Contact: Main numbers, the ending in 3570.
+05:39 - Giovanna Naranjo: And the facts number.
+05:41 - Billing Contact: Facts number ends in 2915.
+05:44 - Giovanna Naranjo: Perfect.
+05:51 - Giovanna Naranjo: And we're going to make you the administrator on the portal.
+05:55 - Billing Contact: Yes.
+05:56 - Giovanna Naranjo - [Question]: Is there anyone else that would need to be an administrator?
+05:59 - Billing Contact: Yeah, let's go and make Paul we see last name W I E S E.
+06:05 - Giovanna Naranjo: Perfect.
+06:08 - Giovanna Naranjo: I think that was when we port the numbers over actually. We do have another second layer of security that we offer to prevent the number from being ported out in error. It's a pin number.
+06:25 - Giovanna Naranjo - [Question]: So is that something you would like to set up?
+06:27 - Giovanna Naranjo: We do encourage that gets set up. It's usually a four digit number.
+06:31 - Giovanna Naranjo: Do you have something in mind?
+06:33 - Billing Contact: Yeah, let's do that one nine five nine.
+06:40 - Giovanna Naranjo - [Question]: And is that going to be across the board for all numbers for all locations, correct?
+06:44 - Giovanna Naranjo: Perfect. Okay. So I'll go ahead and hand this over to Steven for his portion.
+06:55 - Steven Hatch: All right. Yeah, I don't really have much. So this is, you guys have just the Grand Stream UCM 6204. And it's going to be a registered sub-truck.
+07:06 - Gavin Holle: Yes, sir. That would be great.
+07:08 - Steven Hatch: Okay. Yeah. So once we get the registered trunk bill, we'll send you the sip info so you can go ahead and get it set up. Um, so. Yeah. All right. Um, yeah.
+07:22 - Steven Hatch: So we won't be doing anything with the, I, you know, since it's not appearing, yeah, it's not that we won't do anything with the static IP and stuff. But yeah, I think that's.
+07:33 - Steven Hatch: You kind of filled out the form, which is pretty much all the information we need.
+07:36 - Steven Hatch - [Question]: My only question then is, so obviously we're just doing the one location now, but for each location are they each going to have their own PBX or their own registration?
+07:49 - Gavin Holle: Yes. Yeah, it each separate service location. Yeah. Yeah, that's what I share the trunks, but
+08:01 - Gavin Holle: Sorry, I guess they'll share the call paths, but yeah, separate registrations.
+08:07 - Steven Hatch: Okay. Yeah. So each one, so every time we turn one up, we'll have to give you the SIP information for each one as you go. Okay. Sounds good. I just wanted to double check that.
+08:18 - Steven Hatch: That's really something about moving forward, but, you know, figured I'd ask for on the call. Um, yeah, that's really all the information.
+08:27 - Gavin Holle: Cool.
+08:27 - Gavin Holle - [Question]: And then when you do get the Springtail Trunks set up, would you care to throw one test number on it?
+08:34 - Steven Hatch: Yeah, yeah, we'll put a test number on it for you. Perfect.
+08:37 - Giovanna Naranjo: Yeah. Okay. Perfect. So the next thing is talking about the actually goal live date.
+08:53 - Billing Contact: That would be whenever we don't necessarily have a preference on that just whenever you're ready and the porting, you know, the Ozarks go whenever they will let go of the number.
+09:09 - Giovanna Naranjo: So, let's see, we have to give the carrier a minimum.
+09:15 - Giovanna Naranjo - [Question]: So Gavin, once we provide you the temp number, once the trunks are built and we provide you the test number, are you going to be able to test right away?
+09:25 - Giovanna Naranjo - [Question]: Are you going to need some time?
+09:27 - Gavin Holle: No, I mean, within the same day, I should be able to do that.
+09:31 - Giovanna Naranjo: Pricing Ok, so with that said, then we can submit the port request. Again, we do have to give the losing carrier a minimum of $10. full business days. So let's see here one.
+09:54 - Giovanna Naranjo: I am with that would fall into the first week of September after the holiday.
+10:02 - Billing Contact - [Longest Customer Story]: Let's see. We would prefer as far as timing like 3 p.m.
+10:12 - Billing Contact - [Longest Customer Story]: Kind of time that gives us enough time to get it done before five, but also gives us enough time to resolve any issues that may arise before five.
+10:21 - Billing Contact: Longest Customer StoryQuestion Do we get to pick the time?
+10:23 - Giovanna Naranjo: So we're looking at Wednesday the third.
+10:29 - Giovanna Naranjo - [Question]: Would that work?
+10:31 - Gavin Holle: It works on my side.
+10:34 - Billing Contact: Let's avoid Wednesdays if we can.
+10:38 - Giovanna Naranjo: Okay, Thursday the fourth.
+10:40 - Billing Contact: Yeah, Thursday 4th be good.
+10:43 - Giovanna Naranjo: Okay, perfect. Let me just look at the calendar here real quick.
+10:54 - Giovanna Naranjo: And you said three o'clock.
+10:57 - Billing Contact: Yeah, three o'clock on the four guys.
+11:00 - Billing Contact - [Question]: Anybody have the week of labor?
+11:07 - Billing Contact: Let me check one other thing real quick. Make sure Paul's not a vacation.
+11:17 - Billing Contact: Right. On the force. So that should be good. Yeah, the fourth would be good.
+11:25 - Giovanna Naranjo: On the fourth. Hold on.
+11:53 - Giovanna Naranjo - [Longest Monologue]: Okay, so I'll go ahead and send out a tentative calendar invite. for Thursday, September 4th for 3 o'clock.
+12:03 - Giovanna Naranjo - [Longest MonologueNext Steps]: It is tentative for now just until we get confirmation on the port, if for some reason we get any type of rejection, depending on what that is, I'll reach out to you, will I reach out to Gavin or John just to overcome, to see, I mean, need your assistance with getting that.
+12:23 - Giovanna Naranjo - [Longest Monologue]: Rejection resolved. And most of the common rejections we get is either there's a pin number that's needed or something doesn't match, maybe the authorized user on the account doesn't coincide with what we have on our paperwork.
+12:39 - Giovanna Naranjo - [Longest Monologue]: So those are kind of the common rejections we get. When I reach out to which one of you, when I work with them.
+12:46 - Billing Contact: Probably be me, I'd be the one with account information.
+12:49 - Giovanna Naranjo - [Next Steps]: Okay, perfect. So if that's the case, I will reach out to you, John.
+12:52 - Giovanna Naranjo: If not, as soon as we get confirmation on the date of the fourth, I will send out a revised calendar invite confirming and then also separate email that I think you know that we've gotten confirmation. Okay.
+13:05 - Billing Contact - [Question]: Is there, is there any reason for us to delay it a little bit just to, you know, to allow for any kind of hiccups that might happen?
+13:15 - Billing Contact: Like maybe the next Thursday, we're fine with the fourth. I don't know. You know, you guys do this all the time. So
+13:22 - Giovanna Naranjo: No, not. I mean, again, that's up to you. But Gavin, go ahead.
+13:26 - Gavin Holle: No, we'll be fine. Okay. Well, once we have that test, drunk in place, we'll know pretty quick whether we're going to have it working or not. So I'm not. I agree.
+13:37 - Giovanna Naranjo: Yeah, at that point, if you've got him feels that, you know, we need to push it out, then, you know, I definitely would need. a minimum of three business days, full business days notice.
+13:48 - Giovanna Naranjo: Trying to push out a day before or the day of is not always guaranteed that it will be able to push it out and not go down the phone number and then you would have to work with your current provider to get it restored.
+14:02 - Giovanna Naranjo: So of course, we don't want to leave until the last minute, but again, as you mentioned, we have done these before. So in Gavin is pretty familiar with that as well.
+14:12 - Billing Contact: Yeah,
+14:13 - Gavin Holle: This is number 60 something. So they've all gone pretty smooth.
+14:20 - Billing Contact: Ok, yeah, I'm not more concerned with the account. Is not technical issues. OK, oh, yeah, yeah.
+14:28 - Gavin Holle: You will know they'll get the call for a mortar confirmation from. I think Ozarks go will probably be one of the better ones to work with personally.
+14:38 - Billing Contact: Right. I agree.
+14:38 - Gavin Holle: It's AT&T that's kind of a booger.
+14:43 - Giovanna Naranjo: Okay. All right. Well, thank you. I think that would be it that we needed to go through today. So as soon as I have the top number, not that I'll go ahead and send that out to you guys.
+14:54 - Billing Contact: Okay, sounds right.
+14:55 - Giovanna Naranjo: Perfect. Well, thank you very much for joining. You guys have a great rest of your day and week. All right. See you soon. All right. Bye bye.
+15:03 - Billing Contact: Bye bye.

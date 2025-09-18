@@ -1,0 +1,173 @@
+00:14 - Alejandro De La Hoz: Hello.
+00:18 - Christi Lewis: Hi there.
+00:19 - Christi Lewis: How are you?
+00:19 - Christi Lewis: I'm doing great.
+00:21 - Alejandro De La Hoz: Thank you for asking.
+00:21 - Alejandro De La Hoz: What about you?
+00:23 - Christi Lewis: I'm doing okay. Thank you.
+00:26 - Alejandro De La Hoz: All right. So, um, nice to meet you. My name is Alejandro, and I will help you get this account started with anything that you need. I saw that it's a really straightforward implementation, just one user, one phone.
+00:46 - Christi Lewis: Ok, yes, that's correct. Just for right now, we are going to add some more in the future.
+00:52 - Alejandro De La Hoz: That's totally fine. Yeah, that's actually the purpose of this call. So we can see what we have here.
+01:03 - Alejandro De La Hoz: We can implement your services properly, see how you want things to work, how to ring numbers, et cetera, et cetera, et cetera. So I just wanted to talk about that with you on this call and get everything ready.
+01:16 - Alejandro De La Hoz: Most likely by the end of this call, the equipment will already be shipped. I had it pre-prepared by the logistics team. So I'm just waiting.
+01:25 - Alejandro De La Hoz: To confirm last minute details, organize everything and once that's done we'll be just ready to go.
+01:33 - Christi Lewis: Okay, perfect.
+01:36 - Alejandro De La Hoz: Alrighty. So let me check some information here. So just to confirm this is for opening the rally location correct.
+01:49 - Christi Lewis: That's correct.
+01:51 - Alejandro De La Hoz: Okay, the rally location it's 9408 Fayetteville Road in rally North Carolina correct.
+02:00 - Christi Lewis: Um, okay, so there has been an update to the address. Um, well, I'll say this. That is the, that's the address for the property, but the leasing office has a separate address.
+02:12 - Christi Lewis - [Question]: Can I give you that new address for the leasing office?
+02:16 - Alejandro De La Hoz: Uh, yeah, sure thing.
+02:17 - Christi Lewis: Let's go. Okay. Give me one second. Let me find it for you.
+02:22 - Alejandro De La Hoz: Sure thing. I'm also asking for E-9-1-1 purposes. So I will also want the address where people will be physically. There.
+02:30 - Alejandro De La Hoz: So if something happens and they call 911, when they receive the call, it will automatically show the address where they need to send everything there.
+02:38 - Alejandro De La Hoz: So I hope no one needs to call 911, but you never know, better to be safe.
+02:45 - Christi Lewis: Understood. Okay, I'm going to give you this address. Let me know when you're ready.
+02:49 - Alejandro De La Hoz: I'm ready.
+02:50 - Christi Lewis: It's 1-3-1-0-0.
+02:55 - Christi Lewis - [Longest Customer Story]: Okay. Margie Lane, that's M as in Mary AR, G as in George, IE, Lane.
+03:07 - Christi Lewis - [Longest Customer Story]: The city is Fuqua, F as in Frank, UQ, U, A, Y, Varena, V as in Victor, AR, I, N as in Nancy A, North Carolina. zip code is two seven six zero three.
+03:27 - Christi Lewis - [Longest Customer Story]: Let me know it was easier for me to put in the chat.
+03:30 - Alejandro De La Hoz: Don't worry, I got it.
+03:32 - Christi Lewis: Ok.
+03:35 - Alejandro De La Hoz: Yep, got it here.
+03:38 - Adam Hurlebaus: Hey, I want to actually interject real quick. I was listening at the same time.
+03:41 - Adam Hurlebaus - [Question]: Do I need to update that for our yardy profile as well?
+03:46 - Christi Lewis: Yes, Adam. If you don't mind, I just got the information from Kaylee Friday. I'm going to send it to you in the chat.
+03:53 - Adam Hurlebaus: All right, thanks.
+03:55 - Christi Lewis: Yeah.
+03:58 - Alejandro De La Hoz: All right. Thank you for that. That's what I like to confirm information.
+04:02 - Alejandro De La Hoz - [Question]: Also, I wanted to confirm, will this address that you just provided will be the one where I will ship the phone, they won't phone, but to ship it there?
+04:14 - Christi Lewis: Yes.
+04:18 - Alejandro De La Hoz: Okay. Sounds good. So...
+04:29 - Alejandro De La Hoz: Okay, that sounds good. Okay, that's great. So, um, almost again, I look here, um, for the information. And I saw also the document that you sent over with the user that you want that to create, which is great.
+04:51 - Alejandro De La Hoz: Mainly question for that was, I see here that you already put in a number
+04:57 - Speaker: In there.
+04:59 - Alejandro De La Hoz: Which is 9842536999.
+05:06 - Alejandro De La Hoz: Is that number on the other location or is this a number that we will port?
+05:10 - Alejandro De La Hoz - [Question]: You want to get new numbers?
+05:12 - Alejandro De La Hoz: Wanted to ask about that.
+05:16 - Christi Lewis: Hey, Adam, that's the number that was created by us.
+05:19 - Christi Lewis - [Question]: Is that a number OK to use for broad voice?
+05:22 - Adam Hurlebaus: No.
+05:24 - Adam Hurlebaus - [Question]: So is that one of the tracking numbers that I gave you?
+05:28 - Christi Lewis: Yes.
+05:29 - Adam Hurlebaus: Okay. Uh, no, so, um, we need you to create a number for us. Um, okay. Yeah.
+05:38 - Alejandro De La Hoz: Those phone
+05:39 - Adam Hurlebaus: Numbers that I gave you, um, Christy, they're going to, we're going to point to this phone number, the office phone number, he's going to give us. And we're going to advertise the CRM numbers. Um,
+05:52 - Christi Lewis: Yeah. Okay, okay sounds good.
+05:56 - Alejandro De La Hoz: So which area code do you want or do you want any number that is under the Barena locate or within the zip code or do you want it to be whatever you want. Let's do
+06:11 - Christi Lewis: Let's stick with 984
+06:13 - Alejandro De La Hoz: Okay, now you get the fun part of choosing your number
+06:19 - Christi Lewis: So you
+06:19 - Alejandro De La Hoz: Can see Rayleigh has several numbers. You can choose any number on screen. You can just send me the last four numbers and I'll just select that one two purchase and that will be your main number. Okay,
+06:32 - Christi Lewis: Let's see. I wonder if we could do the so-how. Let's see. Take each. So eight, three, four.
+06:46 - Christi Lewis - [Question]: Can you type in a number and see if it'll work?
+06:49 - Alejandro De La Hoz: 34.
+06:50 - Christi Lewis: Yeah, so 3
+07:03 - Alejandro De La Hoz: No, the closest numbers on the A34 are these ones.
+07:08 - Christi Lewis: Okay.
+07:08 - Christi Lewis - [Question]: I wanted to leave this so how?
+07:11 - Alejandro De La Hoz: Don't stress about the location that it says because we're basing by error code.
+07:16 - Alejandro De La Hoz: Regardless, because we have the Inenwin wine when someone calls, it will not matter where it says, it will show the emergency address that I just confirmed with you. So. Can you look
+07:27 - Christi Lewis - [Question]: At these numbers?
+07:28 - Christi Lewis: Um, seven, six, four, six.
+07:33 - Alejandro De La Hoz: Seven, seven, four digits.
+07:36 - Speaker: Yeah.
+07:37 - Alejandro De La Hoz: Okay.
+07:41 - Christi Lewis: Almost, almost. Oh, man. Okay. You can clear it out. Let's just pick a number.
+07:48 - Alejandro De La Hoz: Okay, so these ones are the one in Raleigh, which are close. Um, numbers that I would advise. This one looks easy. This one looks easy.
+07:58 - Alejandro De La Hoz: Uh, these one looks actually similar because it's 5, I also has two in the middle. So it's easy to also remember. So our, this one also looks easy. Lots of two zeros and one. So easy to remember.
+08:14 - Alejandro De La Hoz: Um, that I can see on top of like on my, or getting any morehoff! overview view that I can see. So you can just pick any one you want. This one is easy.
+08:23 - Alejandro De La Hoz: Also has lots of eight, sevens, fives, two and zero ones. So.
+08:29 - Christi Lewis: Say, two, one, two, zero, one, one. 5 do 5
+08:38 - Alejandro De La Hoz: Alrighty, let's do 552. So let me just get that activated on your account. And give me just a second since I got you all here. What you're seeing is our system where I have all your account details.
+08:56 - Alejandro De La Hoz: Nothing crazy there. This is
+08:59 - Speaker: Your account number.
+09:01 - Alejandro De La Hoz: So I confirm it and the number is ours officially. Congratulations.
+09:05 - Christi Lewis: Yay! That was fun.
+09:10 - Alejandro De La Hoz: So yeah, let me just copy the number and add it to your account right away. So it's already there.
+09:20 - Alejandro De La Hoz: Then we also update the address and do the in 911 settings as we speak. So that way we are all good. That way you can also read the address that I made sure that is correct.
+09:33 - Christi Lewis: Let's update the address.
+09:35 - Alejandro De La Hoz: Yeah, so Margeline.
+09:39 - Christi Lewis: Yeah.
+09:42 - Alejandro De La Hoz: It's here. It's. For great.
+09:46 - Christi Lewis: Varena.
+09:48 - Alejandro De La Hoz: If I ever get to copy anything.
+09:53 - Alejandro De La Hoz: For Coriverna, North Carolina, and CIP code is different as well. No, actually it was the same CIP code.
+09:59 - Christi Lewis: Yeah, same CIP code.
+10:01 - Alejandro De La Hoz: Okay, when they call, when, you know, in-n-1-1 calls is gonna show VCP lavista.
+10:07 - Alejandro De La Hoz - [Question]: Is that something that the business there that you want to show?
+10:10 - Alejandro De La Hoz - [Question]: No, can we change it?
+10:12 - Alejandro De La Hoz: Yep.
+10:13 - Christi Lewis - [Question]: Can we change it to the... Or can we change it to should we do?
+10:18 - Christi Lewis - [Question]: Alex, should we do the Soho or so ho a PTS or so, whole apartments?
+10:23 - Adam Hurlebaus: Yeah, I was thinking the so ho apartments,
+10:26 - Christi Lewis: The so ho apartments. I mean, that's
+10:27 - Adam Hurlebaus: How we're advertising it. So yeah, okay, the signage and everything would match. So there's the word the in front of it. So THE space so ho apartments.
+10:37 - Alejandro De La Hoz: Okay. Got it.
+10:40 - Alejandro De La Hoz: So when by any chance someone calls in on one, it will show that is calling from diesel apartments and it's going to show them the address directly so that way we don't need to worry about anything of the sorts.
+10:51 - Alejandro De La Hoz: So that way everything is all set. At risk does not exist.
+10:57 - Christi Lewis: It's a new, it's a new build. It's a new construction.
+11:00 - Alejandro De La Hoz: Yeah, don't worry about it. Let's let's do, let's do one better Google mouse because I don't like that map.
+11:10 - Alejandro De La Hoz: So Google Maps tends to be really good at picking up addresses. And if not,
+11:21 - Alejandro De La Hoz: Okay, so it's given me for Quay Verriner.
+11:27 - Christi Lewis: That's weird.
+11:34 - Alejandro De La Hoz: Yeah, the address, it's
+11:40 - Alejandro De La Hoz: So join me the whole save code.
+11:43 - Speaker: Um, two, oh, it's two, seven, six, zero, three.
+11:47 - Christi Lewis: Two, seven, six, zero, three. Uh huh. Thirteen, one hundred Margie Lane, Fuqua. Yep. That's it.
+11:55 - Adam Hurlebaus - [Question]: What was the original address?
+11:56 - Adam Hurlebaus: Cause we could kind of zoom in on it and drop up in and.
+12:00 - Christi Lewis: It is 90. Give me one second. I think it's 98.04.
+12:11 - Alejandro De La Hoz: The previous address here, give me a second. It was, I have it here. Not yet, five at-wheel road.
+12:18 - Christi Lewis: Yes.
+12:21 - Alejandro De La Hoz: I'm gonna put it here, rolling off Carolina. So this is the previous address.
+12:27 - Christi Lewis: Yes.
+12:28 - Alejandro De La Hoz: It's, it's, that's the location or somewhere close. So I can put the pin in it and get the closer address.
+12:35 - Christi Lewis - [Question]: Can you zoom back in?
+12:37 - Christi Lewis: That's the location. Zoom back in, zoom back in. Okay, so there are four buildings.
+12:43 - Christi Lewis - [Question]: So it's going to be closer to the very first, like on the first building right now, is it the third building?
+12:49 - Christi Lewis: Yes, from left to right.
+12:51 - Alejandro De La Hoz: Okay, so this one is going to be closer to this one.
+12:54 - Christi Lewis: Yes, it's going to be at that building. Yes.
+12:57 - Alejandro De La Hoz: Okay, now the princess for Coraevarena. Funny. Da da da. Knight does says for Coraevarena. Okay. So...
+13:14 - Alejandro De La Hoz: So this is a firetville road and it's picking up from I'm really interested in getting to know which one is fired it fire it fire at railroad because it's not putting up any names.
+13:29 - Alejandro De La Hoz: It was the big one two the right. Yeah, this one.
+13:33 - Adam Hurlebaus: The main road. Yeah.
+13:34 - Alejandro De La Hoz: Okay. The main road and it's just branching out here. Okay. Okay.
+13:54 - Alejandro De La Hoz: I can take care of the address. I already have the correct address and the previous address. I have both, so I can set that up.
+14:00 - Alejandro De La Hoz: I'll just confirm the Pin location with the logistics team so that the way when we deliver the phone is going to be correct and it's going to be delivered to the right place. So don't worry about that.
+14:11 - Alejandro De La Hoz: That should be mostly it about from my end. I'm going to have the number that we selected ring to the only user for now as it is the only user that we have.
+14:26 - Alejandro De La Hoz: So, our partners and the number, serial location, I can update the address later.
+14:36 - Alejandro De La Hoz: So, the email address that we'll receive, everything will be the so-ho at fortispm.com, correct?
+14:48 - Christi Lewis: Yes, that's correct.
+14:49 - Christi Lewis - [Question]: Can we update that later?
+14:52 - Alejandro De La Hoz: Yes, actually that's what you know that address will be the one who will get well first of all the phone calls and everything and Second of all will be the phone the email address that will get the admin access for now For the cell location.
+15:06 - Alejandro De La Hoz: So if I need you need to log in to you You don't know as you can see this is like the admin access So you can check new people check things stuff like that.
+15:16 - Alejandro De La Hoz: You will need That will be the email address you can update it later change things around later, but that will be the main one.
+15:23 - Alejandro De La Hoz: Okay?
+15:25 - Christi Lewis: With that email address, you'll also get a welcome email.
+15:28 - Speaker: So you can also use the app because we also have also an app. So that way, for example, that person will not be near to the physical phone all the time.
+15:36 - Speaker: They can install the app on their phones and they can just have it on their phone and go anywhere that they need and still receive
+15:42 - Christi Lewis: Business calls. Perfect.
+15:47 - Alejandro De La Hoz: Alrighty, well, that's mostly it from my end.
+15:50 - Alejandro De La Hoz: Do you have any questions, anything that you want to confirm, anything that you want to know?
+15:55 - Christi Lewis: No questions right now, Adam.
+15:57 - Christi Lewis - [Question]: Did you have any questions?
+16:01 - Adam Hurlebaus: No, I do not.
+16:02 - Christi Lewis: Awesome. Thanks for joining the call.
+16:04 - Alejandro De La Hoz: QuestionLongest Monologue Ok, so I will ship the phone right away, so you should be getting an email this afternoon from directly from UPS, letting you know their spectate delivery date and time, along with the tracking details for the package so that way you'll all be on the know on where the package is, what's the status?
+16:23 - Alejandro De La Hoz - [Longest Monologue]: When it's going to be delivered. So, you know, so your own the now. And system wise, we already got your number and we already got everything sorted out.
+16:31 - Alejandro De La Hoz - [Longest MonologueNext Steps]: I will send you guys an email recap with everything that we spoke about. That way it's easier for you guys to know and organize and manage that.
+16:40 - Alejandro De La Hoz - [Longest Monologue]: And you're going to get a copy of the address, the phone numbers that we just purchased, everything.
+16:44 - Alejandro De La Hoz - [Longest Monologue]: So you have everything on the email for your records in case you missed anything or you want to go back and let me know something new.
+16:51 - Adam Hurlebaus: I actually do have a quick question. The call, you said we could just download the app and use it for now.
+16:57 - Adam Hurlebaus - [Question]: And so as long as I use our system two forward calls to the number you just created, the team will be able to use the app to retrieve them, right?
+17:06 - Alejandro De La Hoz: Yes, as long as if you forward any calls to our number, anyone with the app will be able to answer the phone. The call as if it was any physical phone on the app.
+17:18 - Adam Hurlebaus: Okay, great. Thank you. I'm going to set that up right now, Christy and CRM, so that calls for route there if one is called.
+17:24 - Christi Lewis: Awesome. I'll download the app on my phone now. Thank you guys.
+17:28 - Alejandro De La Hoz: Sure thing. Well, nice to meet you. If you need anything, just email me. Let me know. I'll be more than happy to help.
+17:33 - Christi Lewis: Well, do. Thank you so much. Have a nice day.
+17:35 - Alejandro De La Hoz: You two guys have a great day. Goodbye.
+17:38 - Speaker: Bye.

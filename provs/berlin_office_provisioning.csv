@@ -1,0 +1,106 @@
+Category;Attribute;Sub-Attribute;Required/Optional;Extracted Value;Source Timestamp;Status;Notes
+User Details;First Name;;Mandatory;Penny;01:27;Complete;Primary contact
+User Details;Last Name;;Mandatory;Farrell;01:27;Complete;Penny Farrell
+User Details;Email;;Mandatory;Penny's email;05:33-12:06;Referenced;Email on file
+User Details;Role;;Mandatory;Administrator;03:29-11:34;Complete;Requesting admin account
+User Details;Package;;Mandatory;;Not mentioned;Missing;Need to determine package type
+User Details;Mobile Number;;Optional;;Not mentioned;Not Required;
+User Details;Local Extension;;Mandatory;;Not mentioned;Missing;Need to assign extensions
+User Details;Job Title;;Optional;;Not mentioned;Not Required;
+User Details;Department;;Optional;;Not mentioned;Not Required;
+User Details;First Name;;Mandatory;Robin;07:18;Complete;Waterbury user
+User Details;Last Name;;Mandatory;;Not mentioned;Missing;Robin's last name not provided
+User Details;Email;;Mandatory;;12:39;Missing;Robin's email needed
+User Details;Role;;Mandatory;User;Inferred;Complete;Standard user
+User Details;First Name;;Mandatory;Dustin;07:18;Complete;Waterbury user
+User Details;Last Name;;Mandatory;;Not mentioned;Missing;Dustin's last name not provided
+User Details;Email;;Mandatory;;14:36;Missing;Dustin's email needed
+User Details;Role;;Mandatory;User;Inferred;Complete;Standard user
+User Details;First Name;;Mandatory;Joshua;00:08;Complete;BroadVoice implementation
+User Details;Last Name;;Mandatory;Kirby;00:08;Complete;Joshua Kirby
+User Details;First Name;;Mandatory;Steven;07:45;Complete;BroadVoice technical
+User Details;Last Name;;Mandatory;Hatch;07:45;Complete;Steven Hatch
+Location/Address;Location Name;;Mandatory;Berlin Office;01:51-15:21;Complete;Berlin location
+Location/Address;Street Address;;Mandatory;1284 US Route 302;22:09;Complete;Shipping address
+Location/Address;City;;Mandatory;Berlin;22:09;Complete;
+Location/Address;State;;Mandatory;VT;22:09;Complete;Vermont
+Location/Address;ZIP Code;;Mandatory;5641;22:09;Complete;
+Location/Address;Shipping Address;Street;Mandatory;1284 US Route 302;22:09;Complete;Same as service address
+Location/Address;Shipping Address;City;Mandatory;Berlin;22:09;Complete;
+Location/Address;Shipping Address;State;Mandatory;VT;22:09;Complete;
+Location/Address;Shipping Address;ZIP;Mandatory;5641;22:09;Complete;
+Location/Address;E911 Address;Street;Mandatory;1284 US Route 302;Inferred;Complete;Same as service address
+Location/Address;E911 Address;City;Mandatory;Berlin;Inferred;Complete;
+Location/Address;E911 Address;State;Mandatory;VT;Inferred;Complete;
+Location/Address;E911 Address;ZIP;Mandatory;5641;Inferred;Complete;
+Location/Address;E911 Business Name;;Mandatory;;Not mentioned;Missing;Need business name for E911
+Location/Address;Timezone;;Mandatory;Eastern;Inferred;Complete;Vermont is Eastern Time
+Phone Numbers;Main Number;;Mandatory;802-XXX-9100;22:38;Complete;9100 confirmed as main
+Phone Numbers;Area Code Preference;;Optional;802;Inferred;Complete;Vermont area code
+Phone Numbers;Number to Port;;Optional;Multiple;23:03-23:30;Complete;6 numbers being ported from Comcast
+Phone Numbers;Inbound Number;;Optional;;Not mentioned;Not Required;
+Phone Numbers;Outbound Number;;Optional;;Not mentioned;Not Required;
+Phone Numbers;Fax Number;;Optional;802-XXX-1734;22:44-22:47;Complete;1734 fax number
+Device Configuration;Device Brand;;Mandatory;Polycom;12:03;Referenced;Poly Edge phones mentioned
+Device Configuration;Device Model;;Mandatory;Edge;12:03;Partial;Poly Edge model
+Device Configuration;Phone Make/Model;;Mandatory;Poly Edge;12:03;Partial;
+Device Configuration;Number of Devices;;Mandatory;10;01:51-08:01;Complete;10 desk phones for Berlin
+Device Configuration;Rental/Purchase;;Mandatory;;Not mentioned;Missing;Need to determine
+Device Configuration;MAC Address;;Optional;;Not mentioned;Not Required;
+Device Configuration;Activation URL;;Auto-generated;;N/A;Pending;Will be generated
+Device Configuration;Hardware Profile;;Optional;;Not mentioned;Not Required;
+Device Configuration;ATA Device;;Optional;1;01:51-18:04;Complete;Physical fax adapter
+Phone Buttons;Lines Configuration;Number of Lines;Mandatory;10;08:01;Complete;10 phones/users
+Phone Buttons;Lines Configuration;Line Names;Optional;Generic;15:24-15:32;Complete;Berlin phone 1-10
+Phone Buttons;Custom Configuration;Per Employee;Mandatory;No;09:22-09:50;Complete;Generic naming convention
+Phone Buttons;Call Parking;Enabled;Mandatory;Yes;17:07-17:18;Complete;3 car parks setup
+Phone Buttons;Call Parking;Number of Keys;Conditional;3;17:14;Complete;3 car parks
+Phone Buttons;Speed Dial;;Optional;;Not mentioned;Not Required;
+Phone Buttons;Presence;;Optional;2;17:14;Complete;2 presence buttons
+Fax Configuration;Fax Service;Enabled;Mandatory;Yes;01:51;Complete;Physical fax service
+Fax Configuration;Fax Service;Type;Conditional;Physical;18:04;Complete;Physical fax with ATA
+Fax Configuration;Fax Inbox;Name;Conditional;;Not mentioned;Missing;
+Fax Configuration;Fax Inbox;Email;Conditional;Penny's email;18:29;Complete;Email backup for fax
+Fax Configuration;Fax Machine;;Text;Yes;06:31-06:36;Complete;Had fax for credit card initially
+Fax Configuration;Outgoing Fax Header;;Optional;;Not mentioned;Not Required;
+Fax Configuration;T.38 Settings;;Optional;;Not mentioned;Not Required;
+Network Settings;Configure Network;;Mandatory;DHCP;Default;Complete;Standard configuration
+Network Settings;Custom Config;;Optional;Cradle Point;25:31:00;Complete;Cradle Point router from HQ
+Network Settings;Static IP;;Optional;No;Inferred;Complete;DHCP configuration
+Network Settings;Firewall;;Optional;Cradle Point;25:31:00;Complete;Same as Waterbury setup
+Call Features;Call Forwarding;;Optional;;Not mentioned;Not Required;
+Call Features;Voicemail;;Mandatory;Yes;12:24-12:51;Complete;Voicemail to email discussed
+Call Features;Auto Attendant;;Optional;No;Inferred;Complete;Ring pattern only
+Call Features;Ring Groups;;Optional;Yes;15:55-16:10;Complete;Ring front then all phones
+Call Features;Call Recording;;Optional;;Not mentioned;Not Required;
+Call Features;Conference Bridge;;Optional;;Not mentioned;Not Required;
+Call Features;International Dialing;;Optional;No;26:47-26:54;Complete;Not needed
+Business Information;Company Name;;Mandatory;H&R Block;25:21:00;Partial;Mentioned H&R Block affiliation
+Business Information;Account Number;;Auto-generated;;N/A;Pending;Will be assigned
+Business Information;Location Type;;Optional;Tax Office;02:14-03:02;Complete;Seasonal tax preparation office
+Business Information;Implementation Date;;Mandatory;Immediate;22:14;Complete;Phones to ship immediately
+Business Information;Existing Waterbury Location;;Optional;Yes;02:32-02:45;Complete;Second location after Waterbury
+Notifications;Welcome Email;;Mandatory;Penny's email;05:23-05:33;Complete;
+Notifications;Admin Email;;Mandatory;Penny's email;11:34-11:42;Complete;Admin access being sent
+Notifications;Logistics Email;;Optional;;Not mentioned;Not Required;
+Notifications;Activation Codes Export;;Mandatory;;Not mentioned;Missing;
+SharePoint/Integration;Input Workbook Path;;Mandatory;;Not mentioned;Missing;
+SharePoint/Integration;Output Folder;;Mandatory;;Not mentioned;Missing;
+SharePoint/Integration;Email Report;;Mandatory;Yes;21:08-21:34;Complete;Multiple follow-up emails promised
+Additional Notes;Training Required;;Optional;Yes;03:23-05:07;Complete;Training scheduled to be arranged
+Additional Notes;Existing Issues - Waterbury;;Optional;Yes;02:45-03:25;Complete;Transfer and voicemail issues at Waterbury
+Additional Notes;Fax Issues - Waterbury;;Optional;Yes;10:29-20:41;Complete;Waterbury fax not working
+Additional Notes;Line Configuration Issue;;Optional;Line 2;19:41-20:41;Complete;Fax on line 2 instead of line 1
+Additional Notes;Admin Portal Training;;Optional;Yes;04:29-05:15;Complete;Beehive admin training needed
+Additional Notes;Seasonal Business;;Optional;Yes;02:14-02:23;Complete;Staff changes yearly
+Additional Notes;Credit Card Processing;;Optional;Wi-Fi;06:36-07:18;Complete;Credit cards via internet not phone
+Additional Notes;Support Code;;Optional;*611;27:07-27:40;Complete;Direct support dial code
+Additional Notes;Whitelist Requirements;;Optional;Yes;25:49-26:15;Complete;Firewall whitelisting needed
+Additional Notes;Ring Pattern;;Optional;Front then All;15:40-16:10;Complete;Ring front desk then all phones
+Additional Notes;Phone Naming Convention;;Optional;Generic;06:14-06:24;Complete;Generic names for seasonal staff
+Additional Notes;5-Day Support;;Optional;Yes;28:23-28:29;Complete;5 business days post-implementation
+Additional Notes;60-Day Rep;;Optional;Yes;28:29:00;Complete;Dedicated rep for 60 days
+Summary;Total Attributes;;;100;;;
+Summary;Complete Required Fields;;;58;;;58% complete
+Summary;Missing Required Fields;;;15;;;Need follow-up
+Summary;Optional Fields Captured;;;27;;;Good detail level

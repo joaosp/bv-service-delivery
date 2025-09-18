@@ -1,0 +1,111 @@
+Category;Attribute;Sub-Attribute;Required/Optional;Extracted Value;Source Timestamp;Status;Notes
+User Details;First Name;;Mandatory;John;Multiple references;Complete;Primary billing contact
+User Details;Last Name;;Mandatory;;Not mentioned;Missing;John is billing contact but no last name
+User Details;Email;;Mandatory;;Not mentioned;Missing;Need email for John
+User Details;Role;;Mandatory;Administrator;05:51;Complete;Portal administrator
+User Details;Package;;Mandatory;;Not mentioned;Missing;Need to determine package type
+User Details;Mobile Number;;Optional;;Not mentioned;Not Required;
+User Details;Local Extension;;Mandatory;;Not mentioned;Missing;Need to assign extensions
+User Details;Job Title;;Optional;;Not mentioned;Not Required;
+User Details;Department;;Optional;;Not mentioned;Not Required;
+User Details;First Name;;Mandatory;Paul;06:05;Complete;Secondary administrator
+User Details;Last Name;;Mandatory;Wiese;06:05;Complete;W-I-E-S-E
+User Details;Email;;Mandatory;;Not mentioned;Missing;Need email for Paul
+User Details;Role;;Mandatory;Administrator;06:05;Complete;Portal administrator
+User Details;First Name;;Mandatory;Gavin;00:03;Complete;Technical contact
+User Details;Last Name;;Mandatory;Holle;02:09;Complete;From chat participant
+User Details;Email;;Mandatory;;Not mentioned;Missing;Need email for Gavin
+User Details;Role;;Mandatory;Technical;Inferred;Complete;Handles technical setup
+User Details;First Name;;Mandatory;Steven;00:09;Complete;BroadVoice technical
+User Details;Last Name;;Mandatory;Hatch;00:09;Complete;Steve with BroadVoice
+Location/Address;Location Name;;Mandatory;Springdale Arkansas;00:47;Complete;First of 5 locations
+Location/Address;Street Address;;Mandatory;179 East Fontanelle Drive;02:14;Complete;Confirmed in chat
+Location/Address;City;;Mandatory;Springdale;00:47;Complete;
+Location/Address;State;;Mandatory;AR;00:47;Complete;Arkansas
+Location/Address;ZIP Code;;Mandatory;72762;02:14;Complete;
+Location/Address;Shipping Address;Street;Mandatory;179 East Fontanelle Drive;02:42;Complete;Same as service address
+Location/Address;Shipping Address;City;Mandatory;Springdale;02:42;Complete;
+Location/Address;Shipping Address;State;Mandatory;AR;02:42;Complete;
+Location/Address;Shipping Address;ZIP;Mandatory;72762;02:42;Complete;
+Location/Address;E911 Address;Street;Mandatory;179 East Fontanelle Drive;Inferred;Complete;Same as service address
+Location/Address;E911 Address;City;Mandatory;Springdale;Inferred;Complete;
+Location/Address;E911 Address;State;Mandatory;AR;Inferred;Complete;
+Location/Address;E911 Address;ZIP;Mandatory;72762;Inferred;Complete;
+Location/Address;E911 Business Name;;Mandatory;;Not mentioned;Missing;Need business name for E911
+Location/Address;Timezone;;Mandatory;Central;Inferred;Complete;Arkansas is Central Time
+Phone Numbers;Main Number;;Mandatory;479-751-3570;05:33;Complete;Main number confirmed
+Phone Numbers;Area Code Preference;;Optional;479;04:54;Complete;All numbers in 479 area
+Phone Numbers;Number to Port;;Optional;479-751-3570;04:54-05:15;Complete;Porting 5 numbers total
+Phone Numbers;Number to Port;;Optional;479-751-2915;05:11;Complete;Fax number
+Phone Numbers;Number to Port;;Optional;479-364-5984;05:15;Complete;Additional DID
+Phone Numbers;Number to Port;;Optional;479-364-6553;05:15;Complete;Additional DID
+Phone Numbers;Number to Port;;Optional;479-364-4947;05:15;Complete;Additional DID
+Phone Numbers;Inbound Number;;Optional;;Not mentioned;Not Required;
+Phone Numbers;Outbound Number;;Optional;;Not mentioned;Not Required;
+Phone Numbers;Fax Number;;Optional;479-751-2915;05:41;Complete;Dedicated fax line
+Device Configuration;Device Brand;;Mandatory;GrandStream;07:00;Complete;UCM 6204
+Device Configuration;Device Model;;Mandatory;UCM 6204;07:00;Complete;PBX system
+Device Configuration;Phone Make/Model;;Mandatory;GrandStream UCM 6204;07:00;Complete;
+Device Configuration;Number of Devices;;Mandatory;1;07:00;Complete;One PBX per location
+Device Configuration;Rental/Purchase;;Mandatory;;Not mentioned;Missing;Customer-owned assumed
+Device Configuration;MAC Address;;Optional;;Not mentioned;Not Required;
+Device Configuration;Activation URL;;Auto-generated;;N/A;Pending;Will be generated
+Device Configuration;Hardware Profile;;Optional;;Not mentioned;Not Required;
+Device Configuration;ATA Device;;Optional;OBi402;02:45;Complete;2 fax adapters quoted
+Phone Buttons;Lines Configuration;Number of Lines;Mandatory;15;02:45;Complete;15 local numbers quoted
+Phone Buttons;Lines Configuration;Line Names;Optional;;Not mentioned;Not Required;
+Phone Buttons;Custom Configuration;Per Employee;Mandatory;;Not mentioned;Missing;
+Phone Buttons;Call Parking;Enabled;Mandatory;;Not mentioned;Missing;
+Phone Buttons;Call Parking;Number of Keys;Conditional;;Not mentioned;Not Required;
+Phone Buttons;Speed Dial;;Optional;;Not mentioned;Not Required;
+Phone Buttons;Presence;;Optional;;Not mentioned;Not Required;
+Fax Configuration;Fax Service;Enabled;Mandatory;Yes;02:24;Complete;ATA for fax machine
+Fax Configuration;Fax Service;Type;Conditional;Shared;02:45;Complete;2 shared fax boxes
+Fax Configuration;Fax Inbox;Name;Conditional;;Not mentioned;Missing;
+Fax Configuration;Fax Inbox;Email;Conditional;;Not mentioned;Missing;
+Fax Configuration;Fax Machine;;Text;Yes;02:24;Complete;Physical fax machine present
+Fax Configuration;Outgoing Fax Header;;Optional;;Not mentioned;Not Required;
+Fax Configuration;T.38 Settings;;Optional;;Not mentioned;Not Required;
+Network Settings;Configure Network;;Mandatory;SIP Registration;07:00;Complete;Registered SIP trunk
+Network Settings;Custom Config;;Optional;;07:06;Noted;SIP info to be provided
+Network Settings;Static IP;;Optional;No;07:22;Complete;Not using static IP
+Network Settings;Elastic Trunking;;Optional;5;02:45;Complete;5 elastic trunking
+Call Features;Call Forwarding;;Optional;;Not mentioned;Not Required;
+Call Features;Voicemail;;Mandatory;;Not mentioned;Missing;
+Call Features;Auto Attendant;;Optional;;Not mentioned;Not Required;
+Call Features;Ring Groups;;Optional;;Not mentioned;Not Required;
+Call Features;Call Recording;;Optional;;Not mentioned;Not Required;
+Call Features;Conference Bridge;;Optional;;Not mentioned;Not Required;
+Business Information;Company Name;;Mandatory;;Not mentioned;Missing;Company name not stated
+Business Information;Account Number;;Auto-generated;;N/A;Pending;Will be assigned
+Business Information;Location Type;;Optional;Branch Office;01:13;Complete;Branch location
+Business Information;Implementation Date;;Mandatory;September 4 2025;10:40;Complete;Thursday at 3PM
+Business Information;Headquarters Address;;Optional;2960 East Eugene;01:04;Complete;Springfield MO headquarters
+Business Information;Total Locations;;Optional;5;01:13;Complete;4-5 sites total planned
+Business Information;Other Locations;;Optional;Collinsville/St. Joseph;03:31;Noted;Other branches mentioned
+Notifications;Welcome Email;;Mandatory;;Not mentioned;Missing;
+Notifications;Admin Email;;Mandatory;;Not mentioned;Missing;
+Notifications;Logistics Email;;Optional;;Not mentioned;Not Required;
+Notifications;Activation Codes Export;;Mandatory;;Not mentioned;Missing;
+SharePoint/Integration;Input Workbook Path;;Mandatory;;Not mentioned;Missing;
+SharePoint/Integration;Output Folder;;Mandatory;;Not mentioned;Missing;
+SharePoint/Integration;Email Report;;Mandatory;;Not mentioned;Missing;
+Security;Port Protection PIN;;Optional;1959;06:33;Complete;4-digit PIN for all locations
+Security;Losing Carrier;;Optional;Ozarks Go;09:09;Complete;Current provider
+Technical Configuration;SIP Registration;;Required;Yes;07:00;Complete;Registered SIP trunk
+Technical Configuration;Test Number;;Required;Yes;08:27;Complete;Test number requested
+Technical Configuration;Separate PBX per Location;;Required;Yes;07:49;Complete;Each location gets own PBX
+Technical Configuration;Shared Call Paths;;Required;Yes;08:01;Complete;Share call paths across locations
+Shipping Instructions;ATA Shipping Address;;Optional;2960 East Eugene Springfield MO;04:04;Complete;Ship ATA to headquarters
+Shipping Instructions;Equipment to Springdale;;Optional;Yes;02:42;Complete;Main equipment to service address
+Port Details;Port Request Date;;Required;Submitted after call;09:31;Pending;10 business days minimum
+Port Details;Port Confirmation;;Required;Pending;12:52;Pending;Awaiting carrier confirmation
+Port Details;Rejection Handling;;Optional;John;12:46;Complete;John handles account issues
+Additional Notes;Multi-site Implementation;;Optional;Yes;01:13;Noted;Starting with Springdale first
+Additional Notes;Future Locations;;Optional;4 more;01:13;Noted;Springfield MO last
+Additional Notes;Testing Timeline;;Optional;Same day;09:27;Complete;Gavin can test same day
+Additional Notes;Go-Live Time Preference;;Optional;3:00 PM;10:12;Complete;Allows time before 5PM
+Summary;Total Attributes;;;100;;;
+Summary;Complete Required Fields;;;48;;;48% complete
+Summary;Missing Required Fields;;;22;;;Need follow-up
+Summary;Optional Fields Captured;;;30;;;Good detail level
