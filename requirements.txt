@@ -1,0 +1,21 @@
+# BroadVoice Service Automation dependencies
+
+# Core dependencies
+requests>=2.31.0
+python-dateutil>=2.8.2
+
+# Microsoft Graph API integration
+msal>=1.24.0
+azure-identity>=1.14.0
+msgraph-core>=0.2.2
+
+# Data processing
+pandas>=2.1.0
+openpyxl>=3.1.0
+
+# File handling
+pathlib2>=2.3.7
+
+# Optional: Advanced features
+beautifulsoup4>=4.12.0  # For HTML parsing if needed
+lxml>=4.9.0  # XML/HTML parser
