@@ -152,11 +152,11 @@ class DocumentExtractor(SalesforceBase):
         """
         try:
             api_endpoint = f"/services/data/v64.0/sobjects/ContentVersion/{version_id}/VersionData"
-            response = self.run_api_request(api_endpoint, method="GET")
+            # Use the new output_file parameter for binary downloads
+            response = self.run_api_request(api_endpoint, method="GET", output_file=str(filepath))
             
-            if response:
-                with open(filepath, 'wb') as f:
-                    f.write(response)
+            # For binary downloads, response will be empty bytes if successful
+            if response is not None:
                 return filepath.exists() and filepath.stat().st_size > 0
             
             return False

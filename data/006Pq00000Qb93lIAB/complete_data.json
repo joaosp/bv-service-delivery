@@ -1,0 +1,1710 @@
+{
+  "opportunity": {
+    "opportunity": {
+      "attributes": {
+        "type": "Opportunity",
+        "url": "/services/data/v64.0/sobjects/Opportunity/006Pq00000Qb93lIAB"
+      },
+      "Id": "006Pq00000Qb93lIAB",
+      "Name": "Spruce Mountain Inn, Inc",
+      "AccountId": "001Pq00000W3XQ7IAN",
+      "Account": {
+        "attributes": {
+          "type": "Account",
+          "url": "/services/data/v64.0/sobjects/Account/001Pq00000W3XQ7IAN"
+        },
+        "Name": "Spruce Mountain Inn, Inc"
+      },
+      "StageName": "Closed Won",
+      "Amount": 342.9,
+      "CloseDate": "2025-08-29",
+      "Type": "New Business",
+      "Description": null,
+      "NextStep": null,
+      "Probability": 100,
+      "LeadSource": "Other",
+      "CampaignId": null,
+      "OwnerId": "005Pq00000A6gejIAB",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v64.0/sobjects/User/005Pq00000A6gejIAB"
+        },
+        "Name": "Tanya Karlovic"
+      },
+      "CreatedDate": "2025-03-21T20:26:00.000+0000",
+      "LastModifiedDate": "2025-09-17T13:02:09.000+0000",
+      "IsClosed": true,
+      "IsWon": true,
+      "ForecastCategory": "Closed",
+      "ForecastCategoryName": "Closed"
+    },
+    "account": {
+      "attributes": {
+        "type": "Account",
+        "url": "/services/data/v64.0/sobjects/Account/001Pq00000W3XQ7IAN"
+      },
+      "Id": "001Pq00000W3XQ7IAN",
+      "Name": "Spruce Mountain Inn, Inc",
+      "Type": "Customer",
+      "Industry": "Health & Fitness",
+      "AnnualRevenue": null,
+      "NumberOfEmployees": null,
+      "BillingStreet": "155 Towne Ave,",
+      "BillingCity": "Plainfield",
+      "BillingState": "Vermont",
+      "BillingPostalCode": "05667",
+      "BillingCountry": "US",
+      "ShippingStreet": "155 Towne Ave",
+      "ShippingCity": "Plainfield",
+      "ShippingState": "Vt",
+      "ShippingPostalCode": "05667",
+      "Phone": null,
+      "Fax": null,
+      "Website": null,
+      "Description": null,
+      "ParentId": null,
+      "Parent": null,
+      "OwnerId": "0051M000007uLI8QAM",
+      "Owner": {
+        "attributes": {
+          "type": "User",
+          "url": "/services/data/v64.0/sobjects/User/0051M000007uLI8QAM"
+        },
+        "Name": "Kathleen Annitto"
+      },
+      "CreatedDate": "2025-03-21T20:25:53.000+0000",
+      "LastModifiedDate": "2025-09-15T18:54:00.000+0000"
+    },
+    "products": [],
+    "history": [
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000c0td2IAA"
+        },
+        "Id": "008Pq00000c0td2IAA",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Closed Won",
+        "Amount": 342.9,
+        "PrevAmount": 342.9,
+        "CloseDate": "2025-08-29",
+        "PrevCloseDate": "2025-09-30",
+        "Probability": 100,
+        "ForecastCategory": "Closed",
+        "CreatedDate": "2025-08-29T21:42:08.000+0000",
+        "CreatedById": "0051M000009uR3LQAU"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000bwzcGIAQ"
+        },
+        "Id": "008Pq00000bwzcGIAQ",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Qualify/Sales Engineering",
+        "Amount": 342.9,
+        "PrevAmount": 342.9,
+        "CloseDate": "2025-09-30",
+        "PrevCloseDate": "2025-09-30",
+        "Probability": 30,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-08-28T19:35:38.000+0000",
+        "CreatedById": "0051M000009uR3LQAU"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000bqAQzIAM"
+        },
+        "Id": "008Pq00000bqAQzIAM",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Closed Lost",
+        "Amount": 342.9,
+        "PrevAmount": 342.9,
+        "CloseDate": "2025-09-30",
+        "PrevCloseDate": "2025-09-30",
+        "Probability": 0,
+        "ForecastCategory": "Omitted",
+        "CreatedDate": "2025-08-26T22:50:48.000+0000",
+        "CreatedById": "0051M000009uR3LQAU"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000acTzgIAE"
+        },
+        "Id": "008Pq00000acTzgIAE",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Qualify/Sales Engineering",
+        "Amount": 342.9,
+        "PrevAmount": 342.9,
+        "CloseDate": "2025-09-30",
+        "PrevCloseDate": "2025-07-31",
+        "Probability": 30,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-08-05T15:23:43.000+0000",
+        "CreatedById": "0051M000009uR3LQAU"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000XW23kIAD"
+        },
+        "Id": "008Pq00000XW23kIAD",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Qualify/Sales Engineering",
+        "Amount": 342.9,
+        "PrevAmount": 342.9,
+        "CloseDate": "2025-07-31",
+        "PrevCloseDate": "2025-05-30",
+        "Probability": 30,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-06-06T21:25:59.000+0000",
+        "CreatedById": "0058Y00000BG8YDQA1"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000VrJLEIA3"
+        },
+        "Id": "008Pq00000VrJLEIA3",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Qualify/Sales Engineering",
+        "Amount": 342.9,
+        "PrevAmount": 342.9,
+        "CloseDate": "2025-05-30",
+        "PrevCloseDate": "2025-04-30",
+        "Probability": 30,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-05-05T15:22:44.000+0000",
+        "CreatedById": "0051M000009uR3LQAU"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000UHtJwIAL"
+        },
+        "Id": "008Pq00000UHtJwIAL",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Qualify/Sales Engineering",
+        "Amount": 342.9,
+        "PrevAmount": 342.9,
+        "CloseDate": "2025-04-30",
+        "PrevCloseDate": "2025-05-30",
+        "Probability": 30,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-04-03T22:04:41.000+0000",
+        "CreatedById": "0051M000009uR3LQAU"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000U9nOSIAZ"
+        },
+        "Id": "008Pq00000U9nOSIAZ",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Qualify/Sales Engineering",
+        "Amount": 342.9,
+        "PrevAmount": 342.9,
+        "CloseDate": "2025-05-30",
+        "PrevCloseDate": "2025-04-30",
+        "Probability": 30,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-04-01T21:38:51.000+0000",
+        "CreatedById": "0051M000009uR3LQAU"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000TcQAXIA3"
+        },
+        "Id": "008Pq00000TcQAXIA3",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Qualify/Sales Engineering",
+        "Amount": 342.9,
+        "PrevAmount": 526.5,
+        "CloseDate": "2025-04-30",
+        "PrevCloseDate": "2025-04-30",
+        "Probability": 30,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-03-21T21:05:27.000+0000",
+        "CreatedById": "0051M00000A7g9PQAR"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000TcXGnIAN"
+        },
+        "Id": "008Pq00000TcXGnIAN",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Qualify/Sales Engineering",
+        "Amount": 526.5,
+        "PrevAmount": 521.5,
+        "CloseDate": "2025-04-30",
+        "PrevCloseDate": "2025-04-30",
+        "Probability": 30,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-03-21T20:36:23.000+0000",
+        "CreatedById": "0051M00000A7g9PQAR"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000TcTekIAF"
+        },
+        "Id": "008Pq00000TcTekIAF",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Qualify/Sales Engineering",
+        "Amount": 521.5,
+        "PrevAmount": 509,
+        "CloseDate": "2025-04-30",
+        "PrevCloseDate": "2025-04-30",
+        "Probability": 30,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-03-21T20:35:58.000+0000",
+        "CreatedById": "0051M00000A7g9PQAR"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000TcV0UIAV"
+        },
+        "Id": "008Pq00000TcV0UIAV",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Qualify/Sales Engineering",
+        "Amount": 509,
+        "PrevAmount": null,
+        "CloseDate": "2025-04-30",
+        "PrevCloseDate": "2025-03-31",
+        "Probability": 30,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-03-21T20:26:04.000+0000",
+        "CreatedById": "0051M00000A7g9PQAR"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000TcHnCIAV"
+        },
+        "Id": "008Pq00000TcHnCIAV",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Qualify/Sales Engineering",
+        "Amount": null,
+        "PrevAmount": null,
+        "CloseDate": "2025-03-31",
+        "PrevCloseDate": "2025-03-31",
+        "Probability": 30,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-03-21T20:26:01.000+0000",
+        "CreatedById": "0051M00000A7g9PQAR"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityHistory",
+          "url": "/services/data/v64.0/sobjects/OpportunityHistory/008Pq00000TcHnBIAV"
+        },
+        "Id": "008Pq00000TcHnBIAV",
+        "OpportunityId": "006Pq00000Qb93lIAB",
+        "StageName": "Prospecting",
+        "Amount": null,
+        "PrevAmount": null,
+        "CloseDate": "2025-03-31",
+        "PrevCloseDate": null,
+        "Probability": 0,
+        "ForecastCategory": "Pipeline",
+        "CreatedDate": "2025-03-21T20:26:00.000+0000",
+        "CreatedById": "0051M00000A7g9PQAR"
+      }
+    ],
+    "team": [
+      {
+        "attributes": {
+          "type": "OpportunityTeamMember",
+          "url": "/services/data/v64.0/sobjects/OpportunityTeamMember/00qPq000008pPPZIA2"
+        },
+        "Id": "00qPq000008pPPZIA2",
+        "UserId": "0051M000009uR3LQAU",
+        "User": {
+          "attributes": {
+            "type": "User",
+            "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+          },
+          "Name": "Christine Rosa",
+          "Email": "christiner@broadvoice.com"
+        },
+        "TeamMemberRole": "Partner Sales Manager",
+        "OpportunityAccessLevel": "Edit",
+        "CreatedDate": "2025-08-15T20:44:08.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityTeamMember",
+          "url": "/services/data/v64.0/sobjects/OpportunityTeamMember/00qPq000008pPPaIAM"
+        },
+        "Id": "00qPq000008pPPaIAM",
+        "UserId": "0051M00000A7g9AQAR",
+        "User": {
+          "attributes": {
+            "type": "User",
+            "url": "/services/data/v64.0/sobjects/User/0051M00000A7g9AQAR"
+          },
+          "Name": "Dan Long",
+          "Email": "danl@broadvoice.com"
+        },
+        "TeamMemberRole": "Solution Architect/Sales Engineer",
+        "OpportunityAccessLevel": "Edit",
+        "CreatedDate": "2025-08-15T20:44:08.000+0000"
+      }
+    ],
+    "extraction_stats": {
+      "start_time": "2025-09-24T15:43:02.086562",
+      "queries_executed": 5,
+      "api_requests": 0,
+      "errors": [],
+      "duration_seconds": 23.489963
+    }
+  },
+  "contacts": {
+    "contacts": [
+      {
+        "attributes": {
+          "type": "Contact",
+          "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gYN6sIAG"
+        },
+        "Id": "003Pq00000gYN6sIAG",
+        "FirstName": "Lise",
+        "LastName": "Couture",
+        "Name": "Lise Couture",
+        "Email": "lcouture@sprucemountainiin.com",
+        "Phone": "8022796896",
+        "MobilePhone": null,
+        "Title": null,
+        "Department": null,
+        "ReportsToId": null,
+        "ReportsTo": null,
+        "MailingStreet": "155 Towne Ave,",
+        "MailingCity": "Plainfield",
+        "MailingState": "Vermont",
+        "MailingPostalCode": "05667",
+        "MailingCountry": "US",
+        "Description": null,
+        "LeadSource": "Other",
+        "CreatedDate": "2025-09-04T21:48:07.000+0000",
+        "LastModifiedDate": "2025-09-19T19:12:02.000+0000",
+        "LastActivityDate": null,
+        "DoNotCall": false,
+        "HasOptedOutOfEmail": false,
+        "EmailBouncedReason": null
+      },
+      {
+        "attributes": {
+          "type": "Contact",
+          "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gY86FIAS"
+        },
+        "Id": "003Pq00000gY86FIAS",
+        "FirstName": "Ian",
+        "LastName": "Covey",
+        "Name": "Ian Covey",
+        "Email": "adminassistant@sprucemountaininn.com",
+        "Phone": "802-498-5624",
+        "MobilePhone": null,
+        "Title": null,
+        "Department": null,
+        "ReportsToId": null,
+        "ReportsTo": null,
+        "MailingStreet": "155 Towne Ave,",
+        "MailingCity": "Plainfield",
+        "MailingState": "Vermont",
+        "MailingPostalCode": "05667",
+        "MailingCountry": "US",
+        "Description": null,
+        "LeadSource": null,
+        "CreatedDate": "2025-09-04T21:17:44.000+0000",
+        "LastModifiedDate": "2025-09-19T19:12:10.000+0000",
+        "LastActivityDate": "2025-09-04",
+        "DoNotCall": false,
+        "HasOptedOutOfEmail": false,
+        "EmailBouncedReason": null
+      }
+    ],
+    "contact_roles": [
+      {
+        "attributes": {
+          "type": "OpportunityContactRole",
+          "url": "/services/data/v64.0/sobjects/OpportunityContactRole/00KPq00000OyzE5MAJ"
+        },
+        "Id": "00KPq00000OyzE5MAJ",
+        "ContactId": "003Pq00000gY86FIAS",
+        "Contact": {
+          "attributes": {
+            "type": "Contact",
+            "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gY86FIAS"
+          },
+          "FirstName": "Ian",
+          "LastName": "Covey",
+          "Name": "Ian Covey",
+          "Email": "adminassistant@sprucemountaininn.com",
+          "Phone": "802-498-5624",
+          "Title": null,
+          "Department": null
+        },
+        "Role": "Install Contact",
+        "IsPrimary": false,
+        "CreatedDate": "2025-09-04T21:17:44.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "OpportunityContactRole",
+          "url": "/services/data/v64.0/sobjects/OpportunityContactRole/00KPq00000Oz2zxMAB"
+        },
+        "Id": "00KPq00000Oz2zxMAB",
+        "ContactId": "003Pq00000gYN6sIAG",
+        "Contact": {
+          "attributes": {
+            "type": "Contact",
+            "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gYN6sIAG"
+          },
+          "FirstName": "Lise",
+          "LastName": "Couture",
+          "Name": "Lise Couture",
+          "Email": "lcouture@sprucemountainiin.com",
+          "Phone": "8022796896",
+          "Title": null,
+          "Department": null
+        },
+        "Role": "Admin",
+        "IsPrimary": false,
+        "CreatedDate": "2025-09-04T21:48:07.000+0000"
+      }
+    ],
+    "activities": {
+      "003Pq00000gY86FIAS": [
+        {
+          "type": "task",
+          "data": {
+            "attributes": {
+              "type": "Task",
+              "url": "/services/data/v64.0/sobjects/Task/00TPq00000mat4EMAQ"
+            },
+            "Id": "00TPq00000mat4EMAQ",
+            "Subject": "Email: Broadvoice Order - Spruce Mountain Inn, Inc - 9445-354",
+            "Status": "Completed",
+            "Priority": "Normal",
+            "ActivityDate": "2025-09-04",
+            "Description": "To: toddw@broadvoice.com; adminassistant@sprucemountaininn.com; rowdy@integritycomm.com; christiner@broadvoice.com; davidl@broadvoice.com\nCC:\nBCC:\nAttachment: Blank Workbook 2023(5).xlsx\n\nSubject: Broadvoice Order - Spruce Mountain Inn, Inc - 9445-354\nBody:\nHello Spruce Mountain Inn, Inc,\nCongratulations on becoming a Broadvoice customer! The contract information for Spruce Mountain Inn, Inc has been completed and we are ready to move your order to our Implementation Team.\nYour dedicated Service Delivery team will include Todd Wieger and David Lauritzen. Todd Wieger will be reaching out to you to schedule a kickoff. During the call we will be reviewing and mapping out the following items:Network assessmentSolution design and configuration (How calls will be handled from the moment they enter the phone system)Extension/User values* (see attached user list)Implementation timelinesImplementation expectations and processWe highly recommend your IT contact and any phone system decision-makers be part of this call.\nAttached is a spreadsheet we need to have filled out before the kickoff call. It gives the team all the necessary information to build the user accounts, including first name, last name, phone numbers, extension, email addresses, and more.\nGathering this information early on makes for a smooth and quick implementation.\nTodd Wieger and  David Lauritzen are both copied on this email. If you have any questions before they reach out, please email them directly.\nThank you!\nThe Broadvoice Team\n\n*Important* Please note extensions that are not available for use:\n211—Community services and information311—Municipal government services411—Directory assistance511—Traffic information611—Phone company repair711—TDD and Relay for the Deaf811—Underground public utility location911—Emergency services (police, fire, EMS)988— National Suicide Prevention Lifeline (new)",
+            "WhoId": "003Pq00000gY86FIAS",
+            "Who": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gY86FIAS"
+              },
+              "Name": "Ian Covey"
+            },
+            "WhatId": "a0xPq000007QRBpIAO",
+            "What": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/Project__c/a0xPq000007QRBpIAO"
+              },
+              "Name": "33141 | Spruce Mountain Inn, Inc"
+            },
+            "OwnerId": "00516000005Cn43AAC",
+            "Owner": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/00516000005Cn43AAC"
+              },
+              "Name": "Liz Guzzo"
+            },
+            "CreatedDate": "2025-09-04T22:25:51.000+0000",
+            "Type": null,
+            "CallType": null,
+            "CallDurationInSeconds": null
+          }
+        }
+      ]
+    },
+    "hierarchy": {
+      "managers": [],
+      "individual_contributors": [
+        {
+          "attributes": {
+            "type": "Contact",
+            "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gYN6sIAG"
+          },
+          "Id": "003Pq00000gYN6sIAG",
+          "FirstName": "Lise",
+          "LastName": "Couture",
+          "Name": "Lise Couture",
+          "Email": "lcouture@sprucemountainiin.com",
+          "Phone": "8022796896",
+          "MobilePhone": null,
+          "Title": null,
+          "Department": null,
+          "ReportsToId": null,
+          "ReportsTo": null,
+          "MailingStreet": "155 Towne Ave,",
+          "MailingCity": "Plainfield",
+          "MailingState": "Vermont",
+          "MailingPostalCode": "05667",
+          "MailingCountry": "US",
+          "Description": null,
+          "LeadSource": "Other",
+          "CreatedDate": "2025-09-04T21:48:07.000+0000",
+          "LastModifiedDate": "2025-09-19T19:12:02.000+0000",
+          "LastActivityDate": null,
+          "DoNotCall": false,
+          "HasOptedOutOfEmail": false,
+          "EmailBouncedReason": null
+        },
+        {
+          "attributes": {
+            "type": "Contact",
+            "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gY86FIAS"
+          },
+          "Id": "003Pq00000gY86FIAS",
+          "FirstName": "Ian",
+          "LastName": "Covey",
+          "Name": "Ian Covey",
+          "Email": "adminassistant@sprucemountaininn.com",
+          "Phone": "802-498-5624",
+          "MobilePhone": null,
+          "Title": null,
+          "Department": null,
+          "ReportsToId": null,
+          "ReportsTo": null,
+          "MailingStreet": "155 Towne Ave,",
+          "MailingCity": "Plainfield",
+          "MailingState": "Vermont",
+          "MailingPostalCode": "05667",
+          "MailingCountry": "US",
+          "Description": null,
+          "LeadSource": null,
+          "CreatedDate": "2025-09-04T21:17:44.000+0000",
+          "LastModifiedDate": "2025-09-19T19:12:10.000+0000",
+          "LastActivityDate": "2025-09-04",
+          "DoNotCall": false,
+          "HasOptedOutOfEmail": false,
+          "EmailBouncedReason": null
+        }
+      ],
+      "unknown": []
+    },
+    "analysis": {
+      "primary_contacts": [],
+      "decision_makers": [],
+      "technical_contacts": [],
+      "total_contacts": 2,
+      "contacts_with_roles": 2
+    },
+    "extraction_stats": {
+      "start_time": "2025-09-24T15:43:04.293405",
+      "queries_executed": 4,
+      "api_requests": 0,
+      "errors": [],
+      "duration_seconds": 29.170083
+    }
+  },
+  "relationships": {
+    "hierarchy": {
+      "root": {
+        "opportunity_id": "006Pq00000Qb93lIAB",
+        "account_id": "001Pq00000W3XQ7IAN"
+      },
+      "direct_children": {
+        "opportunity": {
+          "tasks": [
+            {
+              "attributes": {
+                "type": "Task",
+                "url": "/services/data/v64.0/sobjects/Task/00TPq00000lOWa7MAG"
+              },
+              "Id": "00TPq00000lOWa7MAG",
+              "Subject": "Notes",
+              "Status": "Completed",
+              "Priority": "Normal",
+              "ActivityDate": "2025-08-15",
+              "Description": "Spruce Mountain Inn\n155 Towne Ave\nPlainfield, Vermont 05667\n\nMain Phone Number (802)454-8353\n\nThey currently have 18 Phones and one Fax Machine.",
+              "WhoId": null,
+              "Who": null,
+              "WhatId": "006Pq00000Qb93lIAB",
+              "What": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/Opportunity/006Pq00000Qb93lIAB"
+                },
+                "Name": "Spruce Mountain Inn, Inc"
+              },
+              "OwnerId": "0051M00000A7g9AQAR",
+              "Owner": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/User/0051M00000A7g9AQAR"
+                },
+                "Name": "Dan Long"
+              },
+              "CreatedDate": "2025-08-15T20:39:39.000+0000",
+              "LastModifiedDate": "2025-08-15T20:43:25.000+0000",
+              "Type": "SA Engagement",
+              "CallType": null,
+              "CallDurationInSeconds": null,
+              "IsRecurrence": false
+            },
+            {
+              "attributes": {
+                "type": "Task",
+                "url": "/services/data/v64.0/sobjects/Task/00TPq00000buiCXMAY"
+              },
+              "Id": "00TPq00000buiCXMAY",
+              "Subject": "Notes",
+              "Status": "Completed",
+              "Priority": "Normal",
+              "ActivityDate": "2025-03-24",
+              "Description": "Spruce Mountain Inn\n155 Towne Ave\nPlainfield, Vermont 05667\n\nMain Phone Number (802)454-8353\n\nThey currently have 18 Phones and one Fax Machine.",
+              "WhoId": null,
+              "Who": null,
+              "WhatId": "006Pq00000Qb93lIAB",
+              "What": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/Opportunity/006Pq00000Qb93lIAB"
+                },
+                "Name": "Spruce Mountain Inn, Inc"
+              },
+              "OwnerId": "0051M00000A7g9AQAR",
+              "Owner": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/User/0051M00000A7g9AQAR"
+                },
+                "Name": "Dan Long"
+              },
+              "CreatedDate": "2025-03-24T14:56:04.000+0000",
+              "LastModifiedDate": "2025-03-24T15:06:24.000+0000",
+              "Type": "SA Engagement",
+              "CallType": null,
+              "CallDurationInSeconds": null,
+              "IsRecurrence": false
+            }
+          ],
+          "events": [
+            {
+              "attributes": {
+                "type": "Event",
+                "url": "/services/data/v64.0/sobjects/Event/00UPq00000RmIBEMA3"
+              },
+              "Id": "00UPq00000RmIBEMA3",
+              "Subject": "Reached out to Dave to see if opp still on table, and if so when will it expect to close",
+              "StartDateTime": "2025-08-20T14:03:05.000+0000",
+              "EndDateTime": "2025-08-20T15:03:05.000+0000",
+              "Location": null,
+              "Description": null,
+              "WhoId": null,
+              "Who": null,
+              "WhatId": "006Pq00000Qb93lIAB",
+              "What": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/Opportunity/006Pq00000Qb93lIAB"
+                },
+                "Name": "Spruce Mountain Inn, Inc"
+              },
+              "OwnerId": "0051M000009uR3LQAU",
+              "Owner": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+                },
+                "Name": "Christine Rosa"
+              },
+              "CreatedDate": "2025-08-20T13:03:33.000+0000",
+              "LastModifiedDate": "2025-08-20T13:03:33.000+0000",
+              "Type": null,
+              "DurationInMinutes": 60,
+              "IsRecurrence": false,
+              "IsAllDayEvent": false
+            },
+            {
+              "attributes": {
+                "type": "Event",
+                "url": "/services/data/v64.0/sobjects/Event/00UPq00000RcU7CMAV"
+              },
+              "Id": "00UPq00000RcU7CMAV",
+              "Subject": "f/u on opp. close eom",
+              "StartDateTime": "2025-08-16T01:00:00.000+0000",
+              "EndDateTime": "2025-08-16T02:00:00.000+0000",
+              "Location": null,
+              "Description": null,
+              "WhoId": "003Pq00000L0hKIIAZ",
+              "Who": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/Contact/003Pq00000L0hKIIAZ"
+                },
+                "Name": "Rowdy Doyon"
+              },
+              "WhatId": "006Pq00000Qb93lIAB",
+              "What": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/Opportunity/006Pq00000Qb93lIAB"
+                },
+                "Name": "Spruce Mountain Inn, Inc"
+              },
+              "OwnerId": "005Pq00000A6gejIAB",
+              "Owner": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/User/005Pq00000A6gejIAB"
+                },
+                "Name": "Tanya Karlovic"
+              },
+              "CreatedDate": "2025-08-16T00:32:11.000+0000",
+              "LastModifiedDate": "2025-08-27T18:03:19.000+0000",
+              "Type": null,
+              "DurationInMinutes": 60,
+              "IsRecurrence": false,
+              "IsAllDayEvent": false
+            },
+            {
+              "attributes": {
+                "type": "Event",
+                "url": "/services/data/v64.0/sobjects/Event/00UPq00000MdCHaMAN"
+              },
+              "Id": "00UPq00000MdCHaMAN",
+              "Subject": "Reached out to Rowdy to get update of when they may be closing. Waiting for reply",
+              "StartDateTime": "2025-04-24T15:00:00.000+0000",
+              "EndDateTime": "2025-04-24T16:00:00.000+0000",
+              "Location": null,
+              "Description": null,
+              "WhoId": null,
+              "Who": null,
+              "WhatId": "006Pq00000Qb93lIAB",
+              "What": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/Opportunity/006Pq00000Qb93lIAB"
+                },
+                "Name": "Spruce Mountain Inn, Inc"
+              },
+              "OwnerId": "0051M000009uR3LQAU",
+              "Owner": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+                },
+                "Name": "Christine Rosa"
+              },
+              "CreatedDate": "2025-04-24T14:54:04.000+0000",
+              "LastModifiedDate": "2025-04-24T14:54:04.000+0000",
+              "Type": null,
+              "DurationInMinutes": 60,
+              "IsRecurrence": false,
+              "IsAllDayEvent": false
+            }
+          ],
+          "notes": [
+            {
+              "attributes": {
+                "type": "Note",
+                "url": "/services/data/v64.0/sobjects/Note/002Pq00000xdPpOIAU"
+              },
+              "Id": "002Pq00000xdPpOIAU",
+              "Title": "Confirmed Number portability",
+              "Body": "802-454-8353\r\n802-454-8008\r\n802-454-8009\r\n802-454-8453\r\n802-454-1505\r\n802-454-8011\r\n802-454-1506\r\n802-454-1008\r\n802-454-7336",
+              "CreatedDate": "2025-09-04T21:50:36.000+0000",
+              "LastModifiedDate": "2025-09-04T21:50:36.000+0000",
+              "CreatedBy": {
+                "attributes": {
+                  "type": "User",
+                  "url": "/services/data/v64.0/sobjects/User/005Pq000008npw1IAA"
+                },
+                "Name": "Brenda Olmos"
+              },
+              "LastModifiedBy": {
+                "attributes": {
+                  "type": "User",
+                  "url": "/services/data/v64.0/sobjects/User/005Pq000008npw1IAA"
+                },
+                "Name": "Brenda Olmos"
+              },
+              "IsPrivate": false
+            },
+            {
+              "attributes": {
+                "type": "Note",
+                "url": "/services/data/v64.0/sobjects/Note/002Pq00000xdHtVIAU"
+              },
+              "Id": "002Pq00000xdHtVIAU",
+              "Title": "Sales Write Up",
+              "Body": "Submitting thru SDC as this was prior to Airslate launch date.",
+              "CreatedDate": "2025-09-04T21:35:25.000+0000",
+              "LastModifiedDate": "2025-09-04T21:35:25.000+0000",
+              "CreatedBy": {
+                "attributes": {
+                  "type": "User",
+                  "url": "/services/data/v64.0/sobjects/User/005Pq000008npw1IAA"
+                },
+                "Name": "Brenda Olmos"
+              },
+              "LastModifiedBy": {
+                "attributes": {
+                  "type": "User",
+                  "url": "/services/data/v64.0/sobjects/User/005Pq000008npw1IAA"
+                },
+                "Name": "Brenda Olmos"
+              },
+              "IsPrivate": false
+            },
+            {
+              "attributes": {
+                "type": "Note",
+                "url": "/services/data/v64.0/sobjects/Note/002Pq00000xcQh3IAE"
+              },
+              "Id": "002Pq00000xcQh3IAE",
+              "Title": "Requested COB from Lise - waiting for her to send.",
+              "Body": "Requested COB from Lise - waiting for her to send.",
+              "CreatedDate": "2025-09-04T15:50:41.000+0000",
+              "LastModifiedDate": "2025-09-04T15:50:41.000+0000",
+              "CreatedBy": {
+                "attributes": {
+                  "type": "User",
+                  "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+                },
+                "Name": "Christine Rosa"
+              },
+              "LastModifiedBy": {
+                "attributes": {
+                  "type": "User",
+                  "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+                },
+                "Name": "Christine Rosa"
+              },
+              "IsPrivate": false
+            },
+            {
+              "attributes": {
+                "type": "Note",
+                "url": "/services/data/v64.0/sobjects/Note/002Pq00000xcEHwIAM"
+              },
+              "Id": "002Pq00000xcEHwIAM",
+              "Title": "Submitting thru SDC as this was prior to Airslate launch date.",
+              "Body": "Submitting thru SDC as this was prior to Airslate launch date.",
+              "CreatedDate": "2025-09-04T15:43:06.000+0000",
+              "LastModifiedDate": "2025-09-04T15:43:06.000+0000",
+              "CreatedBy": {
+                "attributes": {
+                  "type": "User",
+                  "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+                },
+                "Name": "Christine Rosa"
+              },
+              "LastModifiedBy": {
+                "attributes": {
+                  "type": "User",
+                  "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+                },
+                "Name": "Christine Rosa"
+              },
+              "IsPrivate": false
+            },
+            {
+              "attributes": {
+                "type": "Note",
+                "url": "/services/data/v64.0/sobjects/Note/002Pq00000xXBNhIAO"
+              },
+              "Id": "002Pq00000xXBNhIAO",
+              "Title": "Reached out to Lise to see if she can sign Docusign today for BOF and LOA",
+              "Body": "Reached out to Lise to see if she can sign Docusign today for BOF and LOA",
+              "CreatedDate": "2025-09-02T21:32:28.000+0000",
+              "LastModifiedDate": "2025-09-02T21:32:28.000+0000",
+              "CreatedBy": {
+                "attributes": {
+                  "type": "User",
+                  "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+                },
+                "Name": "Christine Rosa"
+              },
+              "LastModifiedBy": {
+                "attributes": {
+                  "type": "User",
+                  "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+                },
+                "Name": "Christine Rosa"
+              },
+              "IsPrivate": false
+            }
+          ],
+          "emails": [],
+          "quotes": []
+        },
+        "account": {
+          "cases": [
+            {
+              "attributes": {
+                "type": "Case",
+                "url": "/services/data/v64.0/sobjects/Case/500Pq00000hR7BCIA0"
+              },
+              "Id": "500Pq00000hR7BCIA0",
+              "CaseNumber": "00820904",
+              "Subject": "(PON): BWC0005695238",
+              "Status": "FOC",
+              "Priority": "Normal",
+              "Type": "Local",
+              "Reason": null,
+              "Description": "Please process port request for the date of 10/15/2025], for the [9] number(s)below. LOA attached to notes.\r\n8024548353\r\n8024548008\r\n8024548009\r\n8024548453\r\n8024541505\r\n8024548011\r\n8024541506\r\n8024541008\r\n8024547336\r\n\r\nE911 Address:\r\n155 Towne Ave\r\nPlainfield, VT\r\n05667\r\n\r\nCNAM: Spruce Mtn Inn\r\n\r\nBandwidth PIN: BizO5667",
+              "CreatedDate": "2025-09-12T16:33:12.000+0000",
+              "LastModifiedDate": "2025-09-17T12:57:28.000+0000",
+              "ClosedDate": null,
+              "OwnerId": "0058Y00000AxjBhQAJ",
+              "Owner": {
+                "attributes": {
+                  "type": "Name",
+                  "url": "/services/data/v64.0/sobjects/User/0058Y00000AxjBhQAJ"
+                },
+                "Name": "Todd Wieger"
+              },
+              "ContactId": null,
+              "Contact": null,
+              "ParentId": null,
+              "Parent": null,
+              "IsClosed": false,
+              "IsEscalated": false,
+              "Origin": "Phone",
+              "SuppliedEmail": null,
+              "SuppliedPhone": null
+            }
+          ],
+          "contracts": [],
+          "related_opportunities": []
+        }
+      },
+      "indirect_children": {},
+      "cross_references": {
+        "feed_items": [
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001JltSJKAZ"
+            },
+            "Id": "0D5Pq00001JltSJKAZ",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-09-04T22:12:52.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/005Pq0000099vzaIAA"
+              },
+              "Name": "Jenn Porter"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001JlLLDKA3"
+            },
+            "Id": "0D5Pq00001JlLLDKA3",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-09-04T21:55:53.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/005Pq000008npw1IAA"
+              },
+              "Name": "Brenda Olmos"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001Jll89KAB"
+            },
+            "Id": "0D5Pq00001Jll89KAB",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-09-04T21:40:00.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M00000A7g9PQAR"
+              },
+              "Name": "Business Systems API"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001Jll88KAB"
+            },
+            "Id": "0D5Pq00001Jll88KAB",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-09-04T21:40:00.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M00000A7g9PQAR"
+              },
+              "Name": "Business Systems API"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001JlAZJKA3"
+            },
+            "Id": "0D5Pq00001JlAZJKA3",
+            "Type": "ApprovalPost",
+            "CreatedDate": "2025-09-04T21:31:01.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/005Pq000008npw1IAA"
+              },
+              "Name": "Brenda Olmos"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001JlAZKKA3"
+            },
+            "Id": "0D5Pq00001JlAZKKA3",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-09-04T21:31:00.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/005Pq000008npw1IAA"
+              },
+              "Name": "Brenda Olmos"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001JlBa0KAF"
+            },
+            "Id": "0D5Pq00001JlBa0KAF",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-09-04T21:30:51.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/005Pq000008npw1IAA"
+              },
+              "Name": "Brenda Olmos"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001JlKq1KAF"
+            },
+            "Id": "0D5Pq00001JlKq1KAF",
+            "Type": "ApprovalPost",
+            "CreatedDate": "2025-09-04T21:19:43.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+              },
+              "Name": "Christine Rosa"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001JlKq2KAF"
+            },
+            "Id": "0D5Pq00001JlKq2KAF",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-09-04T21:19:41.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+              },
+              "Name": "Christine Rosa"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001JJ76TKAT"
+            },
+            "Id": "0D5Pq00001JJ76TKAT",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-08-29T21:42:08.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+              },
+              "Name": "Christine Rosa"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001JJ76SKAT"
+            },
+            "Id": "0D5Pq00001JJ76SKAT",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-08-29T21:42:08.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+              },
+              "Name": "Christine Rosa"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001JDd7DKAT"
+            },
+            "Id": "0D5Pq00001JDd7DKAT",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-08-28T19:35:38.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+              },
+              "Name": "Christine Rosa"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001J3ZtuKAF"
+            },
+            "Id": "0D5Pq00001J3ZtuKAF",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-08-26T22:50:48.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+              },
+              "Name": "Christine Rosa"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001IBYJEKA5"
+            },
+            "Id": "0D5Pq00001IBYJEKA5",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-08-15T20:44:08.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M000009uR3LQAU"
+              },
+              "Name": "Christine Rosa"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq00001I5OX6KAN"
+            },
+            "Id": "0D5Pq00001I5OX6KAN",
+            "Type": "TrackedChange",
+            "CreatedDate": "2025-08-14T18:17:27.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M00000A7g9PQAR"
+              },
+              "Name": "Business Systems API"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq000016sKHDKA2"
+            },
+            "Id": "0D5Pq000016sKHDKA2",
+            "Type": "ApprovalPost",
+            "CreatedDate": "2025-03-21T20:34:33.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M000007uLI8QAM"
+              },
+              "Name": "Kathleen Annitto"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          },
+          {
+            "attributes": {
+              "type": "OpportunityFeed",
+              "url": "/services/data/v64.0/sobjects/OpportunityFeed/0D5Pq000016s7vuKAA"
+            },
+            "Id": "0D5Pq000016s7vuKAA",
+            "Type": "CreateRecordEvent",
+            "CreatedDate": "2025-03-21T20:26:02.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M00000A7g9PQAR"
+              },
+              "Name": "Business Systems API"
+            },
+            "Body": null,
+            "Title": null,
+            "LinkUrl": null,
+            "CommentCount": 0,
+            "LikeCount": 0
+          }
+        ],
+        "attachments": [
+          {
+            "attributes": {
+              "type": "Attachment",
+              "url": "/services/data/v64.0/sobjects/Attachment/00PPq00000YYEg7MAH"
+            },
+            "Id": "00PPq00000YYEg7MAH",
+            "Name": "223112.pdf",
+            "ContentType": null,
+            "BodyLength": 78590,
+            "CreatedDate": "2025-09-04T21:41:58.000+0000",
+            "CreatedBy": {
+              "attributes": {
+                "type": "Name",
+                "url": "/services/data/v64.0/sobjects/User/0051M00000A7g9PQAR"
+              },
+              "Name": "Business Systems API"
+            },
+            "Description": "manual signature by Finance Manager Lise Couture signed at 2025-08-26 12:00:00 UTC",
+            "IsPrivate": false
+          }
+        ]
+      }
+    },
+    "analysis": {
+      "activity_patterns": {
+        "total_activities": 5,
+        "tasks_count": 2,
+        "events_count": 3,
+        "activity_types": {
+          "SA Engagement": 2,
+          "null": 3
+        },
+        "owners": {
+          "Dan Long": 2,
+          "Christine Rosa": 2,
+          "Tanya Karlovic": 1
+        },
+        "monthly_activity": {
+          "2025-08": 3,
+          "2025-03": 1,
+          "2025-04": 1
+        },
+        "recent_activity": [
+          {
+            "type": "event",
+            "subject": "Reached out to Dave to see if opp still on table, and if so when will it expect to close",
+            "date": "2025-08-20",
+            "owner": "Christine Rosa"
+          },
+          {
+            "type": "event",
+            "subject": "f/u on opp. close eom",
+            "date": "2025-08-16",
+            "owner": "Tanya Karlovic"
+          },
+          {
+            "type": "task",
+            "subject": "Notes",
+            "date": "2025-08-15",
+            "owner": "Dan Long"
+          },
+          {
+            "type": "event",
+            "subject": "Reached out to Rowdy to get update of when they may be closing. Waiting for reply",
+            "date": "2025-04-24",
+            "owner": "Christine Rosa"
+          },
+          {
+            "type": "task",
+            "subject": "Notes",
+            "date": "2025-03-24",
+            "owner": "Dan Long"
+          }
+        ]
+      },
+      "object_summary": {
+        "tasks": 2,
+        "events": 3,
+        "notes": 5,
+        "cases": 1,
+        "feed_items": 17,
+        "attachments": 1
+      },
+      "total_objects": 29
+    },
+    "metadata": {
+      "extraction_stats": {
+        "start_time": "2025-09-24T15:43:13.234167",
+        "queries_executed": 10,
+        "api_requests": 0,
+        "errors": [],
+        "duration_seconds": 38.495364
+      },
+      "relationship_stats": {
+        "total_objects": 29,
+        "total_relationships": 0,
+        "object_counts": {
+          "tasks": 2,
+          "events": 3,
+          "notes": 5,
+          "cases": 1,
+          "feed_items": 17,
+          "attachments": 1
+        }
+      }
+    }
+  },
+  "documents": {
+    "stats": {
+      "attempted": 6,
+      "successful": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    "opportunity_results": {
+      "stats": {
+        "attempted": 6,
+        "successful": 6,
+        "failed": 0,
+        "skipped": 0
+      },
+      "successful": [
+        "Spruce Montain BOF signed",
+        "Spruce - 513760610_20250904125333 - COB #1",
+        "Spruce - 513760726_20250904125233 - COB #2",
+        "Spruce Mountain Inn - LOA Signed",
+        "Spruce Mountain Inn - Quote Signed",
+        "IRR Spruce Mountain"
+      ],
+      "failed": [],
+      "total_documents": 6
+    },
+    "account_results": {
+      "attempted": 0,
+      "successful": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "inventory": {
+      "total_documents": 6,
+      "by_type": {
+        "contracts": {
+          "count": 2,
+          "total_size": 531676,
+          "files": [
+            {
+              "title": "Spruce Montain BOF signed",
+              "size": 321767,
+              "created_date": "2025-09-04"
+            },
+            {
+              "title": "Spruce Mountain Inn - LOA Signed",
+              "size": 209909,
+              "created_date": "2025-09-04"
+            }
+          ]
+        },
+        "pdfs": {
+          "count": 2,
+          "total_size": 241458,
+          "files": [
+            {
+              "title": "Spruce - 513760610_20250904125333 - COB #1",
+              "size": 121925,
+              "created_date": "2025-09-04"
+            },
+            {
+              "title": "Spruce - 513760726_20250904125233 - COB #2",
+              "size": 119533,
+              "created_date": "2025-09-04"
+            }
+          ]
+        },
+        "quotes": {
+          "count": 1,
+          "total_size": 78590,
+          "files": [
+            {
+              "title": "Spruce Mountain Inn - Quote Signed",
+              "size": 78590,
+              "created_date": "2025-08-28"
+            }
+          ]
+        },
+        "images": {
+          "count": 1,
+          "total_size": 337872,
+          "files": [
+            {
+              "title": "IRR Spruce Mountain",
+              "size": 337872,
+              "created_date": "2025-03-21"
+            }
+          ]
+        }
+      },
+      "by_size": {
+        "small": 6,
+        "medium": 0,
+        "large": 0
+      },
+      "by_date": {
+        "2025-09-04": 4,
+        "2025-08-28": 1,
+        "2025-03-21": 1
+      },
+      "details": [
+        {
+          "title": "Spruce Montain BOF signed",
+          "extension": "pdf",
+          "folder": "contracts",
+          "size": 321767,
+          "size_formatted": "314.2 KB",
+          "created_date": "2025-09-04",
+          "creator": "Christine Rosa"
+        },
+        {
+          "title": "Spruce - 513760610_20250904125333 - COB #1",
+          "extension": "pdf",
+          "folder": "pdfs",
+          "size": 121925,
+          "size_formatted": "119.1 KB",
+          "created_date": "2025-09-04",
+          "creator": "Christine Rosa"
+        },
+        {
+          "title": "Spruce - 513760726_20250904125233 - COB #2",
+          "extension": "pdf",
+          "folder": "pdfs",
+          "size": 119533,
+          "size_formatted": "116.7 KB",
+          "created_date": "2025-09-04",
+          "creator": "Christine Rosa"
+        },
+        {
+          "title": "Spruce Mountain Inn - LOA Signed",
+          "extension": "pdf",
+          "folder": "contracts",
+          "size": 209909,
+          "size_formatted": "205.0 KB",
+          "created_date": "2025-09-04",
+          "creator": "Christine Rosa"
+        },
+        {
+          "title": "Spruce Mountain Inn - Quote Signed",
+          "extension": "pdf",
+          "folder": "quotes",
+          "size": 78590,
+          "size_formatted": "76.7 KB",
+          "created_date": "2025-08-28",
+          "creator": "Christine Rosa"
+        },
+        {
+          "title": "IRR Spruce Mountain",
+          "extension": "png",
+          "folder": "images",
+          "size": 337872,
+          "size_formatted": "330.0 KB",
+          "created_date": "2025-03-21",
+          "creator": "Kathleen Annitto"
+        }
+      ]
+    },
+    "attachments": [
+      {
+        "attributes": {
+          "type": "Attachment",
+          "url": "/services/data/v64.0/sobjects/Attachment/00PPq00000YYEg7MAH"
+        },
+        "Id": "00PPq00000YYEg7MAH",
+        "Name": "223112.pdf",
+        "ContentType": null,
+        "BodyLength": 78590,
+        "CreatedDate": "2025-09-04T21:41:58.000+0000",
+        "CreatedBy": {
+          "attributes": {
+            "type": "Name",
+            "url": "/services/data/v64.0/sobjects/User/0051M00000A7g9PQAR"
+          },
+          "Name": "Business Systems API"
+        },
+        "Description": "manual signature by Finance Manager Lise Couture signed at 2025-08-26 12:00:00 UTC",
+        "IsPrivate": false
+      }
+    ],
+    "extraction_stats": {
+      "start_time": "2025-09-24T15:43:06.518019",
+      "queries_executed": 3,
+      "api_requests": 6,
+      "errors": [],
+      "duration_seconds": 64.206685
+    }
+  },
+  "transcripts": {
+    "transcripts": [],
+    "voice_calls": [],
+    "video_calls": [],
+    "messaging_sessions": [],
+    "insights": [],
+    "stats": {
+      "voice_calls_found": 0,
+      "video_calls_found": 0,
+      "messaging_sessions_found": 0,
+      "transcripts_extracted": 0,
+      "transcripts_cleaned": 0,
+      "teams_transcripts_found": 0,
+      "errors": []
+    },
+    "extraction_stats": {
+      "start_time": "2025-09-24T15:43:08.776989",
+      "queries_executed": 9,
+      "api_requests": 0,
+      "errors": [
+        "Query failed for VoiceCall: \n            FROM Task \n                 ^\nERROR at Row:7:Column:18\nEntity 'Task' is not supported for semi join inner selects"
+      ],
+      "duration_seconds": 72.919058
+    }
+  },
+  "output_directory": "data/006Pq00000Qb93lIAB",
+  "extraction_metadata": {
+    "pipeline_start_time": "2025-09-24T15:43:15.456741",
+    "pipeline_end_time": "2025-09-24T15:44:21.696127",
+    "opportunity_id": "006Pq00000Qb93lIAB",
+    "account_id": "001Pq00000W3XQ7IAN",
+    "org_username": "jcamarate@broadvoice.com"
+  },
+  "extraction_stats": {
+    "opportunity": {
+      "start_time": "2025-09-24T15:43:02.086562",
+      "queries_executed": 5,
+      "api_requests": 0,
+      "errors": [],
+      "duration_seconds": 23.489963
+    },
+    "contacts": {
+      "start_time": "2025-09-24T15:43:04.293405",
+      "queries_executed": 4,
+      "api_requests": 0,
+      "errors": [],
+      "duration_seconds": 29.170083
+    },
+    "relationships": {
+      "start_time": "2025-09-24T15:43:13.234167",
+      "queries_executed": 10,
+      "api_requests": 0,
+      "errors": [],
+      "duration_seconds": 38.495364
+    },
+    "documents": {
+      "start_time": "2025-09-24T15:43:06.518019",
+      "queries_executed": 3,
+      "api_requests": 6,
+      "errors": [],
+      "duration_seconds": 64.206685
+    },
+    "transcripts": {
+      "start_time": "2025-09-24T15:43:08.776989",
+      "queries_executed": 9,
+      "api_requests": 0,
+      "errors": [
+        "Query failed for VoiceCall: \n            FROM Task \n                 ^\nERROR at Row:7:Column:18\nEntity 'Task' is not supported for semi join inner selects"
+      ],
+      "duration_seconds": 72.919058
+    }
+  }
+}

@@ -119,7 +119,7 @@ class SalesforceBase:
                 print(f"❌ {error_msg}")
             return None
     
-    def run_api_request(self, endpoint: str, method: str = "GET", data: Optional[Dict] = None) -> Optional[bytes]:
+    def run_api_request(self, endpoint: str, method: str = "GET", data: Optional[Dict] = None, output_file: Optional[str] = None) -> Optional[bytes]:
         """
         Execute REST API request via SF CLI
         
@@ -127,9 +127,10 @@ class SalesforceBase:
             endpoint: API endpoint path (e.g., "/services/data/v64.0/...")
             method: HTTP method (GET, POST, PUT, DELETE)
             data: Request body data for POST/PUT requests
+            output_file: Optional file path to stream binary response directly to file
             
         Returns:
-            Response bytes or None if failed
+            Response bytes or None if failed (None when output_file is specified)
         """
         try:
             # Remove leading slash if present since sf api request rest expects the endpoint without it
@@ -145,11 +146,19 @@ class SalesforceBase:
             if data:
                 cmd.extend(["--body", json.dumps(data)])
             
+            # Use --stream-to-file for binary downloads
+            if output_file:
+                cmd.extend(["--stream-to-file", output_file])
+            
             result = subprocess.run(cmd, capture_output=True, check=False)
             self.extraction_stats["api_requests"] += 1
             
             if result.returncode == 0:
-                return result.stdout
+                if output_file:
+                    # For file streaming, we don't return bytes but indicate success
+                    return b""  # Empty bytes to indicate success
+                else:
+                    return result.stdout
             else:
                 error_msg = f"API request failed: {result.stderr.decode() if result.stderr else 'Unknown error'}"
                 self.extraction_stats["errors"].append(error_msg)

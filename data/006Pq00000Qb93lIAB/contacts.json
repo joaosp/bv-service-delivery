@@ -1,0 +1,241 @@
+{
+  "contacts": [
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gYN6sIAG"
+      },
+      "Id": "003Pq00000gYN6sIAG",
+      "FirstName": "Lise",
+      "LastName": "Couture",
+      "Name": "Lise Couture",
+      "Email": "lcouture@sprucemountainiin.com",
+      "Phone": "8022796896",
+      "MobilePhone": null,
+      "Title": null,
+      "Department": null,
+      "ReportsToId": null,
+      "ReportsTo": null,
+      "MailingStreet": "155 Towne Ave,",
+      "MailingCity": "Plainfield",
+      "MailingState": "Vermont",
+      "MailingPostalCode": "05667",
+      "MailingCountry": "US",
+      "Description": null,
+      "LeadSource": "Other",
+      "CreatedDate": "2025-09-04T21:48:07.000+0000",
+      "LastModifiedDate": "2025-09-19T19:12:02.000+0000",
+      "LastActivityDate": null,
+      "DoNotCall": false,
+      "HasOptedOutOfEmail": false,
+      "EmailBouncedReason": null
+    },
+    {
+      "attributes": {
+        "type": "Contact",
+        "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gY86FIAS"
+      },
+      "Id": "003Pq00000gY86FIAS",
+      "FirstName": "Ian",
+      "LastName": "Covey",
+      "Name": "Ian Covey",
+      "Email": "adminassistant@sprucemountaininn.com",
+      "Phone": "802-498-5624",
+      "MobilePhone": null,
+      "Title": null,
+      "Department": null,
+      "ReportsToId": null,
+      "ReportsTo": null,
+      "MailingStreet": "155 Towne Ave,",
+      "MailingCity": "Plainfield",
+      "MailingState": "Vermont",
+      "MailingPostalCode": "05667",
+      "MailingCountry": "US",
+      "Description": null,
+      "LeadSource": null,
+      "CreatedDate": "2025-09-04T21:17:44.000+0000",
+      "LastModifiedDate": "2025-09-19T19:12:10.000+0000",
+      "LastActivityDate": "2025-09-04",
+      "DoNotCall": false,
+      "HasOptedOutOfEmail": false,
+      "EmailBouncedReason": null
+    }
+  ],
+  "contact_roles": [
+    {
+      "attributes": {
+        "type": "OpportunityContactRole",
+        "url": "/services/data/v64.0/sobjects/OpportunityContactRole/00KPq00000OyzE5MAJ"
+      },
+      "Id": "00KPq00000OyzE5MAJ",
+      "ContactId": "003Pq00000gY86FIAS",
+      "Contact": {
+        "attributes": {
+          "type": "Contact",
+          "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gY86FIAS"
+        },
+        "FirstName": "Ian",
+        "LastName": "Covey",
+        "Name": "Ian Covey",
+        "Email": "adminassistant@sprucemountaininn.com",
+        "Phone": "802-498-5624",
+        "Title": null,
+        "Department": null
+      },
+      "Role": "Install Contact",
+      "IsPrimary": false,
+      "CreatedDate": "2025-09-04T21:17:44.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "OpportunityContactRole",
+        "url": "/services/data/v64.0/sobjects/OpportunityContactRole/00KPq00000Oz2zxMAB"
+      },
+      "Id": "00KPq00000Oz2zxMAB",
+      "ContactId": "003Pq00000gYN6sIAG",
+      "Contact": {
+        "attributes": {
+          "type": "Contact",
+          "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gYN6sIAG"
+        },
+        "FirstName": "Lise",
+        "LastName": "Couture",
+        "Name": "Lise Couture",
+        "Email": "lcouture@sprucemountainiin.com",
+        "Phone": "8022796896",
+        "Title": null,
+        "Department": null
+      },
+      "Role": "Admin",
+      "IsPrimary": false,
+      "CreatedDate": "2025-09-04T21:48:07.000+0000"
+    }
+  ],
+  "activities": {
+    "003Pq00000gY86FIAS": [
+      {
+        "type": "task",
+        "data": {
+          "attributes": {
+            "type": "Task",
+            "url": "/services/data/v64.0/sobjects/Task/00TPq00000mat4EMAQ"
+          },
+          "Id": "00TPq00000mat4EMAQ",
+          "Subject": "Email: Broadvoice Order - Spruce Mountain Inn, Inc - 9445-354",
+          "Status": "Completed",
+          "Priority": "Normal",
+          "ActivityDate": "2025-09-04",
+          "Description": "To: toddw@broadvoice.com; adminassistant@sprucemountaininn.com; rowdy@integritycomm.com; christiner@broadvoice.com; davidl@broadvoice.com\nCC:\nBCC:\nAttachment: Blank Workbook 2023(5).xlsx\n\nSubject: Broadvoice Order - Spruce Mountain Inn, Inc - 9445-354\nBody:\nHello Spruce Mountain Inn, Inc,\nCongratulations on becoming a Broadvoice customer! The contract information for Spruce Mountain Inn, Inc has been completed and we are ready to move your order to our Implementation Team.\nYour dedicated Service Delivery team will include Todd Wieger and David Lauritzen. Todd Wieger will be reaching out to you to schedule a kickoff. During the call we will be reviewing and mapping out the following items:Network assessmentSolution design and configuration (How calls will be handled from the moment they enter the phone system)Extension/User values* (see attached user list)Implementation timelinesImplementation expectations and processWe highly recommend your IT contact and any phone system decision-makers be part of this call.\nAttached is a spreadsheet we need to have filled out before the kickoff call. It gives the team all the necessary information to build the user accounts, including first name, last name, phone numbers, extension, email addresses, and more.\nGathering this information early on makes for a smooth and quick implementation.\nTodd Wieger and  David Lauritzen are both copied on this email. If you have any questions before they reach out, please email them directly.\nThank you!\nThe Broadvoice Team\n\n*Important* Please note extensions that are not available for use:\n211—Community services and information311—Municipal government services411—Directory assistance511—Traffic information611—Phone company repair711—TDD and Relay for the Deaf811—Underground public utility location911—Emergency services (police, fire, EMS)988— National Suicide Prevention Lifeline (new)",
+          "WhoId": "003Pq00000gY86FIAS",
+          "Who": {
+            "attributes": {
+              "type": "Name",
+              "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gY86FIAS"
+            },
+            "Name": "Ian Covey"
+          },
+          "WhatId": "a0xPq000007QRBpIAO",
+          "What": {
+            "attributes": {
+              "type": "Name",
+              "url": "/services/data/v64.0/sobjects/Project__c/a0xPq000007QRBpIAO"
+            },
+            "Name": "33141 | Spruce Mountain Inn, Inc"
+          },
+          "OwnerId": "00516000005Cn43AAC",
+          "Owner": {
+            "attributes": {
+              "type": "Name",
+              "url": "/services/data/v64.0/sobjects/User/00516000005Cn43AAC"
+            },
+            "Name": "Liz Guzzo"
+          },
+          "CreatedDate": "2025-09-04T22:25:51.000+0000",
+          "Type": null,
+          "CallType": null,
+          "CallDurationInSeconds": null
+        }
+      }
+    ]
+  },
+  "hierarchy": {
+    "managers": [],
+    "individual_contributors": [
+      {
+        "attributes": {
+          "type": "Contact",
+          "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gYN6sIAG"
+        },
+        "Id": "003Pq00000gYN6sIAG",
+        "FirstName": "Lise",
+        "LastName": "Couture",
+        "Name": "Lise Couture",
+        "Email": "lcouture@sprucemountainiin.com",
+        "Phone": "8022796896",
+        "MobilePhone": null,
+        "Title": null,
+        "Department": null,
+        "ReportsToId": null,
+        "ReportsTo": null,
+        "MailingStreet": "155 Towne Ave,",
+        "MailingCity": "Plainfield",
+        "MailingState": "Vermont",
+        "MailingPostalCode": "05667",
+        "MailingCountry": "US",
+        "Description": null,
+        "LeadSource": "Other",
+        "CreatedDate": "2025-09-04T21:48:07.000+0000",
+        "LastModifiedDate": "2025-09-19T19:12:02.000+0000",
+        "LastActivityDate": null,
+        "DoNotCall": false,
+        "HasOptedOutOfEmail": false,
+        "EmailBouncedReason": null
+      },
+      {
+        "attributes": {
+          "type": "Contact",
+          "url": "/services/data/v64.0/sobjects/Contact/003Pq00000gY86FIAS"
+        },
+        "Id": "003Pq00000gY86FIAS",
+        "FirstName": "Ian",
+        "LastName": "Covey",
+        "Name": "Ian Covey",
+        "Email": "adminassistant@sprucemountaininn.com",
+        "Phone": "802-498-5624",
+        "MobilePhone": null,
+        "Title": null,
+        "Department": null,
+        "ReportsToId": null,
+        "ReportsTo": null,
+        "MailingStreet": "155 Towne Ave,",
+        "MailingCity": "Plainfield",
+        "MailingState": "Vermont",
+        "MailingPostalCode": "05667",
+        "MailingCountry": "US",
+        "Description": null,
+        "LeadSource": null,
+        "CreatedDate": "2025-09-04T21:17:44.000+0000",
+        "LastModifiedDate": "2025-09-19T19:12:10.000+0000",
+        "LastActivityDate": "2025-09-04",
+        "DoNotCall": false,
+        "HasOptedOutOfEmail": false,
+        "EmailBouncedReason": null
+      }
+    ],
+    "unknown": []
+  },
+  "analysis": {
+    "primary_contacts": [],
+    "decision_makers": [],
+    "technical_contacts": [],
+    "total_contacts": 2,
+    "contacts_with_roles": 2
+  },
+  "extraction_stats": {
+    "start_time": "2025-09-24T15:43:04.293405",
+    "queries_executed": 4,
+    "api_requests": 0,
+    "errors": [],
+    "duration_seconds": 29.170083
+  }
+}

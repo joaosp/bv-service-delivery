@@ -1,0 +1,186 @@
+{
+  "stats": {
+    "attempted": 6,
+    "successful": 6,
+    "failed": 0,
+    "skipped": 0
+  },
+  "opportunity_results": {
+    "stats": {
+      "attempted": 6,
+      "successful": 6,
+      "failed": 0,
+      "skipped": 0
+    },
+    "successful": [
+      "Spruce Montain BOF signed",
+      "Spruce - 513760610_20250904125333 - COB #1",
+      "Spruce - 513760726_20250904125233 - COB #2",
+      "Spruce Mountain Inn - LOA Signed",
+      "Spruce Mountain Inn - Quote Signed",
+      "IRR Spruce Mountain"
+    ],
+    "failed": [],
+    "total_documents": 6
+  },
+  "account_results": {
+    "attempted": 0,
+    "successful": 0,
+    "failed": 0,
+    "skipped": 0
+  },
+  "inventory": {
+    "total_documents": 6,
+    "by_type": {
+      "contracts": {
+        "count": 2,
+        "total_size": 531676,
+        "files": [
+          {
+            "title": "Spruce Montain BOF signed",
+            "size": 321767,
+            "created_date": "2025-09-04"
+          },
+          {
+            "title": "Spruce Mountain Inn - LOA Signed",
+            "size": 209909,
+            "created_date": "2025-09-04"
+          }
+        ]
+      },
+      "pdfs": {
+        "count": 2,
+        "total_size": 241458,
+        "files": [
+          {
+            "title": "Spruce - 513760610_20250904125333 - COB #1",
+            "size": 121925,
+            "created_date": "2025-09-04"
+          },
+          {
+            "title": "Spruce - 513760726_20250904125233 - COB #2",
+            "size": 119533,
+            "created_date": "2025-09-04"
+          }
+        ]
+      },
+      "quotes": {
+        "count": 1,
+        "total_size": 78590,
+        "files": [
+          {
+            "title": "Spruce Mountain Inn - Quote Signed",
+            "size": 78590,
+            "created_date": "2025-08-28"
+          }
+        ]
+      },
+      "images": {
+        "count": 1,
+        "total_size": 337872,
+        "files": [
+          {
+            "title": "IRR Spruce Mountain",
+            "size": 337872,
+            "created_date": "2025-03-21"
+          }
+        ]
+      }
+    },
+    "by_size": {
+      "small": 6,
+      "medium": 0,
+      "large": 0
+    },
+    "by_date": {
+      "2025-09-04": 4,
+      "2025-08-28": 1,
+      "2025-03-21": 1
+    },
+    "details": [
+      {
+        "title": "Spruce Montain BOF signed",
+        "extension": "pdf",
+        "folder": "contracts",
+        "size": 321767,
+        "size_formatted": "314.2 KB",
+        "created_date": "2025-09-04",
+        "creator": "Christine Rosa"
+      },
+      {
+        "title": "Spruce - 513760610_20250904125333 - COB #1",
+        "extension": "pdf",
+        "folder": "pdfs",
+        "size": 121925,
+        "size_formatted": "119.1 KB",
+        "created_date": "2025-09-04",
+        "creator": "Christine Rosa"
+      },
+      {
+        "title": "Spruce - 513760726_20250904125233 - COB #2",
+        "extension": "pdf",
+        "folder": "pdfs",
+        "size": 119533,
+        "size_formatted": "116.7 KB",
+        "created_date": "2025-09-04",
+        "creator": "Christine Rosa"
+      },
+      {
+        "title": "Spruce Mountain Inn - LOA Signed",
+        "extension": "pdf",
+        "folder": "contracts",
+        "size": 209909,
+        "size_formatted": "205.0 KB",
+        "created_date": "2025-09-04",
+        "creator": "Christine Rosa"
+      },
+      {
+        "title": "Spruce Mountain Inn - Quote Signed",
+        "extension": "pdf",
+        "folder": "quotes",
+        "size": 78590,
+        "size_formatted": "76.7 KB",
+        "created_date": "2025-08-28",
+        "creator": "Christine Rosa"
+      },
+      {
+        "title": "IRR Spruce Mountain",
+        "extension": "png",
+        "folder": "images",
+        "size": 337872,
+        "size_formatted": "330.0 KB",
+        "created_date": "2025-03-21",
+        "creator": "Kathleen Annitto"
+      }
+    ]
+  },
+  "attachments": [
+    {
+      "attributes": {
+        "type": "Attachment",
+        "url": "/services/data/v64.0/sobjects/Attachment/00PPq00000YYEg7MAH"
+      },
+      "Id": "00PPq00000YYEg7MAH",
+      "Name": "223112.pdf",
+      "ContentType": null,
+      "BodyLength": 78590,
+      "CreatedDate": "2025-09-04T21:41:58.000+0000",
+      "CreatedBy": {
+        "attributes": {
+          "type": "Name",
+          "url": "/services/data/v64.0/sobjects/User/0051M00000A7g9PQAR"
+        },
+        "Name": "Business Systems API"
+      },
+      "Description": "manual signature by Finance Manager Lise Couture signed at 2025-08-26 12:00:00 UTC",
+      "IsPrivate": false
+    }
+  ],
+  "extraction_stats": {
+    "start_time": "2025-09-24T15:43:06.518019",
+    "queries_executed": 3,
+    "api_requests": 6,
+    "errors": [],
+    "duration_seconds": 64.206685
+  }
+}
