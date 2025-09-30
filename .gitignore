@@ -1,0 +1,62 @@
+# Credentials & Secrets
+creds.md
+*.key
+*.pem
+*.env
+.env
+secrets/
+credentials/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv
+
+# Data & Outputs
+data/
+provs/*.csv
+provs/*.html
+*.log
+logs/
+
+# System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+
+# Claude Code Local Settings
+.claude/settings.local.json
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Keep these files
+!broadvoice_attributes_requirements.csv
+!CLAUDE.md
+!README.md
+!requirements.txt

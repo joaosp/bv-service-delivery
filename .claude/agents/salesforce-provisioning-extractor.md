@@ -234,7 +234,7 @@ These pre-generated files provide:
 ### Phase 5: Output Generation
 
 #### 1. Provisioning CSV Format
-Create `provs/[customer_name]_provisioning.csv` with structure:
+Create `data/[OPPORTUNITY_ID]/provs/[OPPORTUNITY_ID]_provisioning.csv` with structure:
 ```csv
 Category;Attribute;Sub-Attribute;Required/Optional;Extracted Value;Source Timestamp;Status;Notes
 ```
@@ -250,7 +250,7 @@ Include all 80 attributes from the requirements template, marking:
 - **Notes**: Additional context or issues
 
 #### 2. Status Report (Markdown)
-Create `provs/[customer_name]_status.md` with:
+Create `data/[OPPORTUNITY_ID]/provs/[OPPORTUNITY_ID]_status.md` with:
 
 ```markdown
 # BroadVoice Provisioning Status: [Customer Name]

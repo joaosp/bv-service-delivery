@@ -153,40 +153,169 @@ class ReportGenerator:
         lines.append("```")
         return "\n".join(lines)
     
-    def generate_timeline(self, opportunity_data: Dict, extraction_time: datetime) -> str:
+    def generate_timeline(self, all_data: Dict, extraction_time: datetime) -> str:
         """
-        Generate timeline Gantt chart
+        Generate comprehensive timeline Gantt chart with all activities
         
         Args:
-            opportunity_data: Opportunity data
+            all_data: Complete extracted data dictionary
             extraction_time: Time of extraction
             
         Returns:
             Mermaid Gantt chart markup
         """
-        opp = opportunity_data.get("opportunity", {})
-        created_date = opp.get("CreatedDate", "")[:10]  # Just date part
-        close_date = opp.get("CloseDate", "")
+        activities = []
         extraction_date = extraction_time.strftime("%Y-%m-%d")
         
+        # Extract opportunity data
+        opportunity_data = all_data.get("opportunity", {})
+        opp = opportunity_data.get("opportunity", {})
+        
+        # Helper function to validate and add activity
+        def add_activity(date, activity_type, name, status="done"):
+            if date and date.strip() and activity_type and name:
+                activities.append({
+                    "date": date,
+                    "type": activity_type,
+                    "name": name,
+                    "status": status
+                })
+        
+        # Opportunity creation and close dates
+        created_date = opp.get("CreatedDate", "")[:10] if opp.get("CreatedDate") else None
+        close_date = opp.get("CloseDate", "") if opp.get("CloseDate") else None
+        
+        add_activity(created_date, "Lifecycle", "Opportunity Created")
+            
+        # Opportunity history (stage changes)
+        history = opportunity_data.get("history", [])
+        for hist in history[-5:]:  # Show last 5 stage changes
+            hist_date = hist.get("CreatedDate", "")[:10] if hist.get("CreatedDate") else None
+            stage = hist.get("StageName", "")
+            if hist_date and stage:
+                add_activity(hist_date, "Lifecycle", f"Stage: {stage[:20]}")
+        
+        # Contact creation dates
+        contacts_data = all_data.get("contacts", {})
+        contacts = contacts_data.get("contacts", [])
+        for contact in contacts:
+            contact_date = contact.get("CreatedDate", "")[:10] if contact.get("CreatedDate") else None
+            name = contact.get("Name", "Contact")
+            if contact_date and name:
+                add_activity(contact_date, "Team", f"Contact: {name[:15]}")
+        
+        # Tasks and Events
+        relationships_data = all_data.get("relationships", {})
+        hierarchy = relationships_data.get("hierarchy", {}).get("direct_children", {})
+        
+        # Tasks
+        tasks = hierarchy.get("opportunity", {}).get("tasks", [])
+        for task in tasks[:5]:  # Limit to 5 tasks
+            task_date = task.get("CreatedDate", "")[:10] if task.get("CreatedDate") else None
+            subject = task.get("Subject", "Task")[:20]
+            if task_date and subject:
+                add_activity(task_date, "Activities", f"Task: {subject}")
+        
+        # Events
+        events = hierarchy.get("opportunity", {}).get("events", [])
+        for event in events[:5]:  # Limit to 5 events
+            event_date = event.get("StartDateTime", "")[:10] if event.get("StartDateTime") else None
+            subject = event.get("Subject", "Event")[:20]
+            if event_date and subject:
+                add_activity(event_date, "Activities", f"Event: {subject}")
+        
+        # Notes
+        notes = hierarchy.get("opportunity", {}).get("notes", [])
+        for note in notes[:3]:  # Limit to 3 notes
+            note_date = note.get("CreatedDate", "")[:10] if note.get("CreatedDate") else None
+            title = note.get("Title", "Note")[:20]
+            if note_date and title:
+                add_activity(note_date, "Documentation", f"Note: {title}")
+        
+        # Documents
+        documents_data = all_data.get("documents", {})
+        inventory = documents_data.get("inventory", {})
+        details = inventory.get("details", [])
+        for doc in details[:5]:  # Limit to 5 documents
+            doc_date = doc.get("created_date", "")
+            title = doc.get("title", "Document")[:20]
+            if doc_date and title:
+                add_activity(doc_date, "Documentation", f"Doc: {title}")
+        
+        # Cases
+        cases = hierarchy.get("account", {}).get("cases", [])
+        for case in cases[:3]:  # Limit to 3 cases
+            case_date = case.get("CreatedDate", "")[:10] if case.get("CreatedDate") else None
+            case_num = case.get("CaseNumber", "Case")
+            if case_date and case_num:
+                add_activity(case_date, "Support", f"Case: {case_num}")
+        
+        # Filter out any invalid activities and sort by date
+        valid_activities = []
+        for activity in activities:
+            if (activity.get("date") and activity.get("type") and 
+                activity.get("name") and activity.get("status")):
+                valid_activities.append(activity)
+        
+        # Sort activities by date
+        try:
+            valid_activities.sort(key=lambda x: x["date"])
+        except (KeyError, TypeError):
+            # If sorting fails, just use the activities as-is
+            pass
+        
+        activities = valid_activities
+        
+        # Build Gantt chart
         lines = [
             "```mermaid",
             "gantt",
-            "    title Opportunity Timeline",
+            "    title Comprehensive Opportunity Timeline",
             "    dateFormat YYYY-MM-DD",
-            "    section Lifecycle"
+            "    axisFormat %m-%d"
         ]
         
-        if created_date:
-            lines.append(f"    Opportunity Created    :done, opp1, {created_date}, 1d")
+        # Group by section with defensive checks
+        sections = {}
+        for activity in activities:
+            # Defensive check - ensure activity has all required properties
+            if not all(key in activity for key in ["type", "name", "status", "date"]):
+                continue
+                
+            section = activity.get("type", "Unknown")
+            if section not in sections:
+                sections[section] = []
+            sections[section].append(activity)
         
-        lines.append(f"    Data Extraction       :active, extract, {extraction_date}, 1d")
+        # Add sections
+        section_order = ["Lifecycle", "Team", "Activities", "Documentation", "Support"]
         
+        for section in section_order:
+            if section in sections:
+                lines.append(f"    section {section}")
+                for i, activity in enumerate(sections[section]):
+                    # Additional defensive checks
+                    name = activity.get("name", "Unknown")
+                    status = activity.get("status", "done") 
+                    date = activity.get("date", "")
+                    
+                    if name and date:
+                        safe_name = self._clean_name_for_mermaid(name)
+                        activity_id = f"{section.lower()}{i+1}"
+                        lines.append(f"    {safe_name} :{status}, {activity_id}, {date}, 1d")
+        
+        # Add extraction and analysis section
         lines.extend([
             "    section Analysis",
+            f"    Data Extraction       :active, extract, {extraction_date}, 1d",
             "    LLM Processing        :planned, after extract, 2d",
             "    Provisioning Creation :planned, after extract, 3d"
         ])
+        
+        # Add close date if available
+        if close_date:
+            lines.append("    section Completion")
+            lines.append(f"    Opportunity Closed    :milestone, close, {close_date}, 0d")
         
         lines.append("```")
         return "\n".join(lines)
@@ -271,7 +400,7 @@ flowchart LR
                 opportunity_data, contacts_data, documents_data, relationships_data
             )
             completeness_chart = self.generate_completeness_chart(all_data)
-            timeline = self.generate_timeline(opportunity_data, datetime.now())
+            timeline = self.generate_timeline(all_data, datetime.now())
             process_flow = self.generate_process_flow()
             activity_chart = self.generate_activity_chart(relationships_data)
             
