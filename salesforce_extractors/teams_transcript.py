@@ -118,57 +118,66 @@ class TeamsTranscriptExtractor(SalesforceBase):
             self.log_error(f"Error parsing vendor meeting key: {str(e)}")
             return {}
     
-    def find_online_meeting(self, organizer_id: str, meeting_uuid: str, 
+    def find_online_meeting(self, organizer_id: str, meeting_uuid: str,
                            start_time: str) -> Optional[str]:
         """
         Find online meeting ID using Graph API
-        
+
+        IMPORTANT: Requires OnlineMeetings.Read.All application permission in Azure AD.
+        The app must have admin consent for this permission to access user meetings.
+
         Args:
-            organizer_id: Meeting organizer user ID
-            meeting_uuid: VendorMeetingUuid from VideoCall
-            start_time: Meeting start time ISO format
-            
+            organizer_id: Meeting organizer user ID from VendorMeetingKey
+            meeting_uuid: VendorMeetingUuid from VideoCall (this IS the meeting ID)
+            start_time: Meeting start time ISO format (for logging/validation)
+
         Returns:
-            Online meeting ID if found
+            Online meeting ID (meeting_uuid) if authentication succeeds
         """
         if not self.access_token:
             self.log_error("Not authenticated with Graph API")
             return None
-        
+
         try:
             headers = {
                 'Authorization': f'Bearer {self.access_token}',
                 'Content-Type': 'application/json'
             }
-            
-            # Try to find meeting by organizer and time range
-            # Note: This is a simplified approach - in production you might need
-            # to search calendar events or use more specific filters
-            url = f"{self.graph_base_url}/users/{organizer_id}/onlineMeetings"
-            
-            # Add date filter if possible
-            start_date = datetime.fromisoformat(start_time.replace('Z', '+00:00')).date()
-            url += f"?$filter=startDateTime ge {start_date}T00:00:00Z and startDateTime lt {start_date}T23:59:59Z"
-            
+
+            # The meeting_uuid from Salesforce IS the Microsoft Graph meeting ID
+            # We can directly access: /users/{organizerId}/onlineMeetings/{meetingId}
+            # This requires OnlineMeetings.Read.All permission
+
+            url = f"{self.graph_base_url}/users/{organizer_id}/onlineMeetings/{meeting_uuid}"
+
+            self.log_info(f"Attempting to access meeting: {meeting_uuid}")
             response = requests.get(url, headers=headers)
-            
+
             if response.status_code == 200:
-                meetings = response.json().get('value', [])
-                self.log_info(f"Found {len(meetings)} online meetings for organizer")
-                
-                # Try to match by UUID or other identifiers
-                for meeting in meetings:
-                    meeting_id = meeting.get('id')
-                    if meeting_id:
-                        self.log_success(f"Found potential meeting: {meeting_id}")
-                        return meeting_id
-                        
-                # If no exact match, return first meeting (fallback)
-                if meetings:
-                    return meetings[0].get('id')
+                meeting = response.json()
+                self.log_success(f"Found meeting: {meeting.get('subject', 'No subject')}")
+                return meeting_uuid
+            elif response.status_code == 403:
+                error_data = response.json().get('error', {})
+                error_msg = error_data.get('message', '')
+
+                if 'not allowed to perform operations' in error_msg or 'RSC' in error_msg:
+                    self.log_error(
+                        "Missing Azure AD permission. The app needs 'OnlineMeetings.Read.All' "
+                        "application permission with admin consent. Currently only have "
+                        "'OnlineMeetingTranscript.Read.All' which is insufficient for accessing "
+                        "user meetings."
+                    )
+                else:
+                    self.log_error(f"Forbidden (403): {error_msg}")
+                return None
+            elif response.status_code == 404:
+                self.log_error(f"Meeting not found: {meeting_uuid}")
+                return None
             else:
-                self.log_error(f"Failed to fetch meetings: {response.status_code} - {response.text}")
-                
+                self.log_error(f"Failed to fetch meeting: {response.status_code} - {response.text[:200]}")
+                return None
+
         except Exception as e:
             self.log_error(f"Error finding online meeting: {str(e)}")
         

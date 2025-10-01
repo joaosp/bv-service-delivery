@@ -1,0 +1,23 @@
+# BV Provisioning Agent Dependencies
+
+# Claude Agent SDK
+claude-agent-sdk>=0.1.0
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Data processing
+pandas>=2.1.0
+openpyxl>=3.1.0
+
+# Date/time utilities
+python-dateutil>=2.8.2
+
+# Async support
+asyncio>=3.4.3
+
+# Microsoft Teams Integration (optional - for video call transcript extraction)
+msal>=1.24.0
+azure-identity>=1.14.0
+msgraph-core>=0.2.2
+requests>=2.31.0

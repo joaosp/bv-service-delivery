@@ -1,0 +1,139 @@
+## 80-Attribute Provisioning Requirements
+
+All BroadVoice provisioning files MUST include these 80 attributes across 11 categories. Each attribute must be validated and assigned a status.
+
+### Category 1: User Details (13 attributes)
+1. First Name - Text - MANDATORY - User's first name for account creation
+2. Last Name - Text - MANDATORY - User's last name for account creation
+3. Email - Email - MANDATORY - Primary email address for user account and notifications
+4. Role - Text (User/Admin) - MANDATORY - User role in the system
+5. Package - Text (M/P/B) - MANDATORY - Service package type (Metered/Pro/Basic)
+6. Mobile Number - Phone (10 digits) - OPTIONAL - User's mobile phone number
+7. Local Extension - Number (3-5 digits) - MANDATORY - User's local extension number
+8. Job Title - Text - OPTIONAL - User's job title/position
+9. Department - Text - OPTIONAL - User's department in organization
+10. PID - Number - AUTO-GENERATED - Person ID in system
+11. Username - Text - AUTO-GENERATED - Login username for the user
+12. Password - Text - AUTO-GENERATED - Login password for the user
+13. [Validation] Extensions must be 3-5 digits, not N11 codes, no duplicates
+
+### Category 2: Location/Address (15 attributes)
+14. Location Name - Text - MANDATORY - Name of the location/property
+15. Street Address - Text - MANDATORY - Physical street address
+16. City - Text - MANDATORY - City name
+17. State - Text (2 chars) - MANDATORY - State abbreviation
+18. ZIP Code - Number (5 digits) - MANDATORY - ZIP code
+19-22. Shipping Address (Street, City, State, ZIP) - MANDATORY - Equipment shipping address
+23-26. E911 Address (Street, City, State, ZIP) - MANDATORY - Emergency services address
+27. E911 Business Name - Text - MANDATORY - Business name shown for E911 calls
+28. Timezone - Text - MANDATORY - Override timezone (e.g. Pacific Time US & Canada)
+[Validation] E911 must be complete and standardized, ZIP codes 5 digits, State codes 2 chars
+
+### Category 3: Phone Numbers (6 attributes)
+29. Main Number - Phone (10 digits) - MANDATORY - Main phone number for location
+30. Area Code Preference - Number (3 digits) - OPTIONAL - Preferred area code for new numbers
+31. Number to Port - Phone (10 digits) - OPTIONAL - Existing number to port over
+32. Inbound Number - Phone (10 digits) - OPTIONAL - Inbound telephone number (DID)
+33. Outbound Number - Phone (10 digits) - OPTIONAL - Caller ID number for outbound calls
+34. Fax Number - Phone (10 digits) - OPTIONAL - Dedicated fax line number
+[Validation] All phone numbers 10 digits, valid area codes, no N11 patterns
+
+### Category 4: Device Configuration (8 attributes)
+35. Device Brand - Text - MANDATORY - Phone hardware manufacturer (Polycom/Cisco/Yealink/Obihai)
+36. Device Model - Text - MANDATORY - Specific model number (e.g. VVX-411/T46U/OBI302)
+37. Phone Make/Model - Text - MANDATORY - Combined make and model from workbook
+38. Number of Devices - Number - MANDATORY - Quantity of devices needed
+39. Rental/Purchase - Text - MANDATORY - Whether device is rented or purchased
+40. MAC Address - Text (12 chars) - OPTIONAL - Device MAC address if known
+41. Activation URL - URL - AUTO-GENERATED - Provisioning URL for device
+42. Hardware Profile - Text - OPTIONAL - Custom hardware configuration profile
+[Validation] Brand must be Polycom/Cisco/Yealink/Obihai, device count must match user count
+
+### Category 5: Phone Buttons (11 attributes)
+43. Lines Configuration - Number of Lines - MANDATORY - Number of line buttons to configure (1-12)
+44. Lines Configuration - Line Names - Text (comma-separated) - OPTIONAL - Custom names for each line
+45. Custom Configuration - Per Employee - Yes/No - MANDATORY - Whether custom configs needed per employee
+46. Call Parking - Enabled - Yes/No - MANDATORY - Whether call parking is needed
+47. Call Parking - Number of Keys - Number - CONDITIONAL - Number of call park keys needed (if enabled)
+48. Call Parking - Name - Text - CONDITIONAL - Name for call parking group
+49. Call Parking - Extension - Number (3-4 digits) - CONDITIONAL - Local extension for call parking
+50. Call Parking - Music on Hold - Yes/No - OPTIONAL - Enable music for parked calls
+51. Call Parking - Number of Spots - Number - CONDITIONAL - Maximum concurrent parked calls
+52. Call Parking - Send Reminders - Yes/No - OPTIONAL - Send notifications for parked calls
+53. Speed Dial - Yes/No - OPTIONAL - Configure speed dial buttons
+54. Presence - Yes/No - OPTIONAL - Configure presence monitoring buttons
+[Validation] Lines 1-12, call parking attributes required if enabled
+
+### Category 6: Fax Configuration (7 attributes)
+55. Fax Service - Enabled - Yes/No - MANDATORY - Whether fax service is needed
+56. Fax Service - Type - Text (Personal/Shared) - CONDITIONAL - Type of fax service if enabled
+57. Fax Inbox - Name - Text - CONDITIONAL - Name for fax inbox
+58. Fax Inbox - Email - Email - CONDITIONAL - Email address for fax delivery
+59. Fax Machine - Text - OPTIONAL - Physical fax machine configuration
+60. Outgoing Fax Header - Text - OPTIONAL - Header text for outgoing faxes
+61. T.38 Settings - Yes/No - OPTIONAL - Enable T.38 fax protocol
+[Validation] If fax enabled, type and inbox details required
+
+### Category 7: Network Settings (2 attributes)
+62. Configure Network - Text (DHCP/Manual) - MANDATORY - Network configuration method
+63. Custom Config - XML/Text - OPTIONAL - Custom network configuration snippet
+[Validation] Must be DHCP or Manual
+
+### Category 8: Call Features (6 attributes)
+64. Call Forwarding - Yes/No - OPTIONAL - Enable call forwarding features
+65. Voicemail - Yes/No - MANDATORY - Enable voicemail service
+66. Auto Attendant - Yes/No - OPTIONAL - Enable auto attendant menu
+67. Ring Groups - Yes/No - OPTIONAL - Configure ring groups
+68. Call Recording - Yes/No - OPTIONAL - Enable call recording
+69. Conference Bridge - Yes/No - OPTIONAL - Setup conference bridge
+
+### Category 9: Business Information (4 attributes)
+70. Company Name - Text - MANDATORY - Company/property management name
+71. Account Number - Text - AUTO-GENERATED - BroadVoice account number
+72. Location Type - Text - OPTIONAL - Type of location (office/residential/etc)
+73. Implementation Date - Date - MANDATORY - Target go-live date
+[Validation] Implementation date must be valid future date
+
+### Category 10: Notifications (4 attributes)
+74. Welcome Email - Email - MANDATORY - Email for welcome message and credentials
+75. Admin Email - Email - MANDATORY - Email for admin access and reports
+76. Logistics Email - Email - OPTIONAL - Email for shipping notifications
+77. Activation Codes Export - Yes/No - MANDATORY - Export activation codes for logistics
+[Validation] All email addresses must be valid format
+
+### Category 11: SharePoint/Integration (3 attributes)
+78. Input Workbook Path - File Path - MANDATORY - Location of input requirements workbook
+79. Output Folder - File Path - MANDATORY - Destination for activation codes export
+80. Email Report - Yes/No - MANDATORY - Send completion report via email
+
+## Critical Mandatory Fields (Must Be Present)
+
+These 18 fields are absolutely critical for provisioning to proceed:
+
+1. User: First Name, Last Name, Email, Role, Package, Local Extension
+2. Location: Location Name, Street Address, City, State, ZIP Code, Timezone
+3. Phone: Main Number
+4. Device: Device Brand, Device Model, Number of Devices
+5. Business: Company Name, Implementation Date
+
+If any of these are missing, the status report MUST flag them as blocking issues requiring immediate attention.
+
+## Validation Matrix
+
+For each attribute in the CSV:
+- **Status = Complete**: Value extracted with >85% confidence, passes validation
+- **Status = Partial**: Some sub-attributes present, others missing
+- **Status = Missing**: No value found, cannot be inferred
+- **Status = Not Required**: Optional field not applicable to this customer
+- **Status = Conflict**: Multiple conflicting values, needs resolution
+
+## Auto-Generated Fields
+
+Do NOT attempt to extract these - mark as "Auto-generated by system":
+- PID (Person ID)
+- Username
+- Password
+- Account Number
+- Activation URL
+
+These will be generated during the provisioning process.

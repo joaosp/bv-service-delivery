@@ -82,6 +82,7 @@ class OpportunityDataPipeline:
         # Setup directories
         self.opportunity_id = opportunity_data["opportunity"]["Id"]
         self.account_id = opportunity_data["opportunity"]["AccountId"]
+        self.opportunity_name = opportunity_data["opportunity"].get("Name")
         self.output_dir = utils.setup_directories(".", self.opportunity_id)
         
         print(f"📁 Created directory structure: {self.output_dir}")
@@ -266,7 +267,7 @@ class OpportunityDataPipeline:
         """Extract call transcripts from various sources"""
         try:
             return self.transcript_extractor.extract_all_transcripts(
-                self.opportunity_id, self.account_id, self.output_dir
+                self.opportunity_id, self.account_id, self.output_dir, self.opportunity_name
             )
         except Exception as e:
             print(f"❌ Error extracting transcripts: {str(e)}")

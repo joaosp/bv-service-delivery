@@ -90,35 +90,54 @@ class TranscriptExtractor(SalesforceBase):
     def get_voice_calls_by_account(self, account_id: str) -> List[Dict]:
         """
         Get VoiceCall records by searching related tasks/events on the account
-        
+
         Args:
             account_id: Account ID
-            
+
         Returns:
             List of VoiceCall records
         """
         self.log_info(f"Fetching voice calls by account: {account_id}")
-        
-        # First try to find voice calls through tasks
-        query = f"""
+
+        # First, get tasks with CallObject field
+        # Note: Can't use semi-join with Task object, so we do this in two steps
+        tasks_query = f"""
+        SELECT Id, CallObject
+        FROM Task
+        WHERE WhatId = '{account_id}' AND CallObject != null
+        LIMIT 100
+        """
+
+        tasks_result = self.run_soql_query(tasks_query, log_errors=False)
+        if not tasks_result or tasks_result.get("totalSize", 0) == 0:
+            self.log_info("No tasks with call objects found")
+            return []
+
+        # Extract CallObject IDs
+        call_object_ids = [task["CallObject"] for task in tasks_result["records"] if task.get("CallObject")]
+
+        if not call_object_ids:
+            self.log_info("No call object IDs found in tasks")
+            return []
+
+        # Now query VoiceCall records directly with the IDs
+        # Use batching for large ID lists (Salesforce SOQL has limits)
+        call_ids_str = "', '".join(call_object_ids)
+        voice_calls_query = f"""
         SELECT Id, Name, CallStartDateTime, CallEndDateTime, CallDurationInSeconds,
                CallType, CallDisposition, RelatedRecordId,
                FromPhoneNumber, ToPhoneNumber, CreatedDate
         FROM VoiceCall
-        WHERE Id IN (
-            SELECT CallObject
-            FROM Task 
-            WHERE WhatId = '{account_id}' AND CallObject != null
-        )
+        WHERE Id IN ('{call_ids_str}')
         ORDER BY CallStartDateTime DESC
         """
-        
-        result = self.run_soql_query(query)
+
+        result = self.run_soql_query(voice_calls_query)
         if result and result.get("totalSize", 0) > 0:
             calls = result["records"]
             self.log_success(f"Found {len(calls)} voice calls via account tasks")
             return calls
-        
+
         self.log_info("No voice calls found via account")
         return []
     
@@ -194,18 +213,19 @@ class TranscriptExtractor(SalesforceBase):
             self.transcript_stats["errors"].append(error_msg)
             return None
     
-    def get_video_calls(self, related_record_id: str) -> List[Dict]:
+    def get_video_calls(self, related_record_id: str, opportunity_name: str = None) -> List[Dict]:
         """
         Get VideoCall records related to an opportunity or account
-        
+
         Args:
             related_record_id: Opportunity or Account ID
-            
+            opportunity_name: Optional opportunity name for name-based search
+
         Returns:
             List of VideoCall records
         """
         self.log_info(f"Fetching video call records for: {related_record_id}")
-        
+
         # Try to find VideoCall records by RelatedRecordId
         query = f"""
         SELECT Id, Name, StartDateTime, EndDateTime, DurationInSeconds,
@@ -216,15 +236,66 @@ class TranscriptExtractor(SalesforceBase):
         WHERE RelatedRecordId = '{related_record_id}'
         ORDER BY StartDateTime DESC
         """
-        
-        result = self.run_soql_query(query)
+
+        result = self.run_soql_query(query, log_errors=False)
         if result and result.get("totalSize", 0) > 0:
             video_calls = result["records"]
-            self.log_success(f"Found {len(video_calls)} video calls")
+            self.log_success(f"Found {len(video_calls)} video calls via RelatedRecordId")
             self.video_calls_data = video_calls
             self.transcript_stats["video_calls_found"] = len(video_calls)
             return video_calls
-        
+
+        # Try searching by opportunity ID in the name (common naming pattern)
+        if related_record_id.startswith('006'):  # Opportunity ID prefix
+            self.log_info(f"Trying VideoCall search by name pattern containing opportunity ID")
+            name_query = f"""
+            SELECT Id, Name, StartDateTime, EndDateTime, DurationInSeconds,
+                   VendorName, VendorMeetingUuid, VendorMeetingKey, ExternalId,
+                   RelatedRecordId, IsRecorded, IsDiarizationOptIn, TranscribedLanguage,
+                   IntelligenceScore, MeetingType, HostId, CreatedDate
+            FROM VideoCall
+            WHERE Name LIKE '%{related_record_id}%'
+            ORDER BY StartDateTime DESC
+            LIMIT 10
+            """
+
+            result = self.run_soql_query(name_query, log_errors=False)
+            if result and result.get("totalSize", 0) > 0:
+                video_calls = result["records"]
+                self.log_success(f"Found {len(video_calls)} video calls via name search with opportunity ID")
+                self.video_calls_data = video_calls
+                self.transcript_stats["video_calls_found"] = len(video_calls)
+                return video_calls
+
+        # Try searching by opportunity name pattern if provided
+        if opportunity_name:
+            # Extract key words from opportunity name (remove common words)
+            name_parts = opportunity_name.replace('-', ' ').split()
+            # Use first significant word (>3 chars) for search
+            search_terms = [part for part in name_parts if len(part) > 3]
+
+            if search_terms:
+                search_term = search_terms[0][:20]  # Limit length for SOQL
+                self.log_info(f"Trying VideoCall search by name pattern containing '{search_term}'")
+                name_query = f"""
+                SELECT Id, Name, StartDateTime, EndDateTime, DurationInSeconds,
+                       VendorName, VendorMeetingUuid, VendorMeetingKey, ExternalId,
+                       RelatedRecordId, IsRecorded, IsDiarizationOptIn, TranscribedLanguage,
+                       IntelligenceScore, MeetingType, HostId, CreatedDate
+                FROM VideoCall
+                WHERE Name LIKE '%{search_term}%'
+                ORDER BY StartDateTime DESC
+                LIMIT 10
+                """
+
+                result = self.run_soql_query(name_query, log_errors=False)
+                if result and result.get("totalSize", 0) > 0:
+                    video_calls = result["records"]
+                    self.log_success(f"Found {len(video_calls)} video calls via name search")
+                    self.video_calls_data = video_calls
+                    self.transcript_stats["video_calls_found"] = len(video_calls)
+                    return video_calls
+
         self.log_info("No video calls found")
         return []
     
@@ -615,20 +686,21 @@ class TranscriptExtractor(SalesforceBase):
             except Exception as e:
                 self.log_error(f"Error cleaning {raw_file.name}: {str(e)}")
     
-    def extract_all_transcripts(self, opportunity_id: str, account_id: str, output_dir: Path) -> Dict:
+    def extract_all_transcripts(self, opportunity_id: str, account_id: str, output_dir: Path, opportunity_name: str = None) -> Dict:
         """
         Extract all transcripts from various sources
-        
+
         Args:
             opportunity_id: Opportunity ID
             account_id: Account ID
             output_dir: Output directory
-            
+            opportunity_name: Optional opportunity name for name-based VideoCall search
+
         Returns:
             Extraction results and statistics
         """
         self.log_info("Starting comprehensive transcript extraction")
-        
+
         # Reset stats
         self.transcript_stats = {
             "voice_calls_found": 0,
@@ -639,15 +711,15 @@ class TranscriptExtractor(SalesforceBase):
             "teams_transcripts_found": 0,
             "errors": []
         }
-        
+
         all_transcripts = []
-        
+
         # 1. Extract VoiceCall transcripts
         voice_calls = self.get_voice_calls(opportunity_id)
         if not voice_calls:
             # Try finding by account
             voice_calls = self.get_voice_calls_by_account(account_id)
-        
+
         for i, call in enumerate(voice_calls, 1):
             conversation_id = call.get("ConversationId")
             if conversation_id:
@@ -666,14 +738,14 @@ class TranscriptExtractor(SalesforceBase):
                             "call_type": call.get("CallType"),
                             "disposition": call.get("CallDisposition")
                         }
-                        
+
                         transcript_data = self.extract_transcript_from_entries(entries, metadata)
                         filename = f"voicecall_transcript_{i}_{call.get('CallStartDateTime', '')[:10]}.txt"
                         self.save_transcript(transcript_data, output_dir, filename)
                         all_transcripts.append(transcript_data)
-        
+
         # 2. Extract VideoCall transcripts (Teams/WebEx/Zoom)
-        video_calls = self.get_video_calls(opportunity_id)
+        video_calls = self.get_video_calls(opportunity_id, opportunity_name)
         for video_call in video_calls:
             video_call_id = video_call.get('Id')
             

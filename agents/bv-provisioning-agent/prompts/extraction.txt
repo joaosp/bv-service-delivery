@@ -1,0 +1,125 @@
+## 4-Pass Extraction Methodology
+
+Apply this systematic 4-pass approach to extract provisioning data from all available sources:
+
+### Pass 1: Context Understanding
+**Goal: Build a comprehensive understanding of the customer's business and requirements**
+
+- Map the customer's business structure and requirements
+- Identify key stakeholders and decision makers (who are the primary contacts, admins, technical leads?)
+- Understand the scope and timeline (single vs multi-site, phased rollout, go-live date)
+- Identify the business type (property management, medical office, law firm, etc.)
+- Note any special requirements or constraints mentioned early in discussions
+
+**Output:** Mental model of the customer's environment, organizational structure, and project scope
+
+### Pass 2: Direct Extraction
+**Goal: Capture all explicitly stated values with maximum accuracy**
+
+Extract explicitly stated values from all sources:
+- Capture exact quotes, numbers, and specifications
+- Record phone numbers with validation (10 digits, area code check)
+- Document user names, emails, extensions, roles, packages
+- Note device models, quantities, and configurations
+- Track all addresses (billing, shipping, E911)
+- Record timeline and implementation dates
+- Capture network settings (IP ranges, firewall rules, VLAN)
+- Note business hours, timezone, operational requirements
+
+**Confidence Level:** >95% (these are directly stated facts)
+
+**Track Source Timestamp:** Always note where data came from:
+- "transcript 05:23-05:45" - timestamp range in call transcript
+- "spreadsheet users.xlsx row 15" - specific cell/row in Excel file
+- "contract BOF_signed.pdf page 3" - page in PDF document
+- "salesforce opportunity.CloseDate" - Salesforce field
+- "email 2024-01-15 from john@customer.com" - email metadata
+
+### Pass 3: Logical Inference
+**Goal: Fill gaps using context, patterns, and industry best practices**
+
+Deduce missing values from context and patterns:
+
+**From User Context:**
+- If extension pattern is 100-199, infer next available extension
+- If all users have same package, infer unlisted users have same
+- If location timezone mentioned, apply to all users at that location
+- If device model specified for "all phones", apply to each user
+
+**From Industry Standards:**
+- Default business hours: 8:00 AM - 5:00 PM (if not specified)
+- Default lines configuration: 2-4 lines based on role (admin=4, user=2)
+- E911 address defaults to physical location if not separately specified
+- Shipping address defaults to billing address if not specified
+
+**From Patterns:**
+- If "all receptionists get VVX-411", apply to users with that role
+- If numbering scheme is area_code + sequential, continue pattern
+- If department structure is mentioned, infer departmental groupings
+
+**Confidence Level:** >85% (these are reasonable deductions with supporting evidence)
+
+**Mark as Inferred:** Always note in CSV that value was inferred and show reasoning:
+- Status: "Complete (Inferred)"
+- Notes: "Deduced from extension pattern 200-299 for Sales dept"
+
+### Pass 4: Validation & Confidence Scoring
+**Goal: Ensure data quality and flag issues**
+
+Cross-reference and validate all extracted data:
+
+**Validation Checks:**
+1. **Phone Numbers:**
+   - 10 digits format
+   - Valid area codes (not 000, 111, etc.)
+   - No N11 codes (211, 311, 411, 511, 611, 711, 811, 911)
+   - No duplicates
+
+2. **Extensions:**
+   - 3-5 digits
+   - No conflicts/duplicates
+   - Not N11 codes
+   - Within discussed range
+
+3. **Addresses:**
+   - E911 compliance (complete street, city, state, ZIP)
+   - State codes are 2 characters
+   - ZIP codes are 5 digits
+   - Address standardization
+
+4. **Devices:**
+   - Valid models (Polycom VVX-411, Cisco 7841, Yealink T46U, Obihai OBI302, etc.)
+   - Quantity matches user count
+   - Brand consistency (if specified)
+
+5. **Users:**
+   - Email format valid
+   - Role is User or Admin
+   - Package is M, P, or B
+   - All mandatory fields present
+
+6. **Cross-Reference Validation:**
+   - User count in transcript matches spreadsheet
+   - Phone numbers in contract match transcript discussion
+   - Addresses consistent across all documents
+   - Timeline aligns with opportunity close date
+
+**Conflict Resolution:**
+- Prioritize: Contract > Spreadsheet > Transcript > Salesforce > Email > Inferred
+- Flag conflicts in status report
+- Note both values and source in CSV Notes field
+- Request clarification in Next Steps
+
+**Confidence Scoring:**
+- **>95% confidence:** Explicitly stated in primary source (contract, BOF, signed document)
+- **85-95% confidence:** Stated in transcript or spreadsheet, or strong inference with supporting evidence
+- **<85% confidence:** Weak inference, assumption without strong evidence, or conflicting information
+
+**Status Assignment:**
+- **Complete:** Value extracted with >85% confidence
+- **Partial:** Some sub-attributes present, others missing (e.g., E911 address has street/city but no ZIP)
+- **Missing:** No value found, cannot be inferred
+- **Not Required:** Optional field not applicable to this customer
+- **Conflict:** Multiple conflicting values found, needs resolution
+
+**Output:** Validated, confidence-scored dataset ready for provisioning CSV generation
