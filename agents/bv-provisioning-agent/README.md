@@ -141,7 +141,6 @@ pip install -r requirements.txt  # Includes msal, azure-identity, msgraph-core
 
 Ensure the following exist in the parent project:
 - `extract_opportunity_data_modular.py` - Salesforce extraction script
-- `cleanup_transcript.py` - Transcript cleaning utility
 - `broadvoice_attributes_requirements.csv` - 80-attribute template
 - `salesforce_extractors/` - Modular extractor package
 
@@ -332,14 +331,13 @@ Includes:
 
 ## Custom Tools
 
-The agent uses 6 custom tools:
+The agent uses 5 custom tools:
 
 1. **extract_salesforce_data** - Comprehensive Salesforce extraction
-2. **clean_transcript** - Transcript formatting and cleanup
-3. **analyze_documents** - Excel/spreadsheet analysis
-4. **validate_attributes** - 80-attribute validation
-5. **generate_provisioning_csv** - Final CSV generation
-6. **generate_status_report** - Status report creation
+2. **analyze_documents** - Excel/spreadsheet analysis
+3. **validate_attributes** - 80-attribute validation
+4. **generate_provisioning_csv** - Final CSV generation
+5. **generate_status_report** - Status report creation
 
 ## Configuration
 
@@ -411,7 +409,6 @@ The agent continues gracefully when:
 This agent integrates with:
 - **Salesforce MCP Server** - Data extraction (configured in parent `mcp.json`)
 - **Salesforce Extractors** - Modular extraction library (`salesforce_extractors/`)
-- **Cleanup Scripts** - Transcript processing (`cleanup_transcript.py`)
 - **Requirements Template** - 80-attribute validation (`broadvoice_attributes_requirements.csv`)
 
 ## Development

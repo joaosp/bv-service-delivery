@@ -65,7 +65,6 @@ Navigate to the extracted data folder and systematically analyze all materials i
 2. **Call Transcripts** (transcripts/)
    - Design call transcripts (primary source for technical requirements)
    - Teams meeting transcripts (if available)
-   - Clean transcripts first using clean_transcript tool if needed
    - Extract: speaker names/roles, phone numbers, user counts, device requirements, business hours, network config, special requirements, locations, timeline
 
 3. **Excel/Spreadsheet Files** (documents/spreadsheets/)
@@ -89,13 +88,7 @@ Navigate to the extracted data folder and systematically analyze all materials i
    - Notes and observations
    - Case records for service issues
 
-### Phase 3: Legacy Transcript Processing (Fallback)
-
-If no transcripts found in extraction results, check for legacy files:
-- Search transcripts/*[customer]* for existing local transcripts
-- Clean transcripts using clean_transcript tool if needed
-
-### Phase 4: Intelligent Data Extraction & Analysis
+### Phase 3: Intelligent Data Extraction & Analysis
 
 Apply the 4-pass methodology to each data source (use the extraction prompt for detailed methodology).
 
@@ -105,7 +98,7 @@ Leverage Pre-Generated Analysis:
 - Check summary_stats.json for data quality metrics
 - Query structured JSON files for quick reference
 
-### Phase 5: Output Generation
+### Phase 4: Output Generation
 
 #### 1. Provisioning CSV Format
 

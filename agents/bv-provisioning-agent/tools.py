@@ -25,7 +25,6 @@ except ImportError:
 from config import (
     PROJECT_ROOT,
     EXTRACTION_SCRIPT,
-    CLEANUP_SCRIPT,
     REQUIREMENTS_CSV,
     CSV_DELIMITER,
     CSV_COLUMNS,
@@ -59,7 +58,16 @@ def _format_tool_response(data: Dict[str, Any]) -> Dict[str, Any]:
 @tool(
     "extract_salesforce_data",
     "Extract comprehensive Salesforce data for an opportunity including contacts, documents, transcripts, and relationships",
-    {"opportunity_id": str}
+    {
+        "type": "object",
+        "properties": {
+            "opportunity_id": {
+                "type": "string",
+                "description": "The Salesforce opportunity ID (18 characters starting with 006)"
+            }
+        },
+        "required": ["opportunity_id"]
+    }
 )
 async def extract_salesforce_data(args: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -128,69 +136,18 @@ async def extract_salesforce_data(args: Dict[str, Any]) -> Dict[str, Any]:
 
 
 @tool(
-    "clean_transcript",
-    "Clean a transcript file by removing timestamps and formatting speaker labels",
-    {"input_file": str, "output_file": str}
-)
-async def clean_transcript(args: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Clean a transcript file by removing timestamps and formatting speakers
-
-    Args:
-        args: Dictionary with 'input_file' and 'output_file' keys
-
-    Returns:
-        Formatted response with cleaning results
-    """
-    input_file = args.get('input_file', '')
-    output_file = args.get('output_file', '')
-
-    if not input_file or not output_file:
-        return _format_tool_response({
-            "success": False,
-            "error": "Both input_file and output_file required"
-        })
-
-    try:
-        cmd = [
-            'python3',
-            str(CLEANUP_SCRIPT),
-            input_file,
-            output_file
-        ]
-
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            cwd=PROJECT_ROOT
-        )
-
-        if result.returncode != 0:
-            return _format_tool_response({
-                "success": False,
-                "error": result.stderr,
-                "output": result.stdout
-            })
-
-        return _format_tool_response({
-            "success": True,
-            "input_file": input_file,
-            "output_file": output_file,
-            "message": "Transcript cleaned successfully"
-        })
-
-    except Exception as e:
-        return _format_tool_response({
-            "success": False,
-            "error": str(e)
-        })
-
-
-@tool(
     "analyze_documents",
     "Analyze Excel/spreadsheet documents to extract user lists, device inventories, and other structured data",
-    {"documents_directory": str}
+    {
+        "type": "object",
+        "properties": {
+            "documents_directory": {
+                "type": "string",
+                "description": "Path to the documents directory containing spreadsheets"
+            }
+        },
+        "required": ["documents_directory"]
+    }
 )
 async def analyze_documents(args: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -265,7 +222,16 @@ async def analyze_documents(args: Dict[str, Any]) -> Dict[str, Any]:
 @tool(
     "validate_attributes",
     "Validate extracted attributes against the 80-attribute requirements template",
-    {"attributes_data": dict}
+    {
+        "type": "object",
+        "properties": {
+            "attributes_data": {
+                "type": "object",
+                "description": "Dictionary of extracted attributes with their values, sources, and statuses"
+            }
+        },
+        "required": ["attributes_data"]
+    }
 )
 async def validate_attributes(args: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -353,7 +319,20 @@ async def validate_attributes(args: Dict[str, Any]) -> Dict[str, Any]:
 @tool(
     "generate_provisioning_csv",
     "Generate the final provisioning CSV file with all 80 attributes",
-    {"opportunity_id": str, "attributes_data": dict}
+    {
+        "type": "object",
+        "properties": {
+            "opportunity_id": {
+                "type": "string",
+                "description": "The Salesforce opportunity ID"
+            },
+            "attributes_data": {
+                "type": "object",
+                "description": "Dictionary of extracted attributes with their values, sources, and statuses"
+            }
+        },
+        "required": ["opportunity_id", "attributes_data"]
+    }
 )
 async def generate_provisioning_csv(args: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -435,7 +414,28 @@ async def generate_provisioning_csv(args: Dict[str, Any]) -> Dict[str, Any]:
 @tool(
     "generate_status_report",
     "Generate comprehensive status report in Markdown format",
-    {"opportunity_id": str, "opportunity_name": str, "validation_results": dict, "data_sources": dict}
+    {
+        "type": "object",
+        "properties": {
+            "opportunity_id": {
+                "type": "string",
+                "description": "The Salesforce opportunity ID"
+            },
+            "opportunity_name": {
+                "type": "string",
+                "description": "The opportunity name/customer name"
+            },
+            "validation_results": {
+                "type": "object",
+                "description": "Results from attribute validation"
+            },
+            "data_sources": {
+                "type": "object",
+                "description": "Information about data sources analyzed"
+            }
+        },
+        "required": ["opportunity_id"]
+    }
 )
 async def generate_status_report(args: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -551,7 +551,24 @@ async def generate_status_report(args: Dict[str, Any]) -> Dict[str, Any]:
 @tool(
     "query_salesforce_general",
     "Execute general Salesforce queries using sf CLI - search opportunities, accounts, contacts by name or run SOQL queries",
-    {"query_type": str, "query": str, "object_type": str}
+    {
+        "type": "object",
+        "properties": {
+            "query_type": {
+                "type": "string",
+                "description": "Type of query: 'search' for text search or 'soql' for SOQL query"
+            },
+            "query": {
+                "type": "string",
+                "description": "Search term (for search) or SOQL query string (for soql)"
+            },
+            "object_type": {
+                "type": "string",
+                "description": "Salesforce object type (e.g., Opportunity, Account, Contact) - only used for search"
+            }
+        },
+        "required": ["query"]
+    }
 )
 async def query_salesforce_general(args: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -633,7 +650,16 @@ async def query_salesforce_general(args: Dict[str, Any]) -> Dict[str, Any]:
 @tool(
     "check_extraction_status",
     "Check if provisioning files exist for an opportunity and return status metrics",
-    {"opportunity_id": str}
+    {
+        "type": "object",
+        "properties": {
+            "opportunity_id": {
+                "type": "string",
+                "description": "The Salesforce opportunity ID"
+            }
+        },
+        "required": ["opportunity_id"]
+    }
 )
 async def check_extraction_status(args: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -719,7 +745,16 @@ async def check_extraction_status(args: Dict[str, Any]) -> Dict[str, Any]:
 @tool(
     "read_provisioning_file",
     "Read and parse an existing provisioning CSV file to show extracted attributes",
-    {"opportunity_id": str}
+    {
+        "type": "object",
+        "properties": {
+            "opportunity_id": {
+                "type": "string",
+                "description": "The Salesforce opportunity ID"
+            }
+        },
+        "required": ["opportunity_id"]
+    }
 )
 async def read_provisioning_file(args: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -795,7 +830,6 @@ async def read_provisioning_file(args: Dict[str, Any]) -> Dict[str, Any]:
 # Export all tool functions for registration
 ALL_TOOLS = [
     extract_salesforce_data,
-    clean_transcript,
     analyze_documents,
     validate_attributes,
     generate_provisioning_csv,
@@ -813,19 +847,6 @@ TOOL_SCHEMAS = {
             "opportunity_id": {
                 "type": "string",
                 "description": "The Salesforce opportunity ID (18 characters starting with 006)"
-            }
-        }
-    },
-    "clean_transcript": {
-        "description": "Clean a transcript file by removing timestamps and formatting speaker labels",
-        "input_schema": {
-            "input_file": {
-                "type": "string",
-                "description": "Path to the input transcript file"
-            },
-            "output_file": {
-                "type": "string",
-                "description": "Path where cleaned transcript should be saved"
             }
         }
     },

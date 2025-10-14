@@ -10,13 +10,11 @@ SALESFORCE_ORG_ID = "00DG0000000C8lRMAS"
 # Directory Structure
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
-TRANSCRIPTS_DIR = PROJECT_ROOT / "transcripts"
 PROVS_DIR = PROJECT_ROOT / "provs"
 REQUIREMENTS_CSV = PROJECT_ROOT / "broadvoice_attributes_requirements.csv"
 
 # Extraction Tools
 EXTRACTION_SCRIPT = PROJECT_ROOT / "extract_opportunity_data_modular.py"
-CLEANUP_SCRIPT = PROJECT_ROOT / "cleanup_transcript.py"
 
 # Output Format
 CSV_DELIMITER = ";"

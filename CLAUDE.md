@@ -9,10 +9,6 @@ BroadVoice Service Automation (BVSA) - An agentic workflow system to automate th
 ## Common Commands
 
 ```bash
-# Clean up Salesforce conversation transcripts
-python cleanup_transcript.py <input_file> <output_file>
-# Example: python cleanup_transcript.py transcripts/ex1.txt transcripts/ex1_cleaned.txt
-
 # Test Salesforce MCP server connection
 npx -y @salesforce/mcp --orgs 00DG0000000C8lRMAS --toolsets all
 
@@ -26,25 +22,20 @@ npx -y @salesforce/mcp --orgs 00DG0000000C8lRMAS --toolsets all
 
 ### Pipeline Stages
 1. **Data Ingestion** → Salesforce MCP server (transcripts, emails, customer data)
-2. **Transcript Processing** → cleanup_transcript.py removes timestamps, formats speakers
-3. **AI Extraction** → 4-pass methodology:
+2. **AI Extraction** → 4-pass methodology:
    - Context understanding
    - Direct extraction
    - Logical inference
    - Validation & confidence scoring
-4. **Data Validation** → Validate against 80 attributes in broadvoice_attributes_requirements.csv
-5. **CSV Generation** → 8-column provisioning format with audit trails
-6. **Account Creation** → BroadVoice API integration (future phase)
+3. **Data Validation** → Validate against 80 attributes in broadvoice_attributes_requirements.csv
+4. **CSV Generation** → 8-column provisioning format with audit trails
+5. **Account Creation** → BroadVoice API integration (future phase)
 
 ### Directory Structure
 ```
 provs/                  # Provisioning data and templates
 ├── broadvoice_attributes_requirements.csv  # Master 80-attribute template
 └── *_provisioning.csv                      # Customer-specific provisioning files
-
-transcripts/           # Sales design call transcripts
-├── *.txt             # Raw Salesforce transcripts
-└── *_cleaned.txt     # Processed transcripts
 ```
 
 ## Key Data Requirements
@@ -66,11 +57,10 @@ The system must extract and validate 80 attributes across 8 categories from broa
 ## Development Workflow
 
 ### When processing transcripts:
-1. Always clean transcripts first using cleanup_transcript.py
-2. Extract data with confidence scoring (>95% for explicit, >85% for inferred)
-3. Validate all mandatory fields before proceeding
-4. Track source timestamps for traceability
-5. Generate follow-up items for missing critical data
+1. Extract data with confidence scoring (>95% for explicit, >85% for inferred)
+2. Validate all mandatory fields before proceeding
+3. Track source timestamps for traceability
+4. Generate follow-up items for missing critical data
 
 ### When implementing new features:
 1. Check broadvoice_attributes_requirements.csv for field specifications
@@ -81,7 +71,6 @@ The system must extract and validate 80 attributes across 8 categories from broa
 ## Integration Points
 
 ### Current
-- cleanup_transcript.py - Standardizes Salesforce transcripts
 - Salesforce MCP Server - Configured in mcp.json for automated data retrieval
   - Connected to org: 00DG0000000C8lRMAS (jcamarate@broadvoice.com)
   - Provides access to: transcripts, emails, customer data, SOQL queries

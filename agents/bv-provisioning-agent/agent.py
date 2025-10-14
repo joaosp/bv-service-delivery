@@ -149,7 +149,7 @@ Begin the extraction process now.
             options = ClaudeAgentOptions(
                 model=CLAUDE_MODEL,
                 cwd=str(PROJECT_ROOT),  # Set working directory
-                add_dirs=[str(DATA_DIR), str(PROVS_DIR)],  # Allow access to data directories
+                add_dirs=[str(DATA_DIR)],  # Allow access to data directories
                 mcp_servers={"bv": self.mcp_server},
                 allowed_tools=custom_tools,  # Only our custom tools (explicit list)
                 permission_mode="acceptEdits"  # Auto-approve our custom tools
@@ -305,7 +305,7 @@ Begin the extraction process now.
                 options = ClaudeAgentOptions(
                     model=CLAUDE_MODEL,
                     cwd=str(PROJECT_ROOT),  # Set working directory
-                    add_dirs=[str(DATA_DIR), str(PROVS_DIR)],  # Allow access to data directories
+                    add_dirs=[str(DATA_DIR)],  # Allow access to data directories
                     mcp_servers={"bv": self.mcp_server},
                     allowed_tools=custom_tools,  # Only our custom tools (explicit list)
                     permission_mode="acceptEdits"  # Auto-approve our custom tools
