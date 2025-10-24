@@ -48,7 +48,7 @@ The extraction creates:
 - opportunity.json - Complete opportunity details
 - contacts.json/csv - All contacts with roles and hierarchy
 - documents/ - Downloaded files organized by type (contracts/, quotes/, spreadsheets/, emails/)
-- transcripts/ - Call transcripts (raw/ and cleaned/)
+- transcripts.json - Call transcripts
 - relationships.json - All related Salesforce objects
 - summary.md - Pre-generated relationship analysis
 - complete_data.json - Comprehensive data compilation
@@ -93,12 +93,110 @@ Navigate to the extracted data folder and systematically analyze all materials i
 Apply the 4-pass methodology to each data source (use the extraction prompt for detailed methodology).
 
 Leverage Pre-Generated Analysis:
-- Review summary.md for relationship analysis and key findings
-- Use extraction_summary.json for comprehensive extraction statistics
-- Check summary_stats.json for data quality metrics
-- Query structured JSON files for quick reference
+- opportunity.json - Complete opportunity details
+- contacts.json/csv - All contacts with roles and hierarchy
+- documents/ - Downloaded files organized by type (contracts/, quotes/, spreadsheets/, emails/)
+- transcripts.json - Call transcripts
+- relationships.json - All related Salesforce objects
+- summary.md - Pre-generated relationship analysis
+- complete_data.json - Comprehensive data compilation
+
+### Phase 3.5: Reference Template Format (MANDATORY - DO THIS FIRST)
+
+**CRITICAL: Before creating the attributes_data dictionary, you MUST read the requirements template to understand the exact key format.**
+
+**Step 1: Read the Template CSV**
+- File: `agents/bv-provisioning-agent/broadvoice_attributes_requirements.csv`
+- This CSV defines ALL 80 attributes with their exact Category and Attribute names
+- Use the Read tool to view this file
+
+**Step 2: Understand the Format**
+The CSV has these columns:
+- Column 1: **Category** (e.g., "User Details", "Location/Address", "Phone Numbers")
+- Column 2: **Attribute** (e.g., "First Name", "Street Address", "Main Number")
+- Column 3: **Sub-Attribute** (e.g., "Street" under "E911 Address")
+
+**Step 3: Build Your Dictionary Keys**
+The key format is derived directly from the CSV columns:
+- If no Sub-Attribute: `"{Category}|{Attribute}"`
+- If Sub-Attribute exists: `"{Category}|{Attribute}|{Sub-Attribute}"`
+
+**Examples from the CSV:**
+```
+CSV Row: Category="User Details", Attribute="First Name", Sub-Attribute=""
+→ Dictionary Key: "User Details|First Name"
+
+CSV Row: Category="Location/Address", Attribute="Street Address", Sub-Attribute=""
+→ Dictionary Key: "Location/Address|Street Address"
+
+CSV Row: Category="Location/Address", Attribute="E911 Address", Sub-Attribute="Street"
+→ Dictionary Key: "Location/Address|E911 Address|Street"
+
+CSV Row: Category="Phone Numbers", Attribute="Main Number", Sub-Attribute=""
+→ Dictionary Key: "Phone Numbers|Main Number"
+```
+
+**Why This Matters:**
+The generate_provisioning_csv tool expects keys to match EXACTLY as they appear in this CSV. If you use different keys (like "user_first_name" or "first_name"), the data won't populate in the final CSV.
 
 ### Phase 4: Output Generation
+
+#### CRITICAL: attributes_data Dictionary Format
+
+When calling generate_provisioning_csv, you MUST structure the attributes_data dictionary using this EXACT key format:
+
+**Key Format: "{Category}|{Attribute}" or "{Category}|{Attribute}|{Sub-Attribute}"**
+
+The Category and Attribute names MUST match EXACTLY as they appear in broadvoice_attributes_requirements.csv.
+
+✅ **CORRECT Examples:**
+```
+{
+  "User Details|First Name": {
+    "value": "Christi",
+    "source": "transcript 02:50-03:10",
+    "status": "Complete",
+    "notes": "Admin contact"
+  },
+  "User Details|Email": {
+    "value": "thesoho@fortisbm.com",
+    "source": "transcript 14:42-14:48",
+    "status": "Complete"
+  },
+  "Location/Address|Street Address": {
+    "value": "13100 Margie Lane",
+    "source": "transcript 02:50-03:04",
+    "status": "Complete"
+  },
+  "Location/Address|E911 Address|Street": {
+    "value": "13100 Margie Lane",
+    "source": "transcript 09:20-09:35",
+    "status": "Complete"
+  },
+  "Phone Numbers|Main Number": {
+    "value": "984-212-5552",
+    "source": "transcript 08:24-08:42",
+    "status": "Complete"
+  }
+}
+```
+
+❌ **WRONG Examples (DO NOT USE):**
+```
+{
+  "user_first_name": {...},           // Wrong: snake_case
+  "first_name": {...},                // Wrong: missing category
+  "User Details - First Name": {...}, // Wrong: wrong delimiter
+  "user.first_name": {...}            // Wrong: dot notation
+}
+```
+
+**Value Object Structure:**
+Each value object MUST contain:
+- `value`: The extracted value (string, even for numbers)
+- `source`: Source reference (e.g., "transcript 05:23", "contacts.csv row 2", "contract page 3")
+- `status`: One of: "Complete", "Partial", "Missing", "Inferred", "Conflict"
+- `notes`: (optional) Additional context or confidence indicators
 
 #### 1. Provisioning CSV Format
 
@@ -106,14 +204,18 @@ Use generate_provisioning_csv tool to create data/[OPPORTUNITY_ID]/provs/[OPPORT
 
 Structure: Category;Attribute;Sub-Attribute;Required/Optional;Extracted Value;Source Timestamp;Status;Notes
 
+The tool will automatically map the attributes_data dictionary to the CSV template format.
+
 Include all 80 attributes from the requirements template, marking:
 - Status: Complete/Partial/Missing/Not Required/Conflict
 - Source Timestamp: Reference to source (e.g., "transcript 05:23-05:45", "spreadsheet users.xlsx", "contract BOF_signed.pdf")
 - Notes: Additional context, confidence scores, or issues
 
-Use validate_attributes tool to ensure all 80 attributes are properly populated.
+CRITICAL: Use validate_attributes tool to ensure all 80 attributes are properly populated.
 
 #### 2. Status Report (Markdown)
+
+VERY IMPORTANT: You cannot generate the Status Report without having run the validate_attributes tool first.
 
 Use generate_status_report tool to create data/[OPPORTUNITY_ID]/provs/[OPPORTUNITY_ID]_status.md
 
@@ -162,13 +264,16 @@ Include:
 
 ## Final Checklist
 Before completing:
+0. ✓ **Read broadvoice_attributes_requirements.csv to see exact Category|Attribute format** (Phase 3.5)
 1. ✓ All Salesforce queries attempted
 2. ✓ All transcripts processed
 3. ✓ All documents analyzed
-4. ✓ CSV contains all 80 attributes
-5. ✓ Status report is comprehensive
-6. ✓ Confidence scores assigned
-7. ✓ Next steps clearly defined
-8. ✓ Files saved to correct locations
+4. ✓ attributes_data dictionary keys match template format exactly
+5. ✓ CSV contains all 80 attributes
+6. ✓ You've validated all attributes
+7. ✓ Status report is comprehensive
+8. ✓ Confidence scores assigned
+9. ✓ Next steps clearly defined
+10. ✓ Files saved to correct locations
 
 Remember: Your goal is to be thorough, accurate, and actionable. The outputs you create will directly enable the BroadVoice implementation team to successfully provision customer accounts.

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.17/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.17",
+  "version": "1.0.0",
+  "id": ""c31c4561-df77-4be7-b11d-d944ad16e637,
+  "packageName": "com.broadvoice.provisioningagent",
+  "developer": {
+    "name": "BroadVoice",
+    "websiteUrl": "https://www.broadvoice.com",
+    "privacyUrl": "https://www.broadvoice.com/privacy",
+    "termsOfUseUrl": "https://www.broadvoice.com/terms"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "BV Provisioning Agent",
+    "full": "BroadVoice Provisioning Agent - AI Assistant"
+  },
+  "description": {
+    "short": "AI assistant for BroadVoice provisioning workflows",
+    "full": "BV Provisioning Agent helps you extract provisioning data from Salesforce, analyze transcripts and documents, validate requirements, and generate provisioning files for BroadVoice hosted voice services."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "c31c4561-df77-4be7-b11d-d944ad16e637",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "personal",
+            "team",
+            "groupchat"
+          ],
+          "commands": [
+            {
+              "title": "help",
+              "description": "Show available commands and examples"
+            },
+            {
+              "title": "status",
+              "description": "Show bot status and configuration"
+            },
+            {
+              "title": "clear",
+              "description": "Clear conversation history"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": []
+}

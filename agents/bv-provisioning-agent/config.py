@@ -8,12 +8,14 @@ SALESFORCE_ORG_USERNAME = "jcamarate@broadvoice.com"
 SALESFORCE_ORG_ID = "00DG0000000C8lRMAS"
 
 # Directory Structure
-PROJECT_ROOT = Path(__file__).parent.parent.parent
+# Agent root directory (agents/bv-provisioning-agent/)
+PROJECT_ROOT = Path(__file__).parent
 DATA_DIR = PROJECT_ROOT / "data"
 PROVS_DIR = PROJECT_ROOT / "provs"
 REQUIREMENTS_CSV = PROJECT_ROOT / "broadvoice_attributes_requirements.csv"
 
 # Extraction Tools
+# Extraction script is now local to the agent directory
 EXTRACTION_SCRIPT = PROJECT_ROOT / "extract_opportunity_data_modular.py"
 
 # Output Format

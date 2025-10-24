@@ -55,6 +55,21 @@ from config import (
 from tools import ALL_TOOLS, TOOL_SCHEMAS
 
 
+# Custom tools list for Claude SDK
+CUSTOM_TOOLS = [
+    "mcp__bv__extract_salesforce_data",
+    "mcp__bv__clean_transcript",
+    "mcp__bv__analyze_documents",
+    "mcp__bv__validate_attributes",
+    "mcp__bv__generate_provisioning_csv",
+    "mcp__bv__generate_status_report",
+    "mcp__bv__query_salesforce_general",
+    "mcp__bv__check_extraction_status",
+    "mcp__bv__read_provisioning_file",
+    "mcp__bv__queue_file_for_teams"
+]
+
+
 class BVProvisioningAgent:
     """BroadVoice Provisioning Extraction Agent using Claude Agent SDK"""
 
@@ -95,6 +110,164 @@ class BVProvisioningAgent:
 
         return ''.join(prompts)
 
+    def _create_sdk_options(self) -> 'ClaudeAgentOptions':
+        """
+        Create ClaudeAgentOptions for SDK client
+
+        Returns:
+            Configured ClaudeAgentOptions instance
+        """
+        return ClaudeAgentOptions(
+            model=CLAUDE_MODEL,
+            cwd=str(PROJECT_ROOT),
+            add_dirs=[str(DATA_DIR)],
+            mcp_servers={"bv": self.mcp_server},
+            allowed_tools=CUSTOM_TOOLS,
+            permission_mode="acceptEdits"
+        )
+
+    async def query_prompt(self, prompt: str) -> str:
+        """
+        Query Claude Agent SDK with a prompt and return response text
+
+        Args:
+            prompt: Full prompt to send to agent
+
+        Returns:
+            Agent response text (combined tool outputs and text)
+        """
+        response_text = ""
+        tool_outputs = []
+
+        async with ClaudeSDKClient(options=self._create_sdk_options()) as client:
+            await client.query(prompt)
+
+            async for message in client.receive_response():
+                class_name = message.__class__.__name__
+
+                # Skip system/result messages
+                if class_name in ['SystemMessage', 'ResultMessage']:
+                    continue
+
+                # Handle AssistantMessage
+                if class_name == 'AssistantMessage':
+                    content = getattr(message, 'content', [])
+                    for block in content:
+                        block_type = block.__class__.__name__
+
+                        if block_type == 'TextBlock':
+                            text = getattr(block, 'text', '')
+                            if text:
+                                response_text += text
+
+                        elif block_type == 'ToolUseBlock':
+                            tool_name = getattr(block, 'name', 'unknown')
+                            if 'mcp__bv__' in tool_name:
+                                tool_name = tool_name.replace('mcp__bv__', '')
+                            tool_outputs.append(f"🔧 Using tool: {tool_name}")
+
+                elif class_name == 'UserMessage':
+                    continue
+
+        # Combine tool outputs with response
+        if tool_outputs:
+            full_response = "\n".join(tool_outputs) + "\n\n" + response_text
+        else:
+            full_response = response_text
+
+        return full_response.strip() or "I processed your request but have no additional information to share."
+
+    async def query_prompt_streaming(self, prompt: str):
+        """
+        Query Claude Agent SDK with a prompt and yield incremental updates
+
+        Args:
+            prompt: Full prompt to send to agent
+
+        Yields:
+            Dictionary events:
+            - {"type": "tool_use", "tool_name": str} - when tool is used
+            - {"type": "text", "content": str} - text block from agent
+            - {"type": "done", "full_response": str} - final complete response
+        """
+        from teams_config import TeamsConfig
+
+        response_text = ""
+        tool_outputs = []
+
+        try:
+            if TeamsConfig.VERBOSE_LOGGING:
+                print("[Agent SDK] Starting query...")
+
+            async with ClaudeSDKClient(options=self._create_sdk_options()) as client:
+                await client.query(prompt)
+
+                async for message in client.receive_response():
+                    class_name = message.__class__.__name__
+
+                    # Skip system/result messages
+                    if class_name in ['SystemMessage', 'ResultMessage']:
+                        continue
+
+                    # Handle AssistantMessage
+                    if class_name == 'AssistantMessage':
+                        content = getattr(message, 'content', [])
+                        for block in content:
+                            block_type = block.__class__.__name__
+
+                            if block_type == 'TextBlock':
+                                text = getattr(block, 'text', '')
+                                if text:
+                                    response_text += text
+                                    if TeamsConfig.VERBOSE_LOGGING:
+                                        print(f"[Agent SDK] Text block: {len(text)} chars")
+                                    # Yield text event
+                                    yield {
+                                        "type": "text",
+                                        "content": text
+                                    }
+
+                            elif block_type == 'ToolUseBlock':
+                                tool_name = getattr(block, 'name', 'unknown')
+                                if 'mcp__bv__' in tool_name:
+                                    tool_name = tool_name.replace('mcp__bv__', '')
+                                tool_outputs.append(f"🔧 Using tool: {tool_name}")
+                                if TeamsConfig.VERBOSE_LOGGING:
+                                    print(f"[Agent SDK] Tool use: {tool_name}")
+                                # Yield tool use event
+                                yield {
+                                    "type": "tool_use",
+                                    "tool_name": tool_name
+                                }
+
+                    elif class_name == 'UserMessage':
+                        continue
+
+            # Build final response
+            if tool_outputs:
+                full_response = "\n".join(tool_outputs) + "\n\n" + response_text
+            else:
+                full_response = response_text
+
+            final_response = full_response.strip() or "I processed your request but have no additional information to share."
+
+            if TeamsConfig.VERBOSE_LOGGING:
+                print("[Agent SDK] Streaming complete")
+
+            # Yield completion event
+            yield {
+                "type": "done",
+                "full_response": final_response
+            }
+
+        except Exception as e:
+            if TeamsConfig.VERBOSE_LOGGING:
+                print(f"[Agent SDK] Error: {str(e)}")
+            # Yield error event
+            yield {
+                "type": "error",
+                "error": str(e)
+            }
 
     async def run(self, opportunity_id: str) -> dict:
         """
@@ -132,31 +305,8 @@ Begin the extraction process now.
         try:
             print("🔄 Connecting to Claude Agent SDK...\n")
 
-            # Configure SDK options with MCP server
-            # List all our custom tools explicitly
-            custom_tools = [
-                "mcp__bv__extract_salesforce_data",
-                "mcp__bv__clean_transcript",
-                "mcp__bv__analyze_documents",
-                "mcp__bv__validate_attributes",
-                "mcp__bv__generate_provisioning_csv",
-                "mcp__bv__generate_status_report",
-                "mcp__bv__query_salesforce_general",
-                "mcp__bv__check_extraction_status",
-                "mcp__bv__read_provisioning_file"
-            ]
-
-            options = ClaudeAgentOptions(
-                model=CLAUDE_MODEL,
-                cwd=str(PROJECT_ROOT),  # Set working directory
-                add_dirs=[str(DATA_DIR)],  # Allow access to data directories
-                mcp_servers={"bv": self.mcp_server},
-                allowed_tools=custom_tools,  # Only our custom tools (explicit list)
-                permission_mode="acceptEdits"  # Auto-approve our custom tools
-            )
-
             # Use ClaudeSDKClient for better control
-            async with ClaudeSDKClient(options=options) as client:
+            async with ClaudeSDKClient(options=self._create_sdk_options()) as client:
                 # Send the prompt
                 await client.query(full_prompt)
 
@@ -288,32 +438,9 @@ Begin the extraction process now.
                 print()  # New line for response
                 response_text = ""
 
-                # Configure SDK options with MCP server
-                # List all our custom tools explicitly
-                custom_tools = [
-                    "mcp__bv__extract_salesforce_data",
-                    "mcp__bv__clean_transcript",
-                    "mcp__bv__analyze_documents",
-                    "mcp__bv__validate_attributes",
-                    "mcp__bv__generate_provisioning_csv",
-                    "mcp__bv__generate_status_report",
-                    "mcp__bv__query_salesforce_general",
-                    "mcp__bv__check_extraction_status",
-                    "mcp__bv__read_provisioning_file"
-                ]
-
-                options = ClaudeAgentOptions(
-                    model=CLAUDE_MODEL,
-                    cwd=str(PROJECT_ROOT),  # Set working directory
-                    add_dirs=[str(DATA_DIR)],  # Allow access to data directories
-                    mcp_servers={"bv": self.mcp_server},
-                    allowed_tools=custom_tools,  # Only our custom tools (explicit list)
-                    permission_mode="acceptEdits"  # Auto-approve our custom tools
-                )
-
                 try:
                     # Use ClaudeSDKClient for better control
-                    async with ClaudeSDKClient(options=options) as client:
+                    async with ClaudeSDKClient(options=self._create_sdk_options()) as client:
                         # Send the prompt
                         await client.query(full_prompt)
 

@@ -33,6 +33,28 @@ from config import (
 )
 
 
+def _truncate_text(text: str, max_size: int = 50000, truncation_msg: str = "[OUTPUT TRUNCATED]") -> tuple:
+    """
+    Truncate text if it exceeds max_size
+
+    Args:
+        text: Text to truncate
+        max_size: Maximum size in characters
+        truncation_msg: Message to append when truncated
+
+    Returns:
+        Tuple of (truncated_text, was_truncated)
+    """
+    if not text:
+        return text, False
+
+    if len(text) <= max_size:
+        return text, False
+
+    truncated = text[:max_size] + f"\n\n... {truncation_msg} ...\n(Showing first {max_size} of {len(text)} characters)"
+    return truncated, True
+
+
 def _format_tool_response(data: Dict[str, Any]) -> Dict[str, Any]:
     """
     Format tool response for Claude Agent SDK
@@ -89,17 +111,19 @@ async def extract_salesforce_data(args: Dict[str, Any]) -> Dict[str, Any]:
 
     try:
         # Run the modular extraction script
+        # Script is now local to agent directory, creates data in agent's data directory
         cmd = [
             'python3',
             str(EXTRACTION_SCRIPT),
-            '--opp-id', opp_id
+            '--opp-id', opp_id,
+            '--output-dir', str(DATA_DIR)  # Pass agent's data directory
         ]
 
         result = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
-            cwd=PROJECT_ROOT
+            cwd=PROJECT_ROOT  # Run from agent root
         )
 
         if result.returncode != 0:
@@ -109,14 +133,17 @@ async def extract_salesforce_data(args: Dict[str, Any]) -> Dict[str, Any]:
                 "output": result.stdout
             })
 
-        # Determine output directory
-        data_dir = PROJECT_ROOT / 'data' / opp_id
+        # Determine output directory (agent's data directory)
+        data_dir = DATA_DIR / opp_id
 
-        return _format_tool_response({
+        # Truncate stdout to prevent buffer overflow
+        truncated_stdout, was_truncated = _truncate_text(result.stdout, max_size=50000)
+
+        response_data = {
             "success": True,
             "opportunity_id": opp_id,
             "output_directory": str(data_dir),
-            "extraction_output": result.stdout,
+            "extraction_output": truncated_stdout,
             "files_created": {
                 "opportunity": str(data_dir / "opportunity.json"),
                 "contacts": str(data_dir / "contacts.json"),
@@ -126,7 +153,12 @@ async def extract_salesforce_data(args: Dict[str, Any]) -> Dict[str, Any]:
                 "summary": str(data_dir / "summary.md"),
                 "complete_data": str(data_dir / "complete_data.json")
             }
-        })
+        }
+
+        if was_truncated:
+            response_data["warning"] = "Extraction output was truncated due to size. Full output saved to files."
+
+        return _format_tool_response(response_data)
 
     except Exception as e:
         return _format_tool_response({
@@ -161,7 +193,11 @@ async def analyze_documents(args: Dict[str, Any]) -> Dict[str, Any]:
     """
     docs_dir = Path(args.get('documents_directory', ''))
 
+    # LOGGING: Entry point
+    print(f"[Tool:analyze_documents] Called with directory: {docs_dir}")
+
     if not docs_dir.exists():
+        print(f"[Tool:analyze_documents] ❌ Directory not found: {docs_dir}")
         return _format_tool_response({
             "success": False,
             "error": f"Directory not found: {docs_dir}"
@@ -176,6 +212,7 @@ async def analyze_documents(args: Dict[str, Any]) -> Dict[str, Any]:
         }
 
         if not spreadsheets_dir.exists():
+            print(f"[Tool:analyze_documents] No spreadsheets directory found at {spreadsheets_dir}")
             return _format_tool_response({
                 "success": True,
                 "files_analyzed": [],
@@ -184,8 +221,10 @@ async def analyze_documents(args: Dict[str, Any]) -> Dict[str, Any]:
 
         # Find all Excel files
         excel_files = list(spreadsheets_dir.glob('*.xlsx')) + list(spreadsheets_dir.glob('*.xls'))
+        print(f"[Tool:analyze_documents] Found {len(excel_files)} Excel file(s) in {spreadsheets_dir}")
 
         for excel_file in excel_files:
+            print(f"[Tool:analyze_documents] Analyzing: {excel_file.name}")
             try:
                 # Read Excel file
                 df = pd.read_excel(excel_file, sheet_name=None)  # Read all sheets
@@ -195,20 +234,36 @@ async def analyze_documents(args: Dict[str, Any]) -> Dict[str, Any]:
                     "sheets": {}
                 }
 
+                total_rows = 0
                 for sheet_name, sheet_df in df.items():
                     # Convert to dictionary for easier processing
                     sheet_data = sheet_df.to_dict('records')
+                    row_count = len(sheet_data)
+                    total_rows += row_count
+
                     file_data["sheets"][sheet_name] = {
-                        "row_count": len(sheet_data),
+                        "row_count": row_count,
                         "columns": list(sheet_df.columns),
                         "sample_data": sheet_data[:5] if sheet_data else []  # First 5 rows as sample
                     }
 
+                    print(f"[Tool:analyze_documents]   Sheet '{sheet_name}': {row_count} rows, {len(sheet_df.columns)} columns")
+                    print(f"[Tool:analyze_documents]     Columns: {', '.join(list(sheet_df.columns)[:5])}{'...' if len(sheet_df.columns) > 5 else ''}")
+
+                print(f"[Tool:analyze_documents] ✅ Successfully analyzed {excel_file.name} ({len(df)} sheets, {total_rows} total rows)")
                 results["files_analyzed"].append(excel_file.name)
                 results["data_extracted"][excel_file.name] = file_data
 
             except Exception as e:
+                print(f"[Tool:analyze_documents] ❌ Error analyzing {excel_file.name}: {str(e)}")
                 results["files_analyzed"].append(f"{excel_file.name} (ERROR: {str(e)})")
+
+        # LOGGING: Summary
+        print(f"[Tool:analyze_documents] ═══════════════════════════════════════")
+        print(f"[Tool:analyze_documents] Document Analysis Complete")
+        print(f"[Tool:analyze_documents] Total files analyzed: {len(results['files_analyzed'])}")
+        print(f"[Tool:analyze_documents] Successful extractions: {len(results['data_extracted'])}")
+        print(f"[Tool:analyze_documents] ═══════════════════════════════════════")
 
         return _format_tool_response(results)
 
@@ -245,12 +300,17 @@ async def validate_attributes(args: Dict[str, Any]) -> Dict[str, Any]:
     """
     attributes_data = args.get('attributes_data', {})
 
+    # LOGGING: Entry point
+    print(f"[Tool:validate_attributes] Called with {len(attributes_data)} extracted attributes")
+
     try:
         # Load requirements template
         requirements = []
         with open(REQUIREMENTS_CSV, 'r') as f:
             reader = csv.DictReader(f, delimiter=';')
             requirements = list(reader)
+
+        print(f"[Tool:validate_attributes] Loaded {len(requirements)} attribute requirements from template")
 
         validation_results = {
             "success": True,
@@ -307,6 +367,26 @@ async def validate_attributes(args: Dict[str, Any]) -> Dict[str, Any]:
             (validation_results["complete"] / validation_results["total_attributes"]) * 100, 1
         )
 
+        # LOGGING: Summary
+        print(f"[Tool:validate_attributes] ═══════════════════════════════════════")
+        print(f"[Tool:validate_attributes] Validation Complete")
+        print(f"[Tool:validate_attributes] ═══════════════════════════════════════")
+        print(f"[Tool:validate_attributes] Total attributes: {validation_results['total_attributes']}")
+        print(f"[Tool:validate_attributes] Complete: {validation_results['complete']} ({validation_results['completeness_percentage']}%)")
+        print(f"[Tool:validate_attributes] Partial: {validation_results['partial']}")
+        print(f"[Tool:validate_attributes] Missing: {validation_results['missing']}")
+        print(f"[Tool:validate_attributes] Conflicts: {validation_results['conflicts']}")
+        print(f"[Tool:validate_attributes] Critical mandatory missing: {len(validation_results['critical_missing'])}")
+
+        if validation_results["critical_missing"]:
+            print(f"[Tool:validate_attributes] ❌ Critical MANDATORY fields missing (first 10):")
+            for item in validation_results["critical_missing"][:10]:
+                print(f"[Tool:validate_attributes]   - {item['category']}|{item['attribute']}")
+            if len(validation_results["critical_missing"]) > 10:
+                print(f"[Tool:validate_attributes]   ... and {len(validation_results['critical_missing']) - 10} more")
+
+        print(f"[Tool:validate_attributes] ═══════════════════════════════════════")
+
         return _format_tool_response(validation_results)
 
     except Exception as e:
@@ -353,9 +433,22 @@ async def generate_provisioning_csv(args: Dict[str, Any]) -> Dict[str, Any]:
             "error": "No opportunity_id provided"
         })
 
+    # LOGGING: Entry point
+    print(f"[Tool:generate_provisioning_csv] Called for opportunity: {opp_id}")
+    print(f"[Tool:generate_provisioning_csv] Received attributes_data with {len(attributes_data)} keys")
+
+    if len(attributes_data) > 0:
+        print(f"[Tool:generate_provisioning_csv] Sample attribute keys (first 5):")
+        for i, key in enumerate(list(attributes_data.keys())[:5]):
+            value_preview = str(attributes_data[key].get('value', ''))[:50]
+            status = attributes_data[key].get('status', 'Unknown')
+            print(f"[Tool:generate_provisioning_csv]   {i+1}. {key} = '{value_preview}' (status: {status})")
+    else:
+        print(f"[Tool:generate_provisioning_csv] ⚠️  WARNING: attributes_data is EMPTY - all fields will be 'Missing'")
+
     try:
-        # Create provs directory
-        provs_dir = PROJECT_ROOT / 'data' / opp_id / 'provs'
+        # Create provs directory in agent's data directory
+        provs_dir = DATA_DIR / opp_id / 'provs'
         provs_dir.mkdir(parents=True, exist_ok=True)
 
         csv_file = provs_dir / f"{opp_id}_provisioning.csv"
@@ -365,6 +458,108 @@ async def generate_provisioning_csv(args: Dict[str, Any]) -> Dict[str, Any]:
         with open(REQUIREMENTS_CSV, 'r') as f:
             reader = csv.DictReader(f, delimiter=';')
             requirements = list(reader)
+
+        print(f"[Tool:generate_provisioning_csv] Loaded {len(requirements)} attribute requirements from template")
+
+        # ═══════════════════════════════════════════════════════════
+        # KEY NORMALIZATION: Handle format variations
+        # ═══════════════════════════════════════════════════════════
+
+        # Build a mapping from potential snake_case keys to template format
+        def to_snake_case(text):
+            """Convert 'First Name' to 'first_name'"""
+            import re
+            # Remove special chars, convert to lowercase, replace spaces with underscores
+            text = re.sub(r'[^\w\s]', '', text.lower())
+            text = re.sub(r'\s+', '_', text)
+            return text
+
+        # Auto-generate potential key variations
+        snake_to_template = {}
+        for req in requirements:
+            category = req['Category']
+            attribute = req['Attribute']
+            sub_attribute = req.get('Sub-Attribute', '')
+
+            # Template format key
+            template_key = f"{category}|{attribute}"
+            if sub_attribute:
+                template_key = f"{category}|{attribute}|{sub_attribute}"
+
+            # Potential snake_case variations
+            category_snake = to_snake_case(category)
+            attr_snake = to_snake_case(attribute)
+
+            # Common patterns agents might use
+            variations = [
+                f"{category_snake}_{attr_snake}",  # user_details_first_name
+                f"{attr_snake}",  # first_name (category omitted)
+                f"user_{attr_snake}" if "user" in category.lower() else f"{category_snake}_{attr_snake}",
+                f"location_{attr_snake}" if "location" in category.lower() or "address" in category.lower() else None,
+                f"phone_{attr_snake}" if "phone" in category.lower() else None,
+                f"device_{attr_snake}" if "device" in category.lower() else None,
+            ]
+
+            for variant in variations:
+                if variant:
+                    snake_to_template[variant] = template_key
+
+            # For sub-attributes, try with sub-attribute suffix
+            if sub_attribute:
+                sub_snake = to_snake_case(sub_attribute)
+                snake_to_template[f"{attr_snake}_{sub_snake}"] = template_key
+                snake_to_template[f"{category_snake}_{attr_snake}_{sub_snake}"] = template_key
+
+        # Analyze the format of incoming keys
+        template_format_count = sum(1 for k in attributes_data.keys() if '|' in k)
+        other_format_count = len(attributes_data) - template_format_count
+
+        print(f"[Tool:generate_provisioning_csv] ─────────────────────────────────────")
+        print(f"[Tool:generate_provisioning_csv] Format Analysis:")
+        print(f"[Tool:generate_provisioning_csv]   Keys in template format (Category|Attribute): {template_format_count}")
+        print(f"[Tool:generate_provisioning_csv]   Keys in other format: {other_format_count}")
+
+        # Create a smart lookup function
+        def get_extracted_value(template_key):
+            """Try to find value using template key or alternative formats"""
+            # Try direct template format first
+            if template_key in attributes_data:
+                return attributes_data[template_key]
+
+            # Try to find a match using our snake_case mapping
+            for snake_key, mapped_template_key in snake_to_template.items():
+                if mapped_template_key == template_key and snake_key in attributes_data:
+                    return attributes_data[snake_key]
+
+            # No match found
+            return {}
+
+        # Sample the mappings being applied
+        if other_format_count > 0:
+            sample_mappings = []
+            for snake_key in list(attributes_data.keys())[:5]:
+                if '|' not in snake_key:  # Not template format
+                    mapped = snake_to_template.get(snake_key)
+                    if mapped:
+                        sample_mappings.append(f"{snake_key} → {mapped}")
+
+            if sample_mappings:
+                print(f"[Tool:generate_provisioning_csv]   Applying normalization (sample mappings):")
+                for mapping in sample_mappings:
+                    print(f"[Tool:generate_provisioning_csv]     {mapping}")
+
+        print(f"[Tool:generate_provisioning_csv] ─────────────────────────────────────")
+
+        # Track statistics
+        stats = {
+            'total': 0,
+            'populated': 0,
+            'missing': 0,
+            'inferred': 0,
+            'mandatory_missing': [],
+            'populated_attributes': [],
+            'normalized_count': 0  # Track how many used normalization
+        }
 
         # Write provisioning CSV
         with open(csv_file, 'w', newline='') as f:
@@ -377,31 +572,80 @@ async def generate_provisioning_csv(args: Dict[str, Any]) -> Dict[str, Any]:
                 sub_attribute = req.get('Sub-Attribute', '')
                 required = req['Required/Optional']
 
-                # Get extracted data
+                # Get extracted data using smart lookup
                 attr_key = f"{category}|{attribute}"
                 if sub_attribute:
                     attr_key = f"{category}|{attribute}|{sub_attribute}"
 
-                extracted = attributes_data.get(attr_key, {})
+                extracted = get_extracted_value(attr_key)  # ← Use smart lookup
+
+                # Track if normalization was used
+                if extracted and attr_key not in attributes_data:
+                    stats['normalized_count'] += 1
+
+                value = extracted.get('value', '')
+                status = extracted.get('status', 'Missing')
 
                 row = {
                     'Category': category,
                     'Attribute': attribute,
                     'Sub-Attribute': sub_attribute,
                     'Required/Optional': required,
-                    'Extracted Value': extracted.get('value', ''),
+                    'Extracted Value': value,
                     'Source Timestamp': extracted.get('source', ''),
-                    'Status': extracted.get('status', 'Missing'),
+                    'Status': status,
                     'Notes': extracted.get('notes', '')
                 }
 
                 writer.writerow(row)
 
+                # Update stats
+                stats['total'] += 1
+                if value and status != 'Missing':
+                    stats['populated'] += 1
+                    stats['populated_attributes'].append(f"{category}|{attribute}")
+                    if 'Inferred' in status:
+                        stats['inferred'] += 1
+                else:
+                    stats['missing'] += 1
+                    if 'Mandatory' in required:
+                        stats['mandatory_missing'].append(f"{category}|{attribute}")
+
+        # LOGGING: Final stats
+        print(f"[Tool:generate_provisioning_csv] ═══════════════════════════════════════")
+        print(f"[Tool:generate_provisioning_csv] CSV Generation Complete")
+        print(f"[Tool:generate_provisioning_csv] ═══════════════════════════════════════")
+        print(f"[Tool:generate_provisioning_csv] Total attributes: {stats['total']}")
+        print(f"[Tool:generate_provisioning_csv] Populated: {stats['populated']} ({stats['populated']/stats['total']*100:.1f}%)")
+        print(f"[Tool:generate_provisioning_csv] Missing: {stats['missing']} ({stats['missing']/stats['total']*100:.1f}%)")
+        print(f"[Tool:generate_provisioning_csv] Inferred: {stats['inferred']}")
+        if stats['normalized_count'] > 0:
+            print(f"[Tool:generate_provisioning_csv] Normalized (key mapping applied): {stats['normalized_count']}")
+        print(f"[Tool:generate_provisioning_csv] ═══════════════════════════════════════")
+
+        if stats['populated'] > 0:
+            print(f"[Tool:generate_provisioning_csv] ✅ Populated attributes (first 10):")
+            for attr in stats['populated_attributes'][:10]:
+                print(f"[Tool:generate_provisioning_csv]   - {attr}")
+            if len(stats['populated_attributes']) > 10:
+                print(f"[Tool:generate_provisioning_csv]   ... and {len(stats['populated_attributes']) - 10} more")
+
+        if len(stats['mandatory_missing']) > 0:
+            print(f"[Tool:generate_provisioning_csv] ❌ Critical MANDATORY attributes still missing ({len(stats['mandatory_missing'])}):")
+            for attr in stats['mandatory_missing'][:10]:
+                print(f"[Tool:generate_provisioning_csv]   - {attr}")
+            if len(stats['mandatory_missing']) > 10:
+                print(f"[Tool:generate_provisioning_csv]   ... and {len(stats['mandatory_missing']) - 10} more")
+
+        print(f"[Tool:generate_provisioning_csv] File written to: {csv_file}")
+        print(f"[Tool:generate_provisioning_csv] ═══════════════════════════════════════")
+
         return _format_tool_response({
             "success": True,
             "csv_file": str(csv_file),
             "rows_written": len(requirements),
-            "message": f"Provisioning CSV created successfully: {csv_file}"
+            "stats": stats,
+            "message": f"Provisioning CSV created: {stats['populated']}/{stats['total']} attributes populated"
         })
 
     except Exception as e:
@@ -459,8 +703,8 @@ async def generate_status_report(args: Dict[str, Any]) -> Dict[str, Any]:
         })
 
     try:
-        # Create provs directory
-        provs_dir = PROJECT_ROOT / 'data' / opp_id / 'provs'
+        # Create provs directory in agent's data directory
+        provs_dir = DATA_DIR / opp_id / 'provs'
         provs_dir.mkdir(parents=True, exist_ok=True)
 
         report_file = provs_dir / f"{opp_id}_status.md"
@@ -827,6 +1071,79 @@ async def read_provisioning_file(args: Dict[str, Any]) -> Dict[str, Any]:
         })
 
 
+@tool(
+    "queue_file_for_teams",
+    "Queue a generated file to be sent to the user in MS Teams. Call this immediately after creating CSV files, status reports, or other deliverables that the user needs.",
+    {
+        "type": "object",
+        "properties": {
+            "file_path": {
+                "type": "string",
+                "description": "Absolute path to the file to send to the user"
+            },
+            "description": {
+                "type": "string",
+                "description": "User-friendly description of the file (e.g., 'Provisioning CSV with 80 attributes', 'Status Report')"
+            },
+            "priority": {
+                "type": "string",
+                "enum": ["high", "normal", "low"],
+                "description": "Priority for sending (high priority files sent first). Use 'high' for critical deliverables like provisioning CSVs and status reports."
+            }
+        },
+        "required": ["file_path"]
+    }
+)
+async def queue_file_for_teams(args: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Queue file for Teams delivery
+
+    Args:
+        args: Dictionary with 'file_path', 'description', 'priority'
+
+    Returns:
+        Success confirmation
+    """
+    from file_queue import file_queue
+    from teams_handler import get_current_conversation_id
+
+    file_path = args.get('file_path', '')
+    description = args.get('description', '')
+    priority = args.get('priority', 'normal')
+
+    # Validate file exists
+    if not Path(file_path).exists():
+        return _format_tool_response({
+            "success": False,
+            "error": f"File not found: {file_path}"
+        })
+
+    # Get conversation ID from context
+    conversation_id = get_current_conversation_id()
+
+    if not conversation_id:
+        return _format_tool_response({
+            "success": False,
+            "error": "No active conversation context. This tool must be called during a Teams conversation."
+        })
+
+    # Add to queue
+    file_queue.add_file(
+        conversation_id=conversation_id,
+        file_path=file_path,
+        description=description or Path(file_path).name,
+        priority=priority
+    )
+
+    return _format_tool_response({
+        "success": True,
+        "message": f"File queued for Teams delivery: {Path(file_path).name}",
+        "file_name": Path(file_path).name,
+        "description": description or Path(file_path).name,
+        "priority": priority
+    })
+
+
 # Export all tool functions for registration
 ALL_TOOLS = [
     extract_salesforce_data,
@@ -836,7 +1153,8 @@ ALL_TOOLS = [
     generate_status_report,
     query_salesforce_general,
     check_extraction_status,
-    read_provisioning_file
+    read_provisioning_file,
+    queue_file_for_teams
 ]
 
 # Tool metadata for SDK registration
