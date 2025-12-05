@@ -3,6 +3,9 @@
 # Claude Agent SDK
 claude-agent-sdk>=0.1.0
 
+# MCP (Model Context Protocol) - Required >=1.7.0 for Server version parameter
+mcp>=1.7.0
+
 # Environment variables
 python-dotenv>=1.0.0
 

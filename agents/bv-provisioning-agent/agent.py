@@ -14,6 +14,7 @@ Usage:
 
 import argparse
 import asyncio
+import signal
 import sys
 import os
 from pathlib import Path
@@ -50,13 +51,22 @@ from config import (
     INTERACTIVE_HELP,
     PROJECT_ROOT,
     DATA_DIR,
-    PROVS_DIR
+    PROVS_DIR,
+    BHIVE_MCP_ENABLED,
+    BHIVE_MCP_SERVER_URL,
+    CANCELLATION_ENABLED
 )
 from tools import ALL_TOOLS, TOOL_SCHEMAS
+from cancellation import (
+    get_cancellation_manager,
+    cancellation_manager as global_cancellation_manager,
+    OperationState
+)
 
 
 # Custom tools list for Claude SDK
 CUSTOM_TOOLS = [
+    # Salesforce extraction tools
     "mcp__bv__extract_salesforce_data",
     "mcp__bv__clean_transcript",
     "mcp__bv__analyze_documents",
@@ -66,7 +76,14 @@ CUSTOM_TOOLS = [
     "mcp__bv__query_salesforce_general",
     "mcp__bv__check_extraction_status",
     "mcp__bv__read_provisioning_file",
-    "mcp__bv__queue_file_for_teams"
+    "mcp__bv__queue_file_for_teams",
+    # B-hive provisioning tools
+    "mcp__bv__save_bhive_provisioning_data",
+    "mcp__bv__provision_to_bhive",
+    "mcp__bv__check_bhive_provisioning_status",
+    "mcp__bv__generate_bhive_report",
+    # Cancellation tool
+    "mcp__bv__cancel_operation"
 ]
 
 
@@ -86,6 +103,26 @@ class BVProvisioningAgent:
             version="1.0.0",
             tools=ALL_TOOLS
         )
+
+        # Check b-hive MCP server connectivity if enabled
+        self.bhive_available = False
+        if BHIVE_MCP_ENABLED:
+            self._check_bhive_connectivity()
+
+    def _check_bhive_connectivity(self):
+        """Check if b-hive MCP server is reachable at startup"""
+        from bhive_client import BHiveMCPClient
+        client = BHiveMCPClient()
+        result = client.check_health_sync()
+
+        if result.get("success"):
+            print(f"✅ B-hive MCP server connected ({BHIVE_MCP_SERVER_URL})")
+            self.bhive_available = True
+        else:
+            print(f"⚠️  B-hive MCP server unavailable: {result.get('error')}")
+            print(f"   URL: {BHIVE_MCP_SERVER_URL}")
+            print(f"   B-hive provisioning features will be disabled.")
+            self.bhive_available = False
 
     def _load_system_prompt(self) -> str:
         """Load and combine all system prompts"""
@@ -273,6 +310,8 @@ class BVProvisioningAgent:
         """
         Execute the provisioning extraction workflow using Claude Agent SDK
 
+        Supports cancellation via Ctrl+C (immediate, no confirmation in autonomous mode).
+
         Args:
             opportunity_id: Salesforce opportunity ID or name
 
@@ -284,7 +323,30 @@ class BVProvisioningAgent:
         print("=" * 70)
         print(f"\nOpportunity: {opportunity_id}")
         print(f"Model: {CLAUDE_MODEL}")
+        if CANCELLATION_ENABLED:
+            print("Press Ctrl+C to cancel at any time")
         print("\n" + "=" * 70 + "\n")
+
+        # Get cancellation manager
+        cancellation_mgr = get_cancellation_manager()
+        cancellation_mgr.set_opportunity_id(opportunity_id)
+
+        # Set up SIGINT handler for autonomous mode (immediate cancellation)
+        original_sigint_handler = signal.getsignal(signal.SIGINT)
+        cancelled = False
+
+        def autonomous_cancel_handler(signum, frame):
+            """Handle Ctrl+C in autonomous mode - immediate cancellation"""
+            nonlocal cancelled
+            if CANCELLATION_ENABLED:
+                print("\n\n[Ctrl+C] Cancellation requested...")
+                cancellation_mgr.request_cancellation()
+                cancellation_mgr.confirm_cancellation()
+                cancelled = True
+                print("Cancellation signal sent. Waiting for operation to stop...\n")
+
+        if CANCELLATION_ENABLED:
+            signal.signal(signal.SIGINT, autonomous_cancel_handler)
 
         # Build the prompt with system instructions and user request
         full_prompt = f"""{self.system_prompt}
@@ -312,6 +374,11 @@ Begin the extraction process now.
 
                 # Process responses
                 async for message in client.receive_response():
+                    # Check if cancelled
+                    if cancelled:
+                        print("\n⚠️ Operation cancelled by user")
+                        break
+
                     # Get message class name
                     class_name = message.__class__.__name__
 
@@ -343,8 +410,20 @@ Begin the extraction process now.
                         continue
 
             print("\n" + "=" * 70)
-            print("✅ AGENT COMPLETED")
+            if cancelled:
+                print("⚠️ AGENT CANCELLED")
+                print("Downloaded data has been preserved.")
+            else:
+                print("✅ AGENT COMPLETED")
             print("=" * 70)
+
+            if cancelled:
+                return {
+                    "success": False,
+                    "cancelled": True,
+                    "opportunity_id": opportunity_id,
+                    "message": "Extraction cancelled by user. Downloaded data preserved."
+                }
 
             return {
                 "success": True,
@@ -374,10 +453,21 @@ Begin the extraction process now.
                 "success": False,
                 "error": str(e)
             }
+        finally:
+            # Restore original SIGINT handler
+            if CANCELLATION_ENABLED:
+                signal.signal(signal.SIGINT, original_sigint_handler)
+            # Reset cancellation state
+            cancellation_mgr.reset()
 
     async def run_interactive(self, initial_context: Optional[str] = None) -> None:
         """
         Run agent in interactive mode with continuous conversation
+
+        Supports cancellation:
+        - /cancel command: Request cancellation with confirmation
+        - Ctrl+C: Emergency stop - cancels immediately without confirmation
+        - Natural language: "cancel", "stop", "abort" etc. trigger confirmation
 
         Args:
             initial_context: Optional initial context (e.g., opportunity ID)
@@ -390,112 +480,172 @@ Begin the extraction process now.
         if initial_context:
             print(f"\n📋 Context: {initial_context}\n")
 
-        # Interactive conversation loop
-        while True:
-            try:
-                # Get user input
-                user_input = input(INTERACTIVE_PROMPT).strip()
+        # Get cancellation manager for this session
+        cancellation_mgr = get_cancellation_manager()
 
-                if not user_input:
-                    continue
+        # Set up SIGINT handler for emergency cancellation (Ctrl+C bypasses confirmation)
+        original_sigint_handler = signal.getsignal(signal.SIGINT)
 
-                # Handle commands
-                if user_input.startswith('/'):
-                    if user_input == '/exit':
-                        print("\n👋 Goodbye!")
-                        break
-                    elif user_input == '/help':
-                        print(INTERACTIVE_HELP)
+        def emergency_cancel_handler(signum, frame):
+            """Handle Ctrl+C - immediate cancellation without confirmation"""
+            if CANCELLATION_ENABLED and cancellation_mgr.is_operation_running():
+                print("\n\n[Ctrl+C] Emergency cancellation triggered...")
+                cancellation_mgr.request_cancellation()
+                result = cancellation_mgr.confirm_cancellation()
+                print(f"\n{AGENT_PREFIX}{result.get('message', 'Operation cancelled.')}\n")
+            else:
+                # No operation running, restore original behavior
+                print("\n\n[Ctrl+C] Use /exit to quit gracefully")
+
+        if CANCELLATION_ENABLED:
+            signal.signal(signal.SIGINT, emergency_cancel_handler)
+
+        try:
+            # Interactive conversation loop
+            while True:
+                try:
+                    # Get user input
+                    user_input = input(INTERACTIVE_PROMPT).strip()
+
+                    if not user_input:
                         continue
-                    elif user_input == '/clear':
-                        self.conversation_history = []
-                        print("\n✨ Conversation history cleared.\n")
-                        continue
-                    else:
-                        print(f"Unknown command: {user_input}. Type /help for available commands.")
-                        continue
 
-                # Build prompt with system instructions and conversation history
-                conversation_context = "\n\n".join([
-                    f"{'User' if i % 2 == 0 else 'Assistant'}: {msg}"
-                    for i, msg in enumerate(self.conversation_history)
-                ])
+                    # Check for pending cancellation confirmation
+                    if CANCELLATION_ENABLED and cancellation_mgr.is_pending_confirmation():
+                        if user_input.lower() in ['yes', 'y', 'confirm']:
+                            result = cancellation_mgr.confirm_cancellation()
+                            print(f"\n{AGENT_PREFIX}{result.get('message', 'Operation cancelled.')}\n")
+                            continue
+                        elif user_input.lower() in ['no', 'n', 'cancel']:
+                            cancellation_mgr.abort_cancellation()
+                            print(f"\n{AGENT_PREFIX}Cancellation aborted. Operation continues.\n")
+                            continue
 
-                # Build conversation history section
-                history_section = ""
-                if conversation_context:
-                    history_section = f"CONVERSATION HISTORY:\n{conversation_context}\n\n"
+                    # Handle commands
+                    if user_input.startswith('/'):
+                        if user_input == '/exit':
+                            print("\n👋 Goodbye!")
+                            break
+                        elif user_input == '/help':
+                            print(INTERACTIVE_HELP)
+                            print("\nCancellation Commands:")
+                            print("  /cancel         Cancel current operation (requires confirmation)")
+                            print("  Ctrl+C          Emergency cancel (no confirmation)")
+                            continue
+                        elif user_input == '/clear':
+                            self.conversation_history = []
+                            print("\n✨ Conversation history cleared.\n")
+                            continue
+                        elif user_input == '/cancel':
+                            if not CANCELLATION_ENABLED:
+                                print(f"\n{AGENT_PREFIX}Cancellation is disabled.\n")
+                                continue
+                            if cancellation_mgr.is_operation_running():
+                                result = cancellation_mgr.request_cancellation()
+                                print(f"\n{AGENT_PREFIX}{result.get('message', '')}")
+                                print(f"{AGENT_PREFIX}Type 'yes' to confirm or 'no' to continue.\n")
+                            else:
+                                print(f"\n{AGENT_PREFIX}No operation is currently running.\n")
+                            continue
+                        else:
+                            print(f"Unknown command: {user_input}. Type /help for available commands.")
+                            continue
 
-                full_prompt = f"""{self.system_prompt}
+                    # Check for natural language cancellation intent
+                    if CANCELLATION_ENABLED and cancellation_mgr.detect_cancellation_intent(user_input):
+                        if cancellation_mgr.is_operation_running():
+                            result = cancellation_mgr.request_cancellation()
+                            print(f"\n{AGENT_PREFIX}{result.get('message', '')}")
+                            print(f"{AGENT_PREFIX}Type 'yes' to confirm or 'no' to continue.\n")
+                            continue
+                        # If no operation running, let the message pass through to Claude
+
+                    # Build prompt with system instructions and conversation history
+                    conversation_context = "\n\n".join([
+                        f"{'User' if i % 2 == 0 else 'Assistant'}: {msg}"
+                        for i, msg in enumerate(self.conversation_history)
+                    ])
+
+                    # Build conversation history section
+                    history_section = ""
+                    if conversation_context:
+                        history_section = f"CONVERSATION HISTORY:\n{conversation_context}\n\n"
+
+                    full_prompt = f"""{self.system_prompt}
 
 {history_section}USER: {user_input}
 """
 
-                # Add to conversation history
-                self.conversation_history.append(user_input)
+                    # Add to conversation history
+                    self.conversation_history.append(user_input)
 
-                # Query the agent
-                print()  # New line for response
-                response_text = ""
+                    # Query the agent
+                    print()  # New line for response
+                    response_text = ""
 
-                try:
-                    # Use ClaudeSDKClient for better control
-                    async with ClaudeSDKClient(options=self._create_sdk_options()) as client:
-                        # Send the prompt
-                        await client.query(full_prompt)
+                    try:
+                        # Use ClaudeSDKClient for better control
+                        async with ClaudeSDKClient(options=self._create_sdk_options()) as client:
+                            # Send the prompt
+                            await client.query(full_prompt)
 
-                        # Process responses
-                        async for message in client.receive_response():
-                            # Get message class name
-                            class_name = message.__class__.__name__
+                            # Process responses
+                            async for message in client.receive_response():
+                                # Get message class name
+                                class_name = message.__class__.__name__
 
-                            # Skip system/result messages
-                            if class_name in ['SystemMessage', 'ResultMessage']:
-                                continue
+                                # Skip system/result messages
+                                if class_name in ['SystemMessage', 'ResultMessage']:
+                                    continue
 
-                            # Handle AssistantMessage - contains text and tool use blocks
-                            if class_name == 'AssistantMessage':
-                                content = getattr(message, 'content', [])
-                                for block in content:
-                                    block_type = block.__class__.__name__
+                                # Handle AssistantMessage - contains text and tool use blocks
+                                if class_name == 'AssistantMessage':
+                                    content = getattr(message, 'content', [])
+                                    for block in content:
+                                        block_type = block.__class__.__name__
 
-                                    if block_type == 'TextBlock':
-                                        # Extract text from TextBlock
-                                        text = getattr(block, 'text', '')
-                                        if text:
-                                            print(f"\n{AGENT_PREFIX}{text}")
-                                            response_text += text
+                                        if block_type == 'TextBlock':
+                                            # Extract text from TextBlock
+                                            text = getattr(block, 'text', '')
+                                            if text:
+                                                print(f"\n{AGENT_PREFIX}{text}")
+                                                response_text += text
 
-                                    elif block_type == 'ToolUseBlock':
-                                        # Show tool usage
-                                        tool_name = getattr(block, 'name', 'unknown')
-                                        if 'mcp__bv__' in tool_name:
-                                            tool_name = tool_name.replace('mcp__bv__', '')
-                                        print(f"\n🔧 Using tool: {tool_name}...")
+                                        elif block_type == 'ToolUseBlock':
+                                            # Show tool usage
+                                            tool_name = getattr(block, 'name', 'unknown')
+                                            if 'mcp__bv__' in tool_name:
+                                                tool_name = tool_name.replace('mcp__bv__', '')
+                                            print(f"\n🔧 Using tool: {tool_name}...")
 
-                            # Skip UserMessage (tool results are handled internally)
-                            elif class_name == 'UserMessage':
-                                continue
+                                # Skip UserMessage (tool results are handled internally)
+                                elif class_name == 'UserMessage':
+                                    continue
 
-                    print()  # New line after response
+                        print()  # New line after response
 
-                    # Add response to history
-                    if response_text:
-                        self.conversation_history.append(response_text)
+                        # Add response to history
+                        if response_text:
+                            self.conversation_history.append(response_text)
 
-                except CLINotFoundError:
-                    print(f"\n{AGENT_PREFIX}⚠️  Claude Code CLI not found. Please install: npm install -g @anthropic-ai/claude-code\n")
-                except ProcessError as e:
-                    print(f"\n{AGENT_PREFIX}⚠️  Process error: {e.exit_code}\n")
-                except Exception as e:
-                    print(f"\n{AGENT_PREFIX}⚠️  Error: {str(e)}\n")
+                    except CLINotFoundError:
+                        print(f"\n{AGENT_PREFIX}⚠️  Claude Code CLI not found. Please install: npm install -g @anthropic-ai/claude-code\n")
+                    except ProcessError as e:
+                        print(f"\n{AGENT_PREFIX}⚠️  Process error: {e.exit_code}\n")
+                    except Exception as e:
+                        print(f"\n{AGENT_PREFIX}⚠️  Error: {str(e)}\n")
 
-            except KeyboardInterrupt:
-                print("\n\n⚠️  Use /exit to quit gracefully")
-                continue
-            except EOFError:
-                print("\n\n👋 Goodbye!")
-                break
+                except KeyboardInterrupt:
+                    # This should be handled by our signal handler, but just in case
+                    print("\n\n[Ctrl+C] Use /exit to quit gracefully")
+                    continue
+                except EOFError:
+                    print("\n\n👋 Goodbye!")
+                    break
+        finally:
+            # Restore original SIGINT handler
+            if CANCELLATION_ENABLED:
+                signal.signal(signal.SIGINT, original_sigint_handler)
 
 
 def main():

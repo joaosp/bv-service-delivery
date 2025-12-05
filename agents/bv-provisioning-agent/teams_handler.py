@@ -14,7 +14,11 @@ from botbuilder.schema import ChannelAccount, Activity, ActivityTypes, Attachmen
 
 from agent import BVProvisioningAgent
 from teams_config import TeamsConfig, conversation_store
-from config import CLAUDE_MODEL
+from config import CLAUDE_MODEL, CANCELLATION_ENABLED
+from cancellation import (
+    get_conversation_cancellation_manager,
+    set_current_conversation_id as set_cancellation_conversation_id
+)
 
 # Thread-local storage for conversation context
 _conversation_context = ContextVar('conversation_id', default=None)
@@ -41,7 +45,12 @@ class TeamsActivityHandler(ActivityHandler):
 
     async def on_message_activity(self, turn_context: TurnContext):
         """
-        Handle incoming message from Teams user
+        Handle incoming message from Teams user.
+
+        Supports cancellation:
+        - /cancel command: Request cancellation with confirmation
+        - Natural language: "cancel", "stop", "abort" etc. trigger confirmation
+        - "yes"/"no" to confirm/abort pending cancellation
 
         Args:
             turn_context: Bot Framework turn context with message details
@@ -56,6 +65,38 @@ class TeamsActivityHandler(ActivityHandler):
         user_name = turn_context.activity.from_property.name if turn_context.activity.from_property else "User"
 
         print(f"\n[Teams] Message from {user_name}: {user_message}")
+
+        # Get conversation-specific cancellation manager
+        cancellation_mgr = get_conversation_cancellation_manager(conversation_id)
+        set_cancellation_conversation_id(conversation_id)
+
+        # Check for pending cancellation confirmation
+        if CANCELLATION_ENABLED and cancellation_mgr.is_pending_confirmation():
+            user_lower = user_message.lower().strip()
+            if user_lower in ['yes', 'y', 'confirm']:
+                result = cancellation_mgr.confirm_cancellation()
+                await turn_context.send_activity(f"✅ {result.get('message', 'Operation cancelled.')}")
+                return
+            elif user_lower in ['no', 'n', 'abort', 'continue']:
+                cancellation_mgr.abort_cancellation()
+                await turn_context.send_activity("▶️ Cancellation aborted. Operation continues.")
+                return
+            # Otherwise, fall through and show reminder
+            await turn_context.send_activity(
+                "⚠️ Cancellation is pending. Type **yes** to confirm or **no** to continue."
+            )
+            return
+
+        # Check for natural language cancellation intent (before command handling)
+        if CANCELLATION_ENABLED and cancellation_mgr.detect_cancellation_intent(user_message):
+            if cancellation_mgr.is_operation_running():
+                result = cancellation_mgr.request_cancellation()
+                await turn_context.send_activity(
+                    f"⚠️ {result.get('message', '')}\n\n"
+                    f"Type **yes** to confirm cancellation or **no** to continue."
+                )
+                return
+            # If no operation running, let the message pass through
 
         # Handle commands
         if user_message.startswith('/'):
@@ -505,6 +546,7 @@ Available commands:
 - `/help` - Show this help message
 - `/clear` - Clear conversation history
 - `/status` - Show bot status and model info
+- `/cancel` - Cancel current operation (requires confirmation)
 
 **Example requests:**
 - Extract provisioning data for opportunity [ID]
@@ -518,12 +560,44 @@ Available commands:
             conversation_store.clear_history(conversation_id)
             await turn_context.send_activity("✨ Conversation history cleared.")
 
+        elif command == '/cancel':
+            if not CANCELLATION_ENABLED:
+                await turn_context.send_activity("⚠️ Cancellation is disabled.")
+                return
+
+            cancellation_mgr = get_conversation_cancellation_manager(conversation_id)
+
+            if cancellation_mgr.is_pending_confirmation():
+                # Double /cancel = confirm
+                result = cancellation_mgr.confirm_cancellation()
+                await turn_context.send_activity(f"✅ {result.get('message', 'Operation cancelled.')}")
+            elif cancellation_mgr.is_operation_running():
+                result = cancellation_mgr.request_cancellation()
+                await turn_context.send_activity(
+                    f"⚠️ {result.get('message', '')}\n\n"
+                    f"Type `/cancel` again or **yes** to confirm, or **no** to continue."
+                )
+            else:
+                await turn_context.send_activity("ℹ️ No operation is currently running.")
+
         elif command == '/status':
             status_text = f"""**Bot Status**
 - Model: {CLAUDE_MODEL}
 - Status: ✅ Online
 - Conversation history: {"Enabled" if TeamsConfig.CONVERSATION_HISTORY_ENABLED else "Disabled"}
+- Cancellation: {"Enabled" if CANCELLATION_ENABLED else "Disabled"}
 """
+            # Add current operation status if running
+            if CANCELLATION_ENABLED:
+                cancellation_mgr = get_conversation_cancellation_manager(conversation_id)
+                if cancellation_mgr.is_operation_running():
+                    state = cancellation_mgr.get_current_state()
+                    opp_id = cancellation_mgr.get_opportunity_id()
+                    status_text += f"- Current operation: {state.value}"
+                    if opp_id:
+                        status_text += f" (Opportunity: {opp_id})"
+                    status_text += "\n"
+
             await turn_context.send_activity(status_text)
 
         else:

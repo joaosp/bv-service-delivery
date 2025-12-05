@@ -2,11 +2,13 @@
 Custom tools for BV Provisioning Agent using Claude Agent SDK
 """
 import subprocess
+import signal
 import json
 import csv
+import asyncio
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 import pandas as pd
 import os
 
@@ -29,7 +31,22 @@ from config import (
     CSV_DELIMITER,
     CSV_COLUMNS,
     SALESFORCE_ORG_USERNAME,
-    DATA_DIR
+    DATA_DIR,
+    BHIVE_MCP_ENABLED,
+    BHIVE_MCP_SERVER_URL,
+    BHIVE_PROVISIONING_FILE,
+    BHIVE_DEFAULT_CONTRACT_DURATION,
+    BHIVE_DEFAULT_PAYMENT_TERM,
+    BHIVE_AUTO_ACTIVATE_CONTRACT,
+    CANCELLATION_ENABLED,
+    SALESFORCE_EXTRACTION_TIMEOUT,
+    SUBPROCESS_POLL_INTERVAL,
+    SUBPROCESS_TERMINATION_GRACE
+)
+from cancellation import (
+    get_cancellation_manager,
+    OperationState,
+    CancellationRequestedError
 )
 
 
@@ -93,7 +110,10 @@ def _format_tool_response(data: Dict[str, Any]) -> Dict[str, Any]:
 )
 async def extract_salesforce_data(args: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Extract comprehensive Salesforce data for an opportunity
+    Extract comprehensive Salesforce data for an opportunity.
+
+    Supports cancellation via the CancellationManager. If cancelled, preserves
+    any data that was already downloaded.
 
     Args:
         args: Dictionary with 'opportunity_id' key
@@ -109,35 +129,98 @@ async def extract_salesforce_data(args: Dict[str, Any]) -> Dict[str, Any]:
             "error": "No opportunity_id provided"
         })
 
+    # Get cancellation manager and set state
+    cancellation_mgr = get_cancellation_manager()
+    cancellation_mgr.set_state(OperationState.EXTRACTING_SALESFORCE)
+    cancellation_mgr.set_opportunity_id(opp_id)
+
+    process = None
     try:
-        # Run the modular extraction script
-        # Script is now local to agent directory, creates data in agent's data directory
+        # Run the modular extraction script using Popen for cancellation support
         cmd = [
             'python3',
             str(EXTRACTION_SCRIPT),
             '--opp-id', opp_id,
-            '--output-dir', str(DATA_DIR)  # Pass agent's data directory
+            '--output-dir', str(DATA_DIR)
         ]
 
-        result = subprocess.run(
+        process = subprocess.Popen(
             cmd,
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
-            cwd=PROJECT_ROOT  # Run from agent root
+            cwd=PROJECT_ROOT
         )
 
-        if result.returncode != 0:
+        # Poll for completion with cancellation checks
+        start_time = datetime.now()
+        stdout_data = ""
+        stderr_data = ""
+
+        while process.poll() is None:
+            # Check for cancellation
+            if CANCELLATION_ENABLED and cancellation_mgr.is_cancelled():
+                print(f"[Tool:extract_salesforce_data] Cancellation detected, terminating subprocess...")
+
+                # Graceful termination
+                process.terminate()
+
+                # Wait for grace period
+                try:
+                    process.wait(timeout=SUBPROCESS_TERMINATION_GRACE)
+                except subprocess.TimeoutExpired:
+                    # Force kill if still running
+                    print(f"[Tool:extract_salesforce_data] Process did not terminate, sending SIGKILL...")
+                    process.kill()
+                    process.wait()
+
+                # Determine output directory for partial data
+                data_dir = DATA_DIR / opp_id
+
+                return _format_tool_response({
+                    "success": False,
+                    "cancelled": True,
+                    "opportunity_id": opp_id,
+                    "data_preserved": True,
+                    "partial_output_directory": str(data_dir) if data_dir.exists() else None,
+                    "message": "Salesforce extraction cancelled. Any downloaded data has been preserved."
+                })
+
+            # Check for timeout
+            elapsed = (datetime.now() - start_time).total_seconds()
+            if elapsed > SALESFORCE_EXTRACTION_TIMEOUT:
+                print(f"[Tool:extract_salesforce_data] Timeout after {elapsed:.1f}s, terminating...")
+                process.terminate()
+                try:
+                    process.wait(timeout=SUBPROCESS_TERMINATION_GRACE)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    process.wait()
+
+                return _format_tool_response({
+                    "success": False,
+                    "error": f"Extraction timed out after {SALESFORCE_EXTRACTION_TIMEOUT} seconds",
+                    "opportunity_id": opp_id
+                })
+
+            # Sleep before next check
+            await asyncio.sleep(SUBPROCESS_POLL_INTERVAL)
+
+        # Process completed - read output
+        stdout_data, stderr_data = process.communicate()
+
+        if process.returncode != 0:
             return _format_tool_response({
                 "success": False,
-                "error": result.stderr,
-                "output": result.stdout
+                "error": stderr_data,
+                "output": stdout_data
             })
 
         # Determine output directory (agent's data directory)
         data_dir = DATA_DIR / opp_id
 
         # Truncate stdout to prevent buffer overflow
-        truncated_stdout, was_truncated = _truncate_text(result.stdout, max_size=50000)
+        truncated_stdout, was_truncated = _truncate_text(stdout_data, max_size=50000)
 
         response_data = {
             "success": True,
@@ -165,6 +248,17 @@ async def extract_salesforce_data(args: Dict[str, Any]) -> Dict[str, Any]:
             "success": False,
             "error": str(e)
         })
+    finally:
+        # Reset state when done
+        cancellation_mgr.set_state(OperationState.IDLE)
+
+        # Ensure process is cleaned up
+        if process and process.poll() is None:
+            process.terminate()
+            try:
+                process.wait(timeout=2)
+            except subprocess.TimeoutExpired:
+                process.kill()
 
 
 @tool(
@@ -1144,6 +1238,948 @@ async def queue_file_for_teams(args: Dict[str, Any]) -> Dict[str, Any]:
     })
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# B-hive Provisioning Tools
+# ═══════════════════════════════════════════════════════════════════════════════
+
+@tool(
+    "save_bhive_provisioning_data",
+    "Save b-hive provisioning data to JSON file. Agent populates this with extracted Salesforce data for b-hive account creation.",
+    {
+        "type": "object",
+        "properties": {
+            "opportunity_id": {
+                "type": "string",
+                "description": "The Salesforce opportunity ID"
+            },
+            "opportunity_name": {
+                "type": "string",
+                "description": "The opportunity/customer name"
+            },
+            "account": {
+                "type": "object",
+                "description": "Account details for b-hive",
+                "properties": {
+                    "name": {"type": "string", "description": "Company name"},
+                    "domain": {"type": "string", "description": "Unique SIP domain (lowercase, hyphens allowed)"},
+                    "time_zone": {"type": "string", "description": "IANA timezone (e.g., America/New_York)"},
+                    "sales_channel_type": {"type": "string", "description": "direct_sales or channel_sales"}
+                },
+                "required": ["name", "domain", "time_zone"]
+            },
+            "locations": {
+                "type": "array",
+                "description": "Array of location objects",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {"type": "string"},
+                        "address": {
+                            "type": "object",
+                            "properties": {
+                                "address": {"type": "string"},
+                                "city": {"type": "string"},
+                                "state": {"type": "string"},
+                                "zip": {"type": "string"}
+                            }
+                        },
+                        "contract": {
+                            "type": "object",
+                            "properties": {
+                                "duration": {"type": "integer"},
+                                "payment_term": {"type": "string"},
+                                "auto_activate": {"type": "boolean"}
+                            }
+                        }
+                    }
+                }
+            },
+            "users": {
+                "type": "array",
+                "description": "Array of user objects",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "firstName": {"type": "string"},
+                        "lastName": {"type": "string"},
+                        "email": {"type": "string"},
+                        "role": {"type": "string", "description": "account_admin or user"},
+                        "package": {"type": "string", "description": "pro, basic, or metered"},
+                        "extension": {"type": "string"},
+                        "mobile": {"type": "string"}
+                    }
+                }
+            },
+            "phone_numbers": {
+                "type": "array",
+                "description": "Array of phone numbers in E.164 format (e.g., +14155551234)",
+                "items": {"type": "string"}
+            }
+        },
+        "required": ["opportunity_id", "account", "locations", "users"]
+    }
+)
+async def save_bhive_provisioning_data(args: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Save b-hive provisioning data to JSON file.
+
+    The agent calls this tool after analyzing Salesforce data to create
+    a structured JSON file that can be used for b-hive provisioning.
+
+    Args:
+        args: Dictionary containing opportunity_id, account, locations, users, phone_numbers
+
+    Returns:
+        Formatted response with file path and validation status
+    """
+    opp_id = args.get('opportunity_id', '')
+
+    if not opp_id:
+        return _format_tool_response({
+            "success": False,
+            "error": "No opportunity_id provided"
+        })
+
+    if not BHIVE_MCP_ENABLED:
+        return _format_tool_response({
+            "success": False,
+            "error": "B-hive MCP integration is disabled. Set BHIVE_MCP_ENABLED=true to enable."
+        })
+
+    # LOGGING
+    print(f"[Tool:save_bhive_provisioning_data] Called for opportunity: {opp_id}")
+
+    # Validate required fields
+    validation_errors = []
+    warnings = []
+
+    import re
+    account = args.get('account', {})
+    if not account.get('name'):
+        validation_errors.append("Missing: account.name")
+
+    # Validate domain is lowercase alphanumeric with hyphens only
+    domain = account.get('domain', '')
+    if not domain:
+        validation_errors.append("Missing: account.domain")
+    elif not re.match(r'^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]$', domain):
+        validation_errors.append(f"Invalid: account.domain must be lowercase alphanumeric with hyphens only (e.g., 'company-name'), got: '{domain}'")
+
+    if not account.get('time_zone'):
+        validation_errors.append("Missing: account.time_zone")
+
+    locations = args.get('locations', [])
+    if not locations:
+        validation_errors.append("Missing: at least one location")
+    else:
+        for i, loc in enumerate(locations):
+            if not loc.get('name'):
+                validation_errors.append(f"Missing: locations[{i}].name")
+            addr = loc.get('address', {})
+            if not addr.get('address'):
+                validation_errors.append(f"Missing: locations[{i}].address.address")
+            if not addr.get('city'):
+                validation_errors.append(f"Missing: locations[{i}].address.city")
+
+            # Validate state code is exactly 2 characters
+            state = addr.get('state', '')
+            if not state:
+                validation_errors.append(f"Missing: locations[{i}].address.state")
+            elif len(str(state)) != 2:
+                validation_errors.append(f"Invalid: locations[{i}].address.state must be 2-character code (e.g., 'IN', 'CA'), got: '{state}'")
+
+            # Validate ZIP code is exactly 5 digits
+            zip_code = addr.get('zip', '')
+            if not zip_code:
+                validation_errors.append(f"Missing: locations[{i}].address.zip")
+            elif not re.match(r'^\d{5}$', str(zip_code)):
+                validation_errors.append(f"Invalid: locations[{i}].address.zip must be 5-digit ZIP code (e.g., '46156'), got: '{zip_code}'")
+
+    users = args.get('users', [])
+    if not users:
+        validation_errors.append("Missing: at least one user")
+    else:
+        for i, user in enumerate(users):
+            if not user.get('firstName'):
+                validation_errors.append(f"Missing: users[{i}].firstName")
+            if not user.get('lastName'):
+                validation_errors.append(f"Missing: users[{i}].lastName")
+            if not user.get('email'):
+                validation_errors.append(f"Missing: users[{i}].email")
+
+    # Validate user-location mapping for multi-location accounts
+    if len(locations) > 1 and users:
+        location_names = {loc["name"].lower() for loc in locations}
+        users_without_location = []
+        users_with_invalid_location = []
+
+        for i, user in enumerate(users):
+            user_loc = user.get("location_name", "")
+            if not user_loc:
+                users_without_location.append(f"{user.get('firstName', '')} {user.get('lastName', '')} (users[{i}])")
+            elif user_loc.lower() not in location_names:
+                users_with_invalid_location.append(
+                    f"{user.get('firstName', '')} {user.get('lastName', '')} - assigned to '{user_loc}' (users[{i}])"
+                )
+
+        if users_without_location:
+            warnings.append(
+                f"Multi-location account has {len(users_without_location)} users without location_name. "
+                f"These will be assigned to the first location: {locations[0]['name']}. "
+                f"Users: {', '.join(users_without_location[:5])}" +
+                (f" and {len(users_without_location) - 5} more..." if len(users_without_location) > 5 else "")
+            )
+            # Auto-assign users without location to first location
+            first_loc_name = locations[0]["name"]
+            for user in users:
+                if not user.get("location_name"):
+                    user["location_name"] = first_loc_name
+
+        if users_with_invalid_location:
+            validation_errors.append(
+                f"Users have invalid location_name values that don't match any location: "
+                f"{', '.join(users_with_invalid_location[:3])}" +
+                (f" and {len(users_with_invalid_location) - 3} more..." if len(users_with_invalid_location) > 3 else "")
+            )
+
+    phone_numbers = args.get('phone_numbers', [])
+    if not phone_numbers:
+        warnings.append("No phone numbers specified - account will be created without DIDs")
+
+    # Build the provisioning data structure
+    status = "ready" if not validation_errors else "incomplete"
+
+    # Apply defaults to locations
+    for loc in locations:
+        if 'contract' not in loc:
+            loc['contract'] = {}
+        loc['contract'].setdefault('duration', BHIVE_DEFAULT_CONTRACT_DURATION)
+        loc['contract'].setdefault('payment_term', BHIVE_DEFAULT_PAYMENT_TERM)
+        loc['contract'].setdefault('auto_activate', BHIVE_AUTO_ACTIVATE_CONTRACT)
+
+    data = {
+        "opportunity_id": opp_id,
+        "opportunity_name": args.get('opportunity_name', account.get('name', '')),
+        "created_at": datetime.now().isoformat(),
+        "status": status,
+        "account": {
+            "name": account.get('name', ''),
+            "domain": account.get('domain', ''),
+            "time_zone": account.get('time_zone', 'America/New_York'),
+            "sales_channel_type": account.get('sales_channel_type', 'direct_sales')
+        },
+        "locations": locations,
+        "users": users,
+        "phone_numbers": phone_numbers,
+        "validation": {
+            "ready_for_provisioning": len(validation_errors) == 0,
+            "missing_required": validation_errors,
+            "warnings": warnings
+        },
+        "provisioning_result": None
+    }
+
+    # Save to file
+    json_path = DATA_DIR / opp_id / BHIVE_PROVISIONING_FILE
+    json_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(json_path, 'w') as f:
+        json.dump(data, f, indent=2)
+
+    # LOGGING
+    print(f"[Tool:save_bhive_provisioning_data] ═══════════════════════════════════════")
+    print(f"[Tool:save_bhive_provisioning_data] B-hive Provisioning Data Saved")
+    print(f"[Tool:save_bhive_provisioning_data] ═══════════════════════════════════════")
+    print(f"[Tool:save_bhive_provisioning_data] Status: {status}")
+    print(f"[Tool:save_bhive_provisioning_data] Account: {account.get('name', 'N/A')}")
+    print(f"[Tool:save_bhive_provisioning_data] Locations: {len(locations)}")
+    print(f"[Tool:save_bhive_provisioning_data] Users: {len(users)}")
+    print(f"[Tool:save_bhive_provisioning_data] Phone Numbers: {len(phone_numbers)}")
+    if validation_errors:
+        print(f"[Tool:save_bhive_provisioning_data] ❌ Validation errors: {len(validation_errors)}")
+        for err in validation_errors[:5]:
+            print(f"[Tool:save_bhive_provisioning_data]   - {err}")
+    if warnings:
+        print(f"[Tool:save_bhive_provisioning_data] ⚠️  Warnings: {len(warnings)}")
+        for warn in warnings:
+            print(f"[Tool:save_bhive_provisioning_data]   - {warn}")
+    print(f"[Tool:save_bhive_provisioning_data] File: {json_path}")
+    print(f"[Tool:save_bhive_provisioning_data] ═══════════════════════════════════════")
+
+    return _format_tool_response({
+        "success": True,
+        "file_path": str(json_path),
+        "status": status,
+        "ready_for_provisioning": len(validation_errors) == 0,
+        "validation_errors": validation_errors,
+        "warnings": warnings,
+        "stats": {
+            "users": len(users),
+            "locations": len(locations),
+            "phone_numbers": len(phone_numbers)
+        }
+    })
+
+
+def _interpret_provisioning_result(result: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Interpret B-hive provisioning result to distinguish partial success from failure.
+
+    Account creation with some item-level errors (duplicates, missing DIDs) should
+    still be reported as success since the core provisioning worked.
+    """
+    account = result.get("account", {})
+    stats = result.get("stats", {})
+    errors = result.get("errors", [])
+
+    account_created = bool(account.get("id"))
+    locations_created = stats.get("locations_created", 0)
+    users_created = stats.get("users_created", 0)
+
+    # Count error types by analyzing error messages
+    error_str = str(errors).lower()
+    duplicate_errors = error_str.count("already") + error_str.count("duplicate")
+    did_errors = error_str.count("did") + error_str.count("inventory") + error_str.count("not found")
+
+    if not account_created:
+        return {
+            "is_success": False,
+            "severity": "critical",
+            "summary": "Account creation failed",
+            "recommendation": "Review error message and fix prerequisites"
+        }
+
+    if account_created and (locations_created > 0 or users_created > 0):
+        return {
+            "is_success": True,
+            "severity": "info" if not errors else "warning",
+            "summary": f"Account created successfully. {locations_created} locations, {users_created} users provisioned.",
+            "recommendation": "Review any errors in B-hive console if needed" if errors else None,
+            "expected_errors": {
+                "duplicates": duplicate_errors,
+                "missing_dids": did_errors
+            }
+        }
+
+    return {
+        "is_success": False,
+        "severity": "error",
+        "summary": "Provisioning completed but no resources created",
+        "recommendation": "Check provisioning data and retry"
+    }
+
+
+@tool(
+    "provision_to_bhive",
+    "Execute b-hive provisioning. Reads bhive_provisioning_data.json and calls the MCP server to create the account, locations, users, and phone numbers.",
+    {
+        "type": "object",
+        "properties": {
+            "opportunity_id": {
+                "type": "string",
+                "description": "The Salesforce opportunity ID"
+            }
+        },
+        "required": ["opportunity_id"]
+    }
+)
+async def provision_to_bhive(args: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Execute b-hive provisioning using the MCP server.
+
+    Reads the bhive_provisioning_data.json file and calls the MCP server's
+    provision_complete_customer tool to create the account.
+
+    Supports cancellation via CancellationManager. WARNING: Once the provisioning
+    request is sent to the server, cancellation will disconnect but the operation
+    may still complete server-side.
+
+    Args:
+        args: Dictionary with 'opportunity_id'
+
+    Returns:
+        Formatted response with provisioning results
+    """
+    from bhive_client import BHiveMCPClient
+
+    opp_id = args.get('opportunity_id', '')
+
+    if not opp_id:
+        return _format_tool_response({
+            "success": False,
+            "error": "No opportunity_id provided"
+        })
+
+    if not BHIVE_MCP_ENABLED:
+        return _format_tool_response({
+            "success": False,
+            "error": "B-hive MCP integration is disabled"
+        })
+
+    # Get cancellation manager and set state
+    cancellation_mgr = get_cancellation_manager()
+    cancellation_mgr.set_state(OperationState.PROVISIONING_BHIVE)
+    cancellation_mgr.set_opportunity_id(opp_id)
+
+    # LOGGING
+    print(f"[Tool:provision_to_bhive] Called for opportunity: {opp_id}")
+
+    # Check for provisioning data file
+    json_path = DATA_DIR / opp_id / BHIVE_PROVISIONING_FILE
+
+    if not json_path.exists():
+        cancellation_mgr.set_state(OperationState.IDLE)
+        return _format_tool_response({
+            "success": False,
+            "error": f"No provisioning data found at {json_path}. Run save_bhive_provisioning_data first."
+        })
+
+    # Load provisioning data
+    with open(json_path, 'r') as f:
+        data = json.load(f)
+
+    # Check if ready
+    if data.get("status") != "ready":
+        cancellation_mgr.set_state(OperationState.IDLE)
+        return _format_tool_response({
+            "success": False,
+            "error": "Provisioning data not ready",
+            "status": data.get("status"),
+            "missing": data.get("validation", {}).get("missing_required", [])
+        })
+
+    # Check if already provisioned
+    if data.get("status") == "provisioned":
+        cancellation_mgr.set_state(OperationState.IDLE)
+        return _format_tool_response({
+            "success": False,
+            "error": "This opportunity has already been provisioned",
+            "provisioning_result": data.get("provisioning_result")
+        })
+
+    print(f"[Tool:provision_to_bhive] Connecting to b-hive MCP server...")
+    print(f"[Tool:provision_to_bhive] URL: {BHIVE_MCP_SERVER_URL}/mcp/messages")
+
+    # Create MCP client
+    client = BHiveMCPClient()
+
+    # Test connection
+    conn_test = await client.test_connection()
+    if not conn_test.get("success"):
+        error_msg = conn_test.get('error', 'Unknown error')
+        print(f"[Tool:provision_to_bhive] ❌ Connection failed: {error_msg}")
+        print(f"[Tool:provision_to_bhive] Ensure MCP server is running with: ./bin/server_http")
+        cancellation_mgr.set_state(OperationState.IDLE)
+        return _format_tool_response({
+            "success": False,
+            "error": f"Cannot connect to b-hive MCP server: {error_msg}",
+            "help": f"Ensure the MCP server is running with ./bin/server_http at {BHIVE_MCP_SERVER_URL}"
+        })
+
+    print(f"[Tool:provision_to_bhive] Connected to MCP server (Rails {conn_test.get('rails_version')})")
+    print(f"[Tool:provision_to_bhive] Starting provisioning...")
+
+    try:
+        # Build locations with users and phone numbers
+        # IMPORTANT: Filter users by location_name to avoid duplicates
+        all_users = data.get("users", [])
+        locations_list = data.get("locations", [])
+        first_location_name = locations_list[0]["name"].lower() if locations_list else ""
+
+        locations_payload = []
+        for idx, loc in enumerate(locations_list):
+            loc_name_lower = loc["name"].lower()
+
+            # Filter users: only include users that belong to this location
+            # Users without location_name go to the first location only
+            location_users = [
+                u for u in all_users
+                if u.get("location_name", "").lower() == loc_name_lower
+                or u.get("location_id") == loc.get("id")
+                or (not u.get("location_name") and idx == 0)  # Unassigned users go to first location
+            ]
+
+            loc_payload = {
+                "name": loc["name"],
+                "address": loc["address"],
+                "contract": loc.get("contract", {
+                    "duration": BHIVE_DEFAULT_CONTRACT_DURATION,
+                    "payment_term": BHIVE_DEFAULT_PAYMENT_TERM,
+                    "auto_activate": BHIVE_AUTO_ACTIVATE_CONTRACT
+                }),
+                "users": location_users,
+                "phone_numbers": data.get("phone_numbers", [])
+            }
+            locations_payload.append(loc_payload)
+
+            if location_users:
+                print(f"[Tool:provision_to_bhive] Location '{loc['name']}': {len(location_users)} users")
+
+        # Get cancellation token for async operation
+        cancel_event = cancellation_mgr.get_cancellation_token() if CANCELLATION_ENABLED else None
+
+        # Call MCP server with cancellation support
+        result = await client.provision_complete_customer(
+            customer_name=data["account"]["name"],
+            domain=data["account"]["domain"],
+            time_zone=data["account"]["time_zone"],
+            locations=locations_payload,
+            sales_channel_type=data["account"].get("sales_channel_type", "direct_sales"),
+            cancel_event=cancel_event
+        )
+
+        # Update JSON with result
+        data["provisioning_result"] = result
+        data["provisioned_at"] = datetime.now().isoformat()
+
+        # Interpret the result to distinguish partial success from failure
+        interpretation = _interpret_provisioning_result(result)
+
+        if interpretation["is_success"]:
+            data["status"] = "provisioned"
+            print(f"[Tool:provision_to_bhive] ✅ {interpretation['summary']}")
+        else:
+            data["status"] = "failed"
+            print(f"[Tool:provision_to_bhive] ❌ {interpretation['summary']}")
+
+        # Save updated data
+        with open(json_path, 'w') as f:
+            json.dump(data, f, indent=2)
+
+        # LOGGING
+        print(f"[Tool:provision_to_bhive] ═══════════════════════════════════════")
+        print(f"[Tool:provision_to_bhive] Provisioning Complete")
+        print(f"[Tool:provision_to_bhive] ═══════════════════════════════════════")
+        if result.get("account"):
+            acc = result["account"]
+            print(f"[Tool:provision_to_bhive] Account ID: {acc.get('id')}")
+            print(f"[Tool:provision_to_bhive] Account Number: {acc.get('account_number')}")
+            print(f"[Tool:provision_to_bhive] SIP Domain: {acc.get('sip_domain')}")
+        if result.get("stats"):
+            stats = result["stats"]
+            print(f"[Tool:provision_to_bhive] Users Created: {stats.get('users_created', 0)}")
+            print(f"[Tool:provision_to_bhive] Locations Created: {stats.get('locations_created', 0)}")
+            print(f"[Tool:provision_to_bhive] Phone Numbers Assigned: {stats.get('phone_numbers_assigned', 0)}")
+        if interpretation.get("expected_errors"):
+            exp_err = interpretation["expected_errors"]
+            if exp_err.get("duplicates", 0) > 0:
+                print(f"[Tool:provision_to_bhive] Duplicate Errors (expected): {exp_err['duplicates']}")
+            if exp_err.get("missing_dids", 0) > 0:
+                print(f"[Tool:provision_to_bhive] Missing DIDs (can be added later): {exp_err['missing_dids']}")
+        print(f"[Tool:provision_to_bhive] ═══════════════════════════════════════")
+
+        return _format_tool_response({
+            "success": interpretation["is_success"],
+            "message": interpretation["summary"],
+            "account": result.get("account"),
+            "locations": result.get("locations"),
+            "stats": result.get("stats"),
+            "errors": result.get("errors", []),
+            "interpretation": interpretation
+        })
+
+    except CancellationRequestedError:
+        # Cancelled during provisioning - this is serious because the request may have been sent
+        print(f"[Tool:provision_to_bhive] ⚠️ Cancelled during provisioning!")
+
+        # Update status to cancelled with warning
+        data["status"] = "cancelled"
+        data["cancellation_warning"] = (
+            "Provisioning was cancelled but the request may have been sent to the server. "
+            "Check the BHive admin console to verify if the account was created."
+        )
+        data["cancelled_at"] = datetime.now().isoformat()
+
+        with open(json_path, 'w') as f:
+            json.dump(data, f, indent=2)
+
+        return _format_tool_response({
+            "success": False,
+            "cancelled": True,
+            "opportunity_id": opp_id,
+            "warning": (
+                "BHive provisioning was cancelled. WARNING: The provisioning request may have "
+                "already been sent to the server. The operation could have completed server-side. "
+                "Please check the BHive admin console to verify whether the account was created."
+            ),
+            "recommendation": "Check BHive admin console to verify account status before retrying."
+        })
+
+    except Exception as e:
+        # Update status to failed
+        data["status"] = "failed"
+        data["provisioning_result"] = {"error": str(e)}
+
+        with open(json_path, 'w') as f:
+            json.dump(data, f, indent=2)
+
+        print(f"[Tool:provision_to_bhive] ❌ Error: {str(e)}")
+
+        return _format_tool_response({
+            "success": False,
+            "error": str(e)
+        })
+
+    finally:
+        # Reset state when done
+        cancellation_mgr.set_state(OperationState.IDLE)
+
+
+@tool(
+    "check_bhive_provisioning_status",
+    "Check status of an asynchronous b-hive provisioning job (for bulk user imports with 100+ users)",
+    {
+        "type": "object",
+        "properties": {
+            "job_id": {
+                "type": "string",
+                "description": "The async job ID returned from provisioning"
+            }
+        },
+        "required": ["job_id"]
+    }
+)
+async def check_bhive_provisioning_status(args: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Check status of an asynchronous provisioning job.
+
+    When provisioning 100+ users, the MCP server processes them asynchronously.
+    This tool checks the status of such jobs.
+
+    Args:
+        args: Dictionary with 'job_id'
+
+    Returns:
+        Formatted response with job status and progress
+    """
+    from bhive_client import BHiveMCPClient
+
+    job_id = args.get('job_id', '')
+
+    if not job_id:
+        return _format_tool_response({
+            "success": False,
+            "error": "No job_id provided"
+        })
+
+    if not BHIVE_MCP_ENABLED:
+        return _format_tool_response({
+            "success": False,
+            "error": "B-hive MCP integration is disabled"
+        })
+
+    print(f"[Tool:check_bhive_provisioning_status] Checking job: {job_id}")
+
+    client = BHiveMCPClient()
+
+    try:
+        result = await client.get_provisioning_status(job_id)
+
+        print(f"[Tool:check_bhive_provisioning_status] Status: {result.get('status')}")
+        print(f"[Tool:check_bhive_provisioning_status] Progress: {result.get('progress', 0)}%")
+
+        return _format_tool_response({
+            "success": True,
+            "job_id": job_id,
+            "status": result.get("status"),
+            "progress": result.get("progress", 0),
+            "message": result.get("message", ""),
+            "error": result.get("error")
+        })
+
+    except Exception as e:
+        return _format_tool_response({
+            "success": False,
+            "error": str(e)
+        })
+
+
+@tool(
+    "generate_bhive_report",
+    "Generate a comprehensive b-hive provisioning status report in Markdown format",
+    {
+        "type": "object",
+        "properties": {
+            "opportunity_id": {
+                "type": "string",
+                "description": "The Salesforce opportunity ID"
+            }
+        },
+        "required": ["opportunity_id"]
+    }
+)
+async def generate_bhive_report(args: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Generate a b-hive provisioning status report.
+
+    Creates a Markdown report with details about the provisioning result,
+    including account details, created resources, and any errors.
+
+    Args:
+        args: Dictionary with 'opportunity_id'
+
+    Returns:
+        Formatted response with report file path
+    """
+    opp_id = args.get('opportunity_id', '')
+
+    if not opp_id:
+        return _format_tool_response({
+            "success": False,
+            "error": "No opportunity_id provided"
+        })
+
+    # Check for provisioning data file
+    json_path = DATA_DIR / opp_id / BHIVE_PROVISIONING_FILE
+
+    if not json_path.exists():
+        return _format_tool_response({
+            "success": False,
+            "error": f"No provisioning data found at {json_path}"
+        })
+
+    # Load provisioning data
+    with open(json_path, 'r') as f:
+        data = json.load(f)
+
+    print(f"[Tool:generate_bhive_report] Generating report for: {opp_id}")
+
+    # Build report
+    report_lines = [
+        f"# B-hive Provisioning Report",
+        f"",
+        f"**Opportunity:** {data.get('opportunity_name', 'N/A')} ({opp_id})",
+        f"**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        f"**Status:** {data.get('status', 'unknown').upper()}",
+        f"",
+        f"---",
+        f"",
+        f"## Account Details",
+        f"",
+        f"| Field | Value |",
+        f"|-------|-------|",
+        f"| Company Name | {data.get('account', {}).get('name', 'N/A')} |",
+        f"| SIP Domain | {data.get('account', {}).get('domain', 'N/A')} |",
+        f"| Time Zone | {data.get('account', {}).get('time_zone', 'N/A')} |",
+        f"| Sales Channel | {data.get('account', {}).get('sales_channel_type', 'N/A')} |",
+        f"",
+    ]
+
+    # Provisioning result section
+    prov_result = data.get('provisioning_result')
+    if prov_result:
+        report_lines.extend([
+            f"## Provisioning Result",
+            f"",
+        ])
+
+        if prov_result.get('account'):
+            acc = prov_result['account']
+            report_lines.extend([
+                f"### Account Created",
+                f"",
+                f"| Field | Value |",
+                f"|-------|-------|",
+                f"| Account ID | {acc.get('id', 'N/A')} |",
+                f"| Account Number | {acc.get('account_number', 'N/A')} |",
+                f"| SIP Domain | {acc.get('sip_domain', 'N/A')} |",
+                f"",
+            ])
+
+        if prov_result.get('stats'):
+            stats = prov_result['stats']
+            report_lines.extend([
+                f"### Summary",
+                f"",
+                f"| Resource | Count |",
+                f"|----------|-------|",
+                f"| Accounts Created | {stats.get('accounts_created', 0)} |",
+                f"| Locations Created | {stats.get('locations_created', 0)} |",
+                f"| Contracts Created | {stats.get('contracts_created', 0)} |",
+                f"| Users Created | {stats.get('users_created', 0)} |",
+                f"| Phone Numbers Assigned | {stats.get('phone_numbers_assigned', 0)} |",
+                f"",
+            ])
+
+        if prov_result.get('errors'):
+            report_lines.extend([
+                f"### Errors",
+                f"",
+            ])
+            for error in prov_result['errors']:
+                report_lines.append(f"- {error}")
+            report_lines.append("")
+    else:
+        report_lines.extend([
+            f"## Provisioning Result",
+            f"",
+            f"_Not yet provisioned_",
+            f"",
+        ])
+
+    # Locations section
+    report_lines.extend([
+        f"## Locations ({len(data.get('locations', []))})",
+        f"",
+    ])
+
+    for i, loc in enumerate(data.get('locations', []), 1):
+        addr = loc.get('address', {})
+        contract = loc.get('contract', {})
+        report_lines.extend([
+            f"### {i}. {loc.get('name', 'Unnamed Location')}",
+            f"",
+            f"**Address:** {addr.get('address', '')}, {addr.get('city', '')}, {addr.get('state', '')} {addr.get('zip', '')}",
+            f"",
+            f"**Contract:** {contract.get('duration', 12)} months, {contract.get('payment_term', 'monthly')}",
+            f"",
+        ])
+
+    # Users section
+    report_lines.extend([
+        f"## Users ({len(data.get('users', []))})",
+        f"",
+        f"| Name | Email | Role | Package |",
+        f"|------|-------|------|---------|",
+    ])
+
+    for user in data.get('users', []):
+        name = f"{user.get('firstName', '')} {user.get('lastName', '')}"
+        report_lines.append(f"| {name} | {user.get('email', 'N/A')} | {user.get('role', 'user')} | {user.get('package', 'pro')} |")
+
+    report_lines.append("")
+
+    # Phone numbers section
+    phone_numbers = data.get('phone_numbers', [])
+    report_lines.extend([
+        f"## Phone Numbers ({len(phone_numbers)})",
+        f"",
+    ])
+
+    if phone_numbers:
+        for phone in phone_numbers:
+            report_lines.append(f"- {phone}")
+    else:
+        report_lines.append("_No phone numbers specified_")
+
+    report_lines.extend([
+        f"",
+        f"---",
+        f"",
+        f"*Report generated by BV Provisioning Agent*",
+    ])
+
+    # Save report
+    provs_dir = DATA_DIR / opp_id / 'provs'
+    provs_dir.mkdir(parents=True, exist_ok=True)
+    report_path = provs_dir / f"{opp_id}_bhive_provisioning.md"
+
+    with open(report_path, 'w') as f:
+        f.write('\n'.join(report_lines))
+
+    print(f"[Tool:generate_bhive_report] Report saved to: {report_path}")
+
+    return _format_tool_response({
+        "success": True,
+        "report_file": str(report_path),
+        "message": f"B-hive provisioning report created: {report_path}"
+    })
+
+
+@tool(
+    "cancel_operation",
+    "Cancel the currently running long operation (Salesforce extraction or BHive provisioning). Requires confirmation.",
+    {
+        "type": "object",
+        "properties": {
+            "confirmation": {
+                "type": "boolean",
+                "description": "Set to true to confirm the cancellation. Without confirmation, returns current operation status."
+            }
+        },
+        "required": []
+    }
+)
+async def cancel_operation(args: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Cancel the currently running operation.
+
+    This tool allows Claude to cancel long-running operations like Salesforce
+    extraction or BHive provisioning. It requires explicit confirmation.
+
+    Args:
+        args: Dictionary with optional 'confirmation' boolean
+
+    Returns:
+        Formatted response with cancellation status
+    """
+    if not CANCELLATION_ENABLED:
+        return _format_tool_response({
+            "success": False,
+            "error": "Cancellation is disabled in configuration"
+        })
+
+    cancellation_mgr = get_cancellation_manager()
+    confirmation = args.get('confirmation', False)
+
+    # Check if an operation is running
+    if not cancellation_mgr.is_operation_running():
+        return _format_tool_response({
+            "success": False,
+            "error": "No operation is currently running to cancel."
+        })
+
+    # Get current state info
+    current_state = cancellation_mgr.get_current_state()
+    opportunity_id = cancellation_mgr.get_opportunity_id()
+
+    state_descriptions = {
+        OperationState.EXTRACTING_SALESFORCE: "Salesforce data extraction",
+        OperationState.ANALYZING_DOCUMENTS: "document analysis",
+        OperationState.PROVISIONING_BHIVE: "BHive provisioning",
+        OperationState.GENERATING_CSV: "CSV generation",
+        OperationState.GENERATING_REPORT: "report generation",
+    }
+    state_desc = state_descriptions.get(current_state, current_state.value)
+
+    # If no confirmation, return status and request confirmation
+    if not confirmation:
+        message = f"Currently running: {state_desc}"
+        if opportunity_id:
+            message += f" for opportunity {opportunity_id}"
+        message += ". Call with confirmation=true to cancel."
+
+        # Add BHive warning
+        if current_state == OperationState.PROVISIONING_BHIVE:
+            message += (
+                " WARNING: BHive provisioning cannot be stopped mid-flight. "
+                "If cancelled, the request may have already been sent and could complete server-side."
+            )
+
+        return _format_tool_response({
+            "success": True,
+            "requires_confirmation": True,
+            "current_operation": current_state.value,
+            "opportunity_id": opportunity_id,
+            "message": message
+        })
+
+    # Execute cancellation
+    result = cancellation_mgr.request_cancellation()
+    if result.get("pending"):
+        # Auto-confirm since Claude explicitly passed confirmation=true
+        result = cancellation_mgr.confirm_cancellation()
+
+    return _format_tool_response({
+        "success": True,
+        "cancelled": True,
+        "previous_operation": current_state.value,
+        "opportunity_id": opportunity_id,
+        "message": result.get("message", "Operation cancelled."),
+        "bhive_warning": current_state == OperationState.PROVISIONING_BHIVE
+    })
+
+
 # Export all tool functions for registration
 ALL_TOOLS = [
     extract_salesforce_data,
@@ -1154,7 +2190,14 @@ ALL_TOOLS = [
     query_salesforce_general,
     check_extraction_status,
     read_provisioning_file,
-    queue_file_for_teams
+    queue_file_for_teams,
+    # B-hive provisioning tools
+    save_bhive_provisioning_data,
+    provision_to_bhive,
+    check_bhive_provisioning_status,
+    generate_bhive_report,
+    # Cancellation tool
+    cancel_operation
 ]
 
 # Tool metadata for SDK registration

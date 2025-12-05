@@ -1,6 +1,7 @@
 """
 Configuration and constants for BV Provisioning Agent
 """
+import os
 from pathlib import Path
 
 # Salesforce Configuration
@@ -154,3 +155,43 @@ Example Requests:
   "Query all opportunities closed this month"
   "Explain the 4-pass extraction methodology"
 """
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# B-hive MCP Server Configuration
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# MCP Server URL - supports remote servers via environment variable
+BHIVE_MCP_SERVER_URL = os.getenv("BHIVE_MCP_SERVER_URL", "http://localhost:3002")
+
+# Enable/disable b-hive provisioning integration
+BHIVE_MCP_ENABLED = os.getenv("BHIVE_MCP_ENABLED", "true").lower() == "true"
+
+# Timeout for MCP server requests (in seconds)
+BHIVE_MCP_TIMEOUT = int(os.getenv("BHIVE_MCP_TIMEOUT", "60"))
+
+# Default contract settings for new accounts
+BHIVE_DEFAULT_CONTRACT_DURATION = 12  # months
+BHIVE_DEFAULT_PAYMENT_TERM = "monthly"  # "monthly" or "annual"
+BHIVE_AUTO_ACTIVATE_CONTRACT = True
+
+# B-hive provisioning data file name
+BHIVE_PROVISIONING_FILE = "bhive_provisioning_data.json"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Cancellation Configuration
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Enable/disable cancellation support
+CANCELLATION_ENABLED = True
+
+# Timeout for Salesforce extraction subprocess (seconds)
+SALESFORCE_EXTRACTION_TIMEOUT = 300
+
+# Interval for checking cancellation during subprocess operations (seconds)
+SUBPROCESS_POLL_INTERVAL = 0.5
+
+# Time to wait for user to confirm cancellation before auto-aborting (seconds)
+CANCELLATION_CONFIRMATION_TIMEOUT = 30
+
+# Grace period for subprocess termination before SIGKILL (seconds)
+SUBPROCESS_TERMINATION_GRACE = 5
